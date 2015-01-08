@@ -1,0 +1,23 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>BirthTimes.qml</file>
+        <file>Home.qml</file>
+        <file>HomeForm.ui.qml</file>
+        <file>Images/background.png</file>
+        <file>Today.qml</file>
+        <file>Images/tile.png</file>
+        <file>Main.js</file>
+        <file>Images/background2.png</file>
+        <file>Images/background3.png</file>
+        <file>TodayHolidays.qml</file>
+        <file>TodayHolidaysForm.ui.qml</file>
+        <file>GlassMessage.qml</file>
+        <file>Images/toolbar-home.png</file>
+        <file>Images/toolbar-todayholidays.png</file>
+        <file>TodayEvents.qml</file>
+        <file>TodayEventsForm.ui.qml</file>
+        <file>Images/toolbar-todayevents.png</file>
+        <file>JalaliDate.js</file>
+    </qresource>
+</RCC>
