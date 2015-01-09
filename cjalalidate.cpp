@@ -17,7 +17,7 @@ CJalaliDate::~CJalaliDate()
 /* -------------- Date Functions -------------- */
 
 // Get Gregorian Date and Convert it to Jalali Date
-QString CJalaliDate::gregorianToJalali(int year, int month, int day)
+QString CJalaliDate::gregorianToJalali(int year, int month, int day) const
 {
     QString result;
     int s=year-1;
@@ -91,7 +91,7 @@ QString CJalaliDate::gregorianToJalali(int year, int month, int day)
 }
 
 // Get Jalali Date and Convert it to Gregorian Date
-QString CJalaliDate::jalaliToGregorian(int year, int month, int day)
+QString CJalaliDate::jalaliToGregorian(int year, int month, int day) const
 {
     QString result;
     int s=year -1;
@@ -153,19 +153,42 @@ QString CJalaliDate::jalaliToGregorian(int year, int month, int day)
 
 /* -------------- /Date Functions -------------- */
 
-QJSValue CJalaliDate::getCurrentJalaliDate(QQmlEngine *engine, QJSEngine *scriptEngine)
+QString CJalaliDate::getCurrentJalaliDate() const
 {
-    Q_UNUSED(engine)
-
     QDate date(QDate::currentDate());
 
-    static QString currentJalaliDate = gregorianToJalali(date.year(), date.month(), date.day());
+    const QString currentJalaliDate = gregorianToJalali(date.year(), date.month(), date.day());
 
-    qDebug() << "Current Gregorian date: " << date.year() << "/" << date.month() << "/" << date.day();
+    qDebug() << "Current Gregorian date:" << date.year() << "/" << date.month() << "/" << date.day();
 
-    QJSValue result = scriptEngine->newObject();
+    qDebug() << "Current Jalali date:" << currentJalaliDate;
 
-    result.setProperty("currentJalaliDate", currentJalaliDate);
-    return result;
+    return currentJalaliDate;
 }
 
+QString CJalaliDate::getCurrentJalaliYear() const
+{
+    return this->getCurrentJalaliDate().left(4);
+}
+
+QString CJalaliDate::getCurrentJalaliMonth() const
+{
+    return this->getCurrentJalaliDate().mid(5,2);
+}
+
+QString CJalaliDate::getCurrentJalaliDayInMonth() const
+{
+    return this->getCurrentJalaliDate().right(2);
+}
+
+qint64 CJalaliDate::getCurrentJalaliDayInYear() const
+{
+    QDate startDate(QDate(JalaliDateOptions::CurrentYear, 1, 1));
+
+    QDate endDate(QDate(this->getCurrentJalaliYear().toInt(), this->getCurrentJalaliMonth().toInt()
+                        , this->getCurrentJalaliDayInMonth().toInt()));
+
+    qDebug() << "Days from start of year till now:" << startDate.daysTo(endDate);
+
+    return startDate.daysTo(endDate);
+}

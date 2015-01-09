@@ -2,17 +2,26 @@
 #include <QQmlApplicationEngine>
 #include <QtQml>
 
+
 // Jalali date
 #include "cjalalidate.h"
+
+
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-    // Register C++ Methodes
-    qmlRegisterSingletonType("PureSoft.JalaliDate.currentJalaliDate", 1, 0, "JalaliDate", CJalaliDate::getCurrentJalaliDate);
+
+    // Requeired C++ Classes
+    CJalaliDate jdate;
+
 
     QQmlApplicationEngine engine;
+
+    // Add C++ Classes to QML engine
+    engine.rootContext()->setContextProperty("JDate", QVariant::fromValue(&jdate));
+
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
     return app.exec();

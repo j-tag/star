@@ -18,6 +18,5 @@
         <file>TodayEvents.qml</file>
         <file>TodayEventsForm.ui.qml</file>
         <file>Images/toolbar-todayevents.png</file>
-        <file>JalaliDate.js</file>
     </qresource>
 </RCC>

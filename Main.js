@@ -3,10 +3,10 @@
 /* Backgrounds */
 
 // Background image easing type
-var bgEasingType = Easing.InOutExpo
+var bgEasingType = Easing.OutQuad
 
 // Background change duration
-var bgDuration = 1400
+var bgDuration = 1114
 
 /* Messagebox */
 
@@ -23,6 +23,9 @@ var pageEasingType = Easing.OutExpo
 
 // Page rollback duration
 var pageDuration = 1400
+
+// Page color
+var pageColor = "#e4e4e4"
 
 
 // This function will change background image of main home
@@ -61,6 +64,8 @@ function disablePages(except_item)
 // Show a nice and neat blur message box
 function showMessage(message)
 {
+    // Disable toolbar
+    mainWindow.toolBar.enabled = false
     // Disable main content
     mainContent.enabled = false
     // Set message details

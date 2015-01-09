@@ -4,12 +4,9 @@ import QtQuick.Window 2.2
 import QtQuick.Dialogs 1.2
 import QtGraphicalEffects 1.0
 
-// Jalalidate handler
-import PureSoft.JalaliDate.currentJalaliDate 1.0 as JalaliDate
 
 // Main page js file
 import "Main.js" as Main
-import "JalaliDate.js" as JDate
 
 ApplicationWindow {
     id: mainWindow
@@ -20,11 +17,8 @@ ApplicationWindow {
     minimumHeight: 480
     visible: true
 
-
-
     toolBar: ToolBar
     {
-
         Row
         {
 
@@ -88,7 +82,7 @@ ApplicationWindow {
 
                 onClicked:
                 {
-                    Main.showMessage("YAAAA GOD: " + JDate.getCurrentJalaliDate())
+                    Main.showMessage("Today Jalali Date: " + JDate.getCurrentJalaliDate())
                 }
 
             }
@@ -193,7 +187,7 @@ ApplicationWindow {
 
     }
 
-    GaussianBlur
+    FastBlur
     {
         id: msgBlur
         opacity: 0
@@ -201,8 +195,7 @@ ApplicationWindow {
         source: mainContent
         width: mainContent.width
         height: mainContent.height
-        radius: 8
-        samples: 16
+        radius: 80
 
         onOpacityChanged:
         {

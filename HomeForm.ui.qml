@@ -1,5 +1,6 @@
 import QtQuick 2.4
 import QtQuick.Layouts 1.1
+import "Main.js" as Main
 
 Item {
 
@@ -11,6 +12,8 @@ Item {
     height: 400
     Layout.minimumWidth: 400
     Layout.minimumHeight: 400
+
+
 
     Flickable {
         id: flickableHome
@@ -25,7 +28,7 @@ Item {
         Rectangle
         {
             id: rectBg
-            color: "#979797"
+            color: Main.pageColor
             anchors.fill: itemHome
 
             radius: 3

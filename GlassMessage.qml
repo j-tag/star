@@ -28,7 +28,7 @@ Item {
         anchors.centerIn: rectBackground
         radius: 5
         color: "#ffffff"
-        width: 200
+        width: msg.width/2
         height : 114
 
         Text
@@ -51,20 +51,9 @@ Item {
                 msg.opacity = 0
                 blurContent.opacity = 0
                 mainContent.enabled = true
+                mainWindow.toolBar.enabled = true
             }
         }
-
-//        MouseArea
-//        {
-//            anchors.fill: rectMsg
-
-//            onClicked:
-//            {
-//                msg.opacity = 0
-//                blurContent.opacity = 0
-//                mainContent.enabled = true
-//            }
-//        }
     }
 
     onOpacityChanged:

@@ -2,8 +2,6 @@
 #define CJALALIDATE_H
 
 #include <QObject>
-#include <QJSValue>
-#include <QQmlEngine>
 #include <QDateTime>
 
 
@@ -12,14 +10,24 @@ class CJalaliDate : public QObject
     Q_OBJECT
 
 public:
+    enum JalaliDateOptions
+    {
+        CurrentYear = 1393
+    };
+
     explicit CJalaliDate(QObject *parent = 0);
     ~CJalaliDate();
 
-    static QJSValue getCurrentJalaliDate(QQmlEngine *engine, QJSEngine *scriptEngine);
+    Q_INVOKABLE QString getCurrentJalaliDate() const;
+    Q_INVOKABLE QString getCurrentJalaliYear() const;
+    Q_INVOKABLE QString getCurrentJalaliMonth() const;
+    Q_INVOKABLE QString getCurrentJalaliDayInMonth() const;
+    Q_INVOKABLE qint64 getCurrentJalaliDayInYear() const;
+
 
 protected:
-    static QString gregorianToJalali(const int year, const int month, const int day);
-    static QString jalaliToGregorian(const int year, const int month, const int day);
+    QString gregorianToJalali(const int year, const int month, const int day) const;
+    QString jalaliToGregorian(const int year, const int month, const int day) const;
 
 signals:
 

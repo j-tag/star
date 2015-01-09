@@ -19,7 +19,8 @@ Item {
             id: progYear
             minimumValue: 1
             maximumValue: 365
-            value: 114
+
+            value: JDate.getCurrentJalaliDayInYear()
         }
 
 
@@ -32,7 +33,8 @@ Item {
             id: progMonth
             minimumValue: 1
             maximumValue: 31
-            value: 8
+
+            value: JDate.getCurrentJalaliDayInMonth()
         }
     }
 
