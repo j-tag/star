@@ -192,3 +192,20 @@ qint64 CJalaliDate::getCurrentJalaliDayInYear() const
 
     return startDate.daysTo(endDate);
 }
+
+QString CJalaliDate::getCurrentJalaliDayName() const
+{
+    // TOFO : WE SHOULD IMPLIMENT THIS METHOD
+    QString result;
+
+    switch (QDate::currentDate().dayOfWeek())
+    {
+    case 1:
+        result = "شنبه";
+        break;
+    default:
+        break;
+    }
+
+    return result;
+}

@@ -9,9 +9,9 @@ Item {
 
     id: home
     width: mainWindow.width/1.2
-    height: 400
-    Layout.minimumWidth: 400
-    Layout.minimumHeight: 400
+    height: mainWindow.height/1.2
+    Layout.minimumWidth: 200
+    Layout.minimumHeight: 200
 
 
 
@@ -20,7 +20,7 @@ Item {
         transformOrigin: Item.Center
         anchors.centerIn: parent
         width: home.width/1.21
-        height: 401
+        height: home.height/1.21
         contentHeight: itemHome.height
         contentWidth: itemHome.width
 
@@ -31,8 +31,8 @@ Item {
             color: Main.pageColor
             anchors.fill: itemHome
 
-            radius: 3
-            opacity: .7
+            radius: Main.pageRadius
+            opacity: Main.pageOpacity
 
         }
 
@@ -42,27 +42,30 @@ Item {
             id:itemHome
             anchors.centerIn: parent
             width: home.width/1.2
-            height: 400
+            height: home.height/1.3
 
 
             Row {
                 id: rowHome
                 width: itemHome.width/1.2
-                height: 200
+                height: itemHome.height/1.1
                 spacing: 2
                 anchors.centerIn: parent
 
                 BirthTimes {
                     id: birthTimesHome
                     width: rowHome.width/2
-                    height: 200
+                    height: rowHome.height/2
+                    anchors.verticalCenter: rowHome.verticalCenter
                 }
 
 
                 Today {
                     id: todayHome
                     width:rowHome.width/2
-                    height: 200
+                    height: rowHome.height/2
+                    anchors.verticalCenter: rowHome.verticalCenter
+
                 }
             }
         }

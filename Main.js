@@ -27,6 +27,19 @@ var pageDuration = 1400
 // Page color
 var pageColor = "#e4e4e4"
 
+// Page border radius
+var pageRadius = 3
+
+// Page opacity
+var pageOpacity = .7
+
+/* Flipper */
+
+// Flipper Easing type
+var flipEasingType = Easing.OutBack
+
+// Flipper flip duration
+var flipDuration = pageDuration
 
 // This function will change background image of main home
 function changeBackground()

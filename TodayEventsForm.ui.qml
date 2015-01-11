@@ -9,16 +9,16 @@ Item {
 
     id: todayEvents
     width: mainWindow.width/1.2
-    height: 400
-    Layout.minimumWidth: 400
-    Layout.minimumHeight: 400
+    height: mainWindow.height/1.2
+    Layout.minimumWidth: 200
+    Layout.minimumHeight: 200
 
     Flickable {
         id: flickableTodayEvents
         transformOrigin: Item.Center
         anchors.centerIn: parent
         width: todayEvents.width/1.21
-        height: 401
+        height: todayEvents.height/1.21
         contentHeight: itemTodayEvents.height
         contentWidth: itemTodayEvents.width
 
@@ -29,8 +29,8 @@ Item {
             color: Main.pageColor
             anchors.fill: itemTodayEvents
 
-            radius: 3
-            opacity: .7
+            radius: Main.pageRadius
+            opacity: Main.pageOpacity
 
         }
 
@@ -40,13 +40,13 @@ Item {
             id:itemTodayEvents
             anchors.centerIn: parent
             width: todayEvents.width/1.2
-            height: 400
+            height: todayEvents.height/1.3
 
 
             Row {
                 id: rowTodayEvents
                 width: itemTodayEvents.width/1.2
-                height: 200
+                height: itemTodayEvents.height/1.1
                 spacing: 2
                 anchors.centerIn: parent
 

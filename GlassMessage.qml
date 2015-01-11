@@ -28,14 +28,20 @@ Item {
         anchors.centerIn: rectBackground
         radius: 5
         color: "#ffffff"
-        width: msg.width/2
-        height : 114
+        width: Qt.platform.os === "android" ? msg.width/1.2 : msg.width/2
+        height : Qt.platform.os === "android" ? msg.height/1.5 : msg.height/3
 
         Text
         {
             id:textMsg
             text: strMessage
-            anchors.centerIn: rectMsg
+            anchors.fill: rectMsg
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            anchors.margins: 14
+            font.pixelSize: 14
+
+            wrapMode: Text.WordWrap
         }
 
         Button

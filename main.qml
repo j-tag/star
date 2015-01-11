@@ -19,15 +19,16 @@ ApplicationWindow {
 
     toolBar: ToolBar
     {
+
         Row
         {
 
             ToolButton
             {
                 id:toolBtnHome
-                text: qsTr("خانه")
                 iconSource: "qrc:/Images/toolbar-home.png"
-                tooltip: text
+                width: 32
+                height: 32
 
 
                 onClicked:
@@ -42,9 +43,9 @@ ApplicationWindow {
             ToolButton
             {
                 id:toolBtnTodayHolidays
-                text: qsTr("مناسبت های امروزز")
                 iconSource: "qrc:/Images/toolbar-todayholidays.png"
-                tooltip: text
+                width: 32
+                height: 32
 
                 onClicked:
                 {
@@ -58,9 +59,9 @@ ApplicationWindow {
             ToolButton
             {
                 id:toolBtnTodayEvents
-                text: qsTr("یادآوری های امروزز")
                 iconSource: "qrc:/Images/toolbar-todayevents.png"
-                tooltip: text
+                width: 32
+                height: 32
 
                 onClicked:
                 {
@@ -68,8 +69,6 @@ ApplicationWindow {
 
                     Main.disablePages(todayEvents)
                     Main.changeBackground()
-
-                    //Main.showMessage("YAAAA GOD")
                 }
 
             }
@@ -77,15 +76,84 @@ ApplicationWindow {
             ToolButton
             {
                 id:toolBtnMsgTest
-                text: qsTr("MSG TEST")
-                tooltip: text
+                iconSource: "qrc:/Images/toolbar-todayholidays.png"
+                width: 32
+                height: 32
 
                 onClicked:
                 {
-                    Main.showMessage("Today Jalali Date: " + JDate.getCurrentJalaliDate())
+                    Main.showMessage("تاریخ شمسی امروز: " + JDate.getCurrentJalaliDate())
                 }
 
             }
+
+            ToolButton
+            {
+                id:toolBtnFlipTest
+                iconSource: "qrc:/Images/toolbar-todayholidays.png"
+                width: 32
+                height: 32
+
+                onClicked:
+                {
+                    flipableMainWindow.flipped = !flipableMainWindow.flipped
+                }
+
+            }
+        }
+    }
+
+
+    Flipable
+    {
+        id: flipableMainWindow
+        width: mainWindow.width
+        height: mainWindow.height
+
+        property bool flipped: false
+
+        front: mainContent
+        back: tt
+
+        transform: Rotation
+        {
+            id: rotation
+            origin.x: flipableMainWindow.width/2
+            origin.y: flipableMainWindow.height/2
+            axis.x: 1; axis.y: 0; axis.z: 0     // set axis.x to 1 to rotate around x-axis
+            angle: 0    // the default angle
+        }
+
+        states: State
+        {
+            name: "back"
+            PropertyChanges { target: rotation; angle: 180 }
+            when: flipableMainWindow.flipped
+        }
+
+        transitions: Transition
+        {
+            NumberAnimation { target: rotation; property: "angle"; duration: Main.flipDuration; easing.type: Main.flipEasingType}
+        }
+    }
+
+    Item
+    {
+        id: tt
+
+        width: mainWindow.width
+        height: mainWindow.height
+
+        Rectangle
+        {
+            anchors.fill: tt
+            color: "red"
+        }
+
+        Text {
+            id: testText
+            anchors.centerIn: parent
+            text: qsTr("TODO : Calendar placeholder")
         }
     }
 
@@ -191,8 +259,8 @@ ApplicationWindow {
     {
         id: msgBlur
         opacity: 0
-        anchors.fill: mainContent
-        source: mainContent
+        anchors.fill: flipableMainWindow
+        source: flipableMainWindow
         width: mainContent.width
         height: mainContent.height
         radius: 80

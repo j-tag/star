@@ -17,6 +17,7 @@ Item {
         ProgressBar
         {
             id: progYear
+            width: itemToday.width
             minimumValue: 1
             maximumValue: 365
 
@@ -31,6 +32,7 @@ Item {
         ProgressBar
         {
             id: progMonth
+            width: itemToday.width
             minimumValue: 1
             maximumValue: 31
 

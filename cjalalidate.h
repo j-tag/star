@@ -23,7 +23,7 @@ public:
     Q_INVOKABLE QString getCurrentJalaliMonth() const;
     Q_INVOKABLE QString getCurrentJalaliDayInMonth() const;
     Q_INVOKABLE qint64 getCurrentJalaliDayInYear() const;
-
+    Q_INVOKABLE QString getCurrentJalaliDayName() const;
 
 protected:
     QString gregorianToJalali(const int year, const int month, const int day) const;
