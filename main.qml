@@ -1,5 +1,5 @@
-import QtQuick 2.4
-import QtQuick.Controls 1.3
+import QtQuick 2.7
+import QtQuick.Controls 2.0
 import QtQuick.Window 2.2
 import QtQuick.Dialogs 1.2
 import QtGraphicalEffects 1.0
@@ -10,14 +10,14 @@ import "Main.js" as Main
 
 ApplicationWindow {
     id: mainWindow
-    title: qsTr("ستاره")
+    title: qsTr("Star")
     width: 740
     height: 480
     minimumWidth: 600
     minimumHeight: 480
     visible: true
 
-    toolBar: ToolBar
+    header: ToolBar
     {
 
         Row
@@ -26,14 +26,11 @@ ApplicationWindow {
             ToolButton
             {
                 id:toolBtnHome
-                iconSource: "qrc:/Images/toolbar-home.png"
-                width: 32
-                height: 32
-
+                text: qsTr("Home")
 
                 onClicked:
                 {
-                    stack.push(home)
+                    stack.replace(home)
 
                     Main.disablePages(home)
                     Main.changeBackground()
@@ -43,13 +40,11 @@ ApplicationWindow {
             ToolButton
             {
                 id:toolBtnTodayHolidays
-                iconSource: "qrc:/Images/toolbar-todayholidays.png"
-                width: 32
-                height: 32
+                text: qsTr("Today Holidays")
 
                 onClicked:
                 {
-                    stack.push(todayHolidays)
+                    stack.replace(todayHolidays)
 
                     Main.disablePages(todayHolidays)
                     Main.changeBackground()
@@ -59,13 +54,11 @@ ApplicationWindow {
             ToolButton
             {
                 id:toolBtnTodayEvents
-                iconSource: "qrc:/Images/toolbar-todayevents.png"
-                width: 32
-                height: 32
+                text: qsTr("Today Events")
 
                 onClicked:
                 {
-                    stack.push(todayEvents)
+                    stack.replace(todayEvents)
 
                     Main.disablePages(todayEvents)
                     Main.changeBackground()
@@ -76,9 +69,7 @@ ApplicationWindow {
             ToolButton
             {
                 id:toolBtnMsgTest
-                iconSource: "qrc:/Images/toolbar-todayholidays.png"
-                width: 32
-                height: 32
+                text: qsTr("Msg TEST")
 
                 onClicked:
                 {
@@ -90,9 +81,7 @@ ApplicationWindow {
             ToolButton
             {
                 id:toolBtnFlipTest
-                iconSource: "qrc:/Images/toolbar-todayholidays.png"
-                width: 32
-                height: 32
+                text: qsTr("Flip TEST")
 
                 onClicked:
                 {
@@ -221,24 +210,64 @@ ApplicationWindow {
         StackView {
             id: stack
             initialItem: home
+            anchors.fill: parent
 
-            Home
-            {
-                id: home
+            pushEnter: stackViewTransitionEnter
+            pushExit: stackViewTransitionExit
+            popEnter: stackViewTransitionEnter
+            popExit: stackViewTransitionExit
+            replaceEnter: stackViewTransitionEnter
+            replaceExit: stackViewTransitionExit
+        }
+
+        Transition {
+            id: stackViewTransitionExit
+            PropertyAnimation {
+                easing.type: Main.pageEasingType
+                properties: "opacity"
+                from: 1
+                to:0
+                duration: Main.pageDuration
             }
-
-
-            TodayHolidays
-            {
-                id: todayHolidays
-                visible: false
+            PropertyAnimation {
+                easing.type: Main.pageEasingType
+                properties: "scale"
+                from: 1
+                to: 2
+                duration: Main.pageDuration
             }
+        }
 
-            TodayEvents
-            {
-                id: todayEvents
-                visible: false
+        Transition {
+            id: stackViewTransitionEnter
+            PropertyAnimation {
+                easing.type: Main.pageEasingType
+                properties: "opacity,scale"
+                from: 0
+                to: 1
+                duration: Main.pageDuration
             }
+        }
+
+        Home
+        {
+            id: home
+            anchors.centerIn: stack
+        }
+
+
+        TodayHolidays
+        {
+            id: todayHolidays
+            visible: false
+            anchors.centerIn: stack
+        }
+
+        TodayEvents
+        {
+            id: todayEvents
+            visible: false
+            anchors.centerIn: stack
         }
 
     }
@@ -248,7 +277,7 @@ ApplicationWindow {
     {
         id: glassMessage
         opacity: 0
-        z:114// Brings messagebox to top
+        z: 114// Brings messagebox to top
         anchors.centerIn: mainContent
         width: mainContent.width
         height: mainContent.height

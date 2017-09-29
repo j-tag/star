@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += qml quick widgets
+QT += qml quick quickcontrols2 widgets
 
 SOURCES += main.cpp \
     cjalalidate.cpp

@@ -1,5 +1,5 @@
-import QtQuick 2.0
-import QtQuick.Controls 1.3
+import QtQuick 2.7
+import QtQuick.Controls 2.0
 
 Item {
 
@@ -18,8 +18,8 @@ Item {
         {
             id: progYear
             width: itemToday.width
-            minimumValue: 1
-            maximumValue: 365
+            from: 1
+            to: 365
 
             value: JDate.getCurrentJalaliDayInYear()
         }
@@ -33,8 +33,8 @@ Item {
         {
             id: progMonth
             width: itemToday.width
-            minimumValue: 1
-            maximumValue: 31
+            from: 1
+            to: 31
 
             value: JDate.getCurrentJalaliDayInMonth()
         }
