@@ -11,7 +11,7 @@ Item {
         spacing: 2
 
         Text {
-            text: qsTr("زمان سپری شده از امسال")
+            text: qsTr("Elapsed time of year")
         }
 
         ProgressBar
@@ -26,7 +26,7 @@ Item {
 
 
         Text {
-            text: qsTr("زمان سپری شده از این ماه")
+            text: qsTr("Time passed from this month")
         }
 
         ProgressBar
@@ -37,6 +37,20 @@ Item {
             to: 31
 
             value: JDate.getCurrentJalaliDayInMonth()
+        }
+
+        Text {
+            text: qsTr("Elapsed time of today")
+        }
+
+        ProgressBar
+        {
+            id: progDay
+            width: itemToday.width
+            from: 1
+            to: 86400000
+
+            value: JDate.getCurrentMillisecondOfDay()
         }
     }
 

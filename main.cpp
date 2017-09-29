@@ -4,7 +4,7 @@
 
 
 // Jalali date
-#include "cjalalidate.h"
+#include "CJalaliDate.h"
 
 
 

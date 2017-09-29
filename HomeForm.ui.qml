@@ -65,7 +65,6 @@ Item {
                     width:rowHome.width/2
                     height: rowHome.height/2
                     anchors.verticalCenter: rowHome.verticalCenter
-
                 }
             }
         }

@@ -50,14 +50,14 @@ Item {
             anchors.bottomMargin: 14
             anchors.bottom: rectMsg.bottom
 
-            text: qsTr("تایید")
+            text: qsTr("OK")
 
             onClicked:
             {
                 msg.opacity = 0
                 blurContent.opacity = 0
                 mainContent.enabled = true
-                mainWindow.toolBar.enabled = true
+                mainWindow.header.enabled = true
             }
         }
     }

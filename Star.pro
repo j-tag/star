@@ -3,7 +3,7 @@ TEMPLATE = app
 QT += qml quick quickcontrols2 widgets
 
 SOURCES += main.cpp \
-    cjalalidate.cpp
+    CJalaliDate.cpp
 
 RESOURCES += qml.qrc
 
@@ -14,4 +14,4 @@ QML_IMPORT_PATH =
 include(deployment.pri)
 
 HEADERS += \
-    cjalalidate.h
+    CJalaliDate.h

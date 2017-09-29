@@ -1,4 +1,4 @@
-#include "cjalalidate.h"
+#include "CJalaliDate.h"
 
 #include <QDebug>
 
@@ -136,7 +136,7 @@ QString CJalaliDate::jalaliToGregorian(int year, int month, int day) const
         else if(r<=304) ma=10, ro=r-273;
         else if(r<=334) ma=11, ro=r-304;
         else if(r<366) ma=12, ro=r-334;
-        else if (r=366) sa=sa+1,ma=1 , ro=1;
+        else if (r==366) sa=sa+1,ma=1 , ro=1;
     }
 
     if (ma<=9 && ro<=9)
@@ -195,17 +195,39 @@ qint64 CJalaliDate::getCurrentJalaliDayInYear() const
 
 QString CJalaliDate::getCurrentJalaliDayName() const
 {
-    // TOFO : WE SHOULD IMPLIMENT THIS METHOD
     QString result;
 
     switch (QDate::currentDate().dayOfWeek())
     {
     case 1:
+        result = "دوشنبه";
+        break;
+    case 2:
+        result = "سه شنبه";
+        break;
+    case 3:
+        result = "چهارشنبه";
+        break;
+    case 4:
+        result = "پنج شنبه";
+        break;
+    case 5:
+        result = "جمعه";
+        break;
+    case 6:
         result = "شنبه";
+        break;
+    case 7:
+        result = "یکشنبه";
         break;
     default:
         break;
     }
 
     return result;
+}
+
+int CJalaliDate::getCurrentMillisecondOfDay() const
+{
+    return QTime::currentTime().msecsSinceStartOfDay();
 }

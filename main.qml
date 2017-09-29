@@ -207,6 +207,7 @@ ApplicationWindow {
         }
 
 
+        // Stack view used for navigating in pages
         StackView {
             id: stack
             initialItem: home
@@ -220,6 +221,7 @@ ApplicationWindow {
             replaceExit: stackViewTransitionExit
         }
 
+        // Stack view exit transition
         Transition {
             id: stackViewTransitionExit
             PropertyAnimation {
@@ -238,6 +240,7 @@ ApplicationWindow {
             }
         }
 
+        // Stack view enter transition
         Transition {
             id: stackViewTransitionEnter
             PropertyAnimation {
@@ -249,6 +252,7 @@ ApplicationWindow {
             }
         }
 
+        // Home page
         Home
         {
             id: home
@@ -256,6 +260,7 @@ ApplicationWindow {
         }
 
 
+        // Today holidays page
         TodayHolidays
         {
             id: todayHolidays
@@ -263,6 +268,7 @@ ApplicationWindow {
             anchors.centerIn: stack
         }
 
+        // Today events page
         TodayEvents
         {
             id: todayEvents

@@ -70,15 +70,16 @@ function changeBackground()
 // This function will disable all page instead of one page that gets from parameter
 function disablePages(except_item)
 {
-    home.enabled =  except_item === home
-    todayHolidays.enabled =  except_item === todayHolidays
+    home.enabled = except_item === home
+    todayHolidays.enabled = except_item === todayHolidays
+    todayEvents.enabled = except_item === todayEvents
 }
 
 // Show a nice and neat blur message box
 function showMessage(message)
 {
     // Disable toolbar
-    mainWindow.toolBar.enabled = false
+    mainWindow.header.enabled = false
     // Disable main content
     mainContent.enabled = false
     // Set message details
