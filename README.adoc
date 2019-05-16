@@ -8,8 +8,6 @@ v0.1, 2019-05-16
 :icons: font
 :experimental: true
 
-== Quick Start
-
 This project is a simple yet powerful Persian Jalali calendar for Windows that will let you simply use it and enjoy it.
 
 This project is created using Qt framework.
