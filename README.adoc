@@ -1,0 +1,38 @@
+= The Star Persian Calendar
+Hesam Gholami <hesamgholami@yahoo.com>
+v0.1, 2019-05-16
+
+++++
+<link rel="stylesheet"  href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.1.0/css/font-awesome.min.css">
+++++
+:icons: font
+:experimental: true
+
+== Quick Start
+
+This project is a simple yet powerful Persian Jalali calendar for Windows that will let you simply use it and enjoy it.
+
+This project is created using Qt framework.
+
+== Roadmap
+
+I want to add these pages to Star, also user comment are welcome:
+
+    * A home page where you can see a brief of this year and your age
+    * A page to show Persian calendar events which will be synced from Puresoftware server
+    * Simple TODO list with ability of setting alarm based on day or exact time
+    * A settings page
+    * An about page
+    * A simple tray icon with related menu
+
+
+This app will be published on puresoftware.org website and will be available for free download.
+
+== Contributing
+
+If you enjoyed this project, please consider contributing to it and make it better.
+
+And please don't forget to give it a star.
+
+Thank you and happy coding!
+ 
