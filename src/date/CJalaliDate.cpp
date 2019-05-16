@@ -1,4 +1,4 @@
-#include "CJalaliDate.h"
+#include "includes/date/CJalaliDate.h"
 
 #include <QDebug>
 
@@ -183,7 +183,7 @@ QString CJalaliDate::getCurrentJalaliDayInMonth() const
 
 qint64 CJalaliDate::getCurrentJalaliDayInYear() const
 {
-    QDate startDate(QDate(JalaliDateOptions::CurrentYear, 1, 1));
+    QDate startDate(QDate(this->getCurrentJalaliYear().toInt(), 1, 1));
 
     QDate endDate(QDate(this->getCurrentJalaliYear().toInt(), this->getCurrentJalaliMonth().toInt()
                         , this->getCurrentJalaliDayInMonth().toInt()));

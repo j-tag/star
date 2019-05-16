@@ -10,12 +10,8 @@ class CJalaliDate : public QObject
     Q_OBJECT
 
 public:
-    enum JalaliDateOptions
-    {
-        CurrentYear = 1396
-    };
 
-    explicit CJalaliDate(QObject *parent = 0);
+    explicit CJalaliDate(QObject *parent = nullptr);
     ~CJalaliDate();
 
 signals:
