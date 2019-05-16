@@ -4,7 +4,7 @@
 
 
 // Jalali date
-#include "CJalaliDate.h"
+#include "includes/date/CJalaliDate.h"
 
 
 
@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
     // Add C++ Classes to QML engine
     engine.rootContext()->setContextProperty("JDate", QVariant::fromValue(&jdate));
 
-    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
+    engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
 
     return app.exec();
 }

@@ -1,8 +1,8 @@
 import QtQuick 2.7
-import "Main.js" as Main
+import "../Main.js" as Main
 
-TodayEventsForm {
-    flickableTodayEvents.rebound: Transition {
+TodayHolidaysForm {
+    flickableTodayHolidays.rebound: Transition {
                            NumberAnimation {
                                properties: "x,y"
                                duration: Main.pageDuration

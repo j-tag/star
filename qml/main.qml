@@ -1,8 +1,10 @@
 import QtQuick 2.7
-import QtQuick.Controls 2.0
+import QtQuick.Controls 2.5
 import QtQuick.Window 2.2
 import QtQuick.Dialogs 1.2
 import QtGraphicalEffects 1.0
+import "components"
+import "pages"
 
 
 // Main page js file
@@ -157,7 +159,7 @@ ApplicationWindow {
             id: imgBackground
             anchors.fill: parent
             fillMode: Image.PreserveAspectCrop
-            source: "qrc:/Images/background.png"
+            source: "qrc:/images/background.png"
             opacity: 1
 
             Behavior on opacity
@@ -174,7 +176,7 @@ ApplicationWindow {
         Image {
             id: imgBackground2
             fillMode: Image.PreserveAspectCrop
-            source: "qrc:/Images/background2.png"
+            source: "qrc:/images/background2.png"
             opacity: 0
             anchors.fill: imgBackground
 
@@ -192,7 +194,7 @@ ApplicationWindow {
         Image {
             id: imgBackground3
             fillMode: Image.PreserveAspectCrop
-            source: "qrc:/Images/background3.png"
+            source: "qrc:/images/background3.png"
             opacity: 0
             anchors.fill: imgBackground
 
@@ -256,7 +258,6 @@ ApplicationWindow {
         Home
         {
             id: home
-            anchors.centerIn: stack
         }
 
 
@@ -265,7 +266,6 @@ ApplicationWindow {
         {
             id: todayHolidays
             visible: false
-            anchors.centerIn: stack
         }
 
         // Today events page
@@ -273,7 +273,6 @@ ApplicationWindow {
         {
             id: todayEvents
             visible: false
-            anchors.centerIn: stack
         }
 
     }

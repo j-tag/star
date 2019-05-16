@@ -1,22 +1,22 @@
 <RCC>
     <qresource prefix="/">
-        <file>main.qml</file>
-        <file>BirthTimes.qml</file>
-        <file>Home.qml</file>
-        <file>HomeForm.ui.qml</file>
-        <file>Images/background.png</file>
-        <file>Today.qml</file>
-        <file>Images/tile.png</file>
-        <file>Main.js</file>
-        <file>Images/background2.png</file>
-        <file>Images/background3.png</file>
-        <file>TodayHolidays.qml</file>
-        <file>TodayHolidaysForm.ui.qml</file>
-        <file>GlassMessage.qml</file>
-        <file>Images/toolbar-home.png</file>
-        <file>Images/toolbar-todayholidays.png</file>
-        <file>TodayEvents.qml</file>
-        <file>TodayEventsForm.ui.qml</file>
-        <file>Images/toolbar-todayevents.png</file>
+        <file>qml/main.qml</file>
+        <file>qml/pages/BirthTimes.qml</file>
+        <file>qml/pages/Home.qml</file>
+        <file>qml/pages/HomeForm.ui.qml</file>
+        <file>images/background.png</file>
+        <file>qml/pages/Today.qml</file>
+        <file>images/tile.png</file>
+        <file>qml/Main.js</file>
+        <file>images/background2.png</file>
+        <file>images/background3.png</file>
+        <file>qml/pages/TodayHolidays.qml</file>
+        <file>qml/pages/TodayHolidaysForm.ui.qml</file>
+        <file>qml/components/GlassMessage.qml</file>
+        <file>images/toolbar-home.png</file>
+        <file>images/toolbar-todayholidays.png</file>
+        <file>qml/pages/TodayEvents.qml</file>
+        <file>qml/pages/TodayEventsForm.ui.qml</file>
+        <file>images/toolbar-todayevents.png</file>
     </qresource>
 </RCC>

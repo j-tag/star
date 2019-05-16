@@ -2,7 +2,7 @@ import QtQuick 2.7
 import QtQuick.Controls 2.0
 
 // Main page handler
-import "Main.js" as Main
+import "../Main.js" as Main
 
 Item {
     // Note: width and height must be set by caller
