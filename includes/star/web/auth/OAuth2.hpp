@@ -15,6 +15,8 @@ class OAuth2 : public QObject
 public:
     explicit OAuth2(QObject *parent = nullptr);
 
+    bool login(const QString &strUsername, const QString &strPassword);
+
 signals:
 
 public slots:

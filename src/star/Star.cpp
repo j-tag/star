@@ -1,5 +1,7 @@
 #include "includes/star/Star.hpp"
 
+#include <QCoreApplication>
+
 
 
 star::Star::Star(QObject *parent) : QObject(parent)
@@ -16,6 +18,10 @@ star::Star::~Star()
     if(this->pOAuth2) {
         this->pOAuth2->deleteLater();
     }
+    if(this->pWebAccessManager) {
+        this->pWebAccessManager->deleteLater();
+    }
+
 }
 
 /**
@@ -25,6 +31,15 @@ void star::Star::start()
 {
     // Initialize application objects
     this->initObjects();
+
+    QNetworkRequest request;
+    request.setUrl(QUrl("https://puresoftware.org"));
+    request.setRawHeader("User-Agent", "MyOwnBrowser 1.0");
+    qDebug()<<"SSL version use for build: "<<QSslSocket::sslLibraryBuildVersionString();
+    qDebug()<<"SSL version use for run-time: "<<QSslSocket::sslLibraryVersionNumber();
+    qDebug()<<QCoreApplication::libraryPaths();
+
+    pWebAccessManager->get(request);
 }
 
 
@@ -35,6 +50,7 @@ void star::Star::initObjects()
 {
     this->pJalaliDate = new date::CJalaliDate;
     this->pOAuth2 = new web::auth::OAuth2;
+    this->pWebAccessManager = new web::WebAccessManager;
 }
 
 /**
@@ -63,6 +79,16 @@ void star::Star::setOAuth2(web::auth::OAuth2 *oAuth2)
 star::web::auth::OAuth2 *star::Star::getOAuth2() const
 {
     return this->pOAuth2;
+}
+
+void star::Star::setWebAccessManager(star::web::WebAccessManager *webAccessManager)
+{
+    this->pWebAccessManager = webAccessManager;
+}
+
+star::web::WebAccessManager *star::Star::getWebAccessManager() const
+{
+    return this->pWebAccessManager;
 }
 
 

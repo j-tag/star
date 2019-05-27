@@ -11,8 +11,8 @@
 */
 
 // Uncomment following macroes to disable output of qDebug(), qInfo() or qWarning()
-#define QT_NO_DEBUG_OUTPUT
-#define QT_NO_INFO_OUTPUT
+//#define QT_NO_DEBUG_OUTPUT
+//#define QT_NO_INFO_OUTPUT
 //#define QT_NO_WARNING_OUTPUT
 
 
@@ -23,6 +23,7 @@
 // Star modules
 #include "includes/star/date/CJalaliDate.hpp" // Jalali date handler class
 #include "includes/star/web/auth/OAuth2.hpp" // OAuth2 login handler class
+#include "includes/star/web/WebAccessManager.hpp" // Web access manager class
 
 namespace star {
 
@@ -37,6 +38,8 @@ public:
     date::CJalaliDate *getJalaliDate() const;
     void setOAuth2(web::auth::OAuth2 *oAuth2);
     web::auth::OAuth2 *getOAuth2() const;
+    void setWebAccessManager(web::WebAccessManager *webAccessManager);
+    web::WebAccessManager *getWebAccessManager() const;
 
 
 signals:
@@ -49,6 +52,7 @@ public slots:
 protected:
     QPointer<date::CJalaliDate> pJalaliDate;
     QPointer<web::auth::OAuth2> pOAuth2;
+    QPointer<web::WebAccessManager> pWebAccessManager;
 };
 
 }
