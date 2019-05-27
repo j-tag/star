@@ -10,6 +10,7 @@ Item {
     property string strMessage
     property var blurContent
     property var mainContent
+    property alias rectMsg: rectMsg
 
     id: msg
 
@@ -27,13 +28,14 @@ Item {
         id: rectMsg
         anchors.centerIn: rectBackground
         radius: 5
+        scale: 0
         color: "#ffffff"
         width: Qt.platform.os === "android" ? msg.width/1.2 : msg.width/2
-        height : Qt.platform.os === "android" ? msg.height/1.5 : msg.height/3
+        height: Qt.platform.os === "android" ? msg.height/1.5 : msg.height/3
 
         Text
         {
-            id:textMsg
+            id: textMsg
             text: strMessage
             anchors.fill: rectMsg
             horizontalAlignment: Text.AlignHCenter
@@ -55,9 +57,20 @@ Item {
             onClicked:
             {
                 msg.opacity = 0
+                rectMsg.scale = 0
                 blurContent.opacity = 0
                 mainContent.enabled = true
                 mainWindow.header.enabled = true
+            }
+        }
+
+        Behavior on scale
+        {
+
+            NumberAnimation
+            {
+                duration: Main.msgShowDuration
+                easing.type: Main.msgRectEasingType
             }
         }
     }
@@ -76,5 +89,6 @@ Item {
             easing.type: Main.msgEasingType
         }
     }
+
 }
 

@@ -16,6 +16,9 @@ var msgShowDuration = 500
 // Message box easing type
 var msgEasingType = Easing.InOutQuad
 
+// Message box rectangle easing type
+var msgRectEasingType = Easing.InOutExpo
+
 /* Pages */
 
 // Page easing type
@@ -89,5 +92,6 @@ function showMessage(message)
     // Show blur effect
     msgBlur.opacity = 1
     // Show message dialog
+    glassMessage.rectMsg.scale = 1
     glassMessage.opacity = 1
 }
