@@ -1,5 +1,5 @@
 import QtQuick 2.7
-import QtQuick.Controls 2.5
+import QtQuick.Controls 2.12
 import QtQuick.Window 2.2
 import QtQuick.Dialogs 1.2
 import QtGraphicalEffects 1.0
@@ -12,12 +12,18 @@ import "Main.js" as Main
 
 ApplicationWindow {
     id: mainWindow
-    title: qsTr("Star")
+    title: qsTr("نرم افزار تقویم شمسی ستاره")
     width: 740
     height: 480
     minimumWidth: 600
     minimumHeight: 480
     visible: true
+
+    // Main application font
+    FontLoader {
+        id: appFont
+        source: "qrc:/fonts/IRANSans.ttf"
+    }
 
     header: ToolBar
     {

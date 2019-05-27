@@ -19,5 +19,6 @@
         <file>qml/pages/TodayEventsForm.ui.qml</file>
         <file>images/toolbar-todayevents.png</file>
         <file>fonts/IRANSans.ttf</file>
+        <file>qtquickcontrols2.conf</file>
     </qresource>
 </RCC>
