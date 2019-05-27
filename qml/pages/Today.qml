@@ -1,56 +1,63 @@
 import QtQuick 2.7
 import QtQuick.Controls 2.0
+import QtQuick.Layouts 1.12
 
 Item {
 
     id: itemToday
 
-    Column
+    ColumnLayout
     {
         anchors.fill: itemToday
         spacing: 2
 
         Text {
-            text: qsTr("Elapsed time of year")
+            Layout.fillWidth: true
+            horizontalAlignment: Text.AlignHCenter
+            text: qsTr("زمان سپری شده از امسال")
         }
 
         ProgressBar
         {
             id: progYear
-            width: itemToday.width
+            Layout.fillWidth: true
             from: 1
             to: 365
 
-            value: JDate.getCurrentJalaliDayInYear()
+            value: jalaliDate.getCurrentJalaliDayInYear()
         }
 
 
         Text {
-            text: qsTr("Time passed from this month")
+            Layout.fillWidth: true
+            horizontalAlignment: Text.AlignHCenter
+            text: qsTr("زمان سپری شده از این ماه")
         }
 
         ProgressBar
         {
             id: progMonth
-            width: itemToday.width
+            Layout.fillWidth: true
             from: 1
             to: 31
 
-            value: JDate.getCurrentJalaliDayInMonth()
+            value: jalaliDate.getCurrentJalaliDayInMonth()
         }
 
         Text {
-            text: qsTr("Elapsed time of today")
+            Layout.fillWidth: true
+            horizontalAlignment: Text.AlignHCenter
+            text: qsTr("زمان سپری شده از امروز")
         }
 
         ProgressBar
         {
             id: progDay
-            width: itemToday.width
+            Layout.fillWidth: true
             from: 1
             to: 86400000
 
-            value: JDate.getCurrentMillisecondOfDay()
+            value: jalaliDate.getCurrentMillisecondOfDay()
         }
     }
 

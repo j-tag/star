@@ -4,6 +4,9 @@
 #include <QObject>
 #include <QDateTime>
 
+namespace star {
+
+namespace date {
 
 class CJalaliDate : public QObject
 {
@@ -30,5 +33,11 @@ protected:
     QString jalaliToGregorian(const int year, const int month, const int day) const;
 
 };
+
+
+}
+
+}
+
 
 #endif // CJALALIDATE_H

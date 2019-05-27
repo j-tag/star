@@ -75,7 +75,7 @@ ApplicationWindow {
 
                 onClicked:
                 {
-                    Main.showMessage("تاریخ شمسی امروز: " + JDate.getCurrentJalaliDate())
+                    Main.showMessage("تاریخ شمسی امروز: " + jalaliDate.getCurrentJalaliDate())
                 }
 
             }

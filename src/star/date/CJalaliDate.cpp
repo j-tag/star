@@ -1,15 +1,12 @@
-#include "includes/date/CJalaliDate.h"
-
-#include <QDebug>
+#include "includes/star/Star.hpp"
 
 
-
-CJalaliDate::CJalaliDate(QObject *parent) : QObject(parent)
+star::date::CJalaliDate::CJalaliDate(QObject *parent) : QObject(parent)
 {
 
 }
 
-CJalaliDate::~CJalaliDate()
+star::date::CJalaliDate::~CJalaliDate()
 {
 
 }
@@ -17,8 +14,10 @@ CJalaliDate::~CJalaliDate()
 /* -------------- Date Functions -------------- */
 
 // Get Gregorian Date and Convert it to Jalali Date
-QString CJalaliDate::gregorianToJalali(int year, int month, int day) const
+QString star::date::CJalaliDate::gregorianToJalali(int year, int month, int day) const
 {
+    // TODO: Refine this code
+
     QString result;
     int s=year-1;
     int m=month-1;
@@ -91,7 +90,7 @@ QString CJalaliDate::gregorianToJalali(int year, int month, int day) const
 }
 
 // Get Jalali Date and Convert it to Gregorian Date
-QString CJalaliDate::jalaliToGregorian(int year, int month, int day) const
+QString star::date::CJalaliDate::jalaliToGregorian(int year, int month, int day) const
 {
     QString result;
     int s=year -1;
@@ -153,7 +152,7 @@ QString CJalaliDate::jalaliToGregorian(int year, int month, int day) const
 
 /* -------------- /Date Functions -------------- */
 
-QString CJalaliDate::getCurrentJalaliDate() const
+QString star::date::CJalaliDate::getCurrentJalaliDate() const
 {
     QDate date(QDate::currentDate());
 
@@ -162,22 +161,22 @@ QString CJalaliDate::getCurrentJalaliDate() const
     return currentJalaliDate;
 }
 
-QString CJalaliDate::getCurrentJalaliYear() const
+QString star::date::CJalaliDate::getCurrentJalaliYear() const
 {
     return this->getCurrentJalaliDate().left(4);
 }
 
-QString CJalaliDate::getCurrentJalaliMonth() const
+QString star::date::CJalaliDate::getCurrentJalaliMonth() const
 {
     return this->getCurrentJalaliDate().mid(5,2);
 }
 
-QString CJalaliDate::getCurrentJalaliDayInMonth() const
+QString star::date::CJalaliDate::getCurrentJalaliDayInMonth() const
 {
     return this->getCurrentJalaliDate().right(2);
 }
 
-qint64 CJalaliDate::getCurrentJalaliDayInYear() const
+qint64 star::date::CJalaliDate::getCurrentJalaliDayInYear() const
 {
     QDate startDate = QDate::fromString(this->jalaliToGregorian(this->getCurrentJalaliYear().toInt(), 1, 1), "yyyy/MM/dd");
 
@@ -189,7 +188,7 @@ qint64 CJalaliDate::getCurrentJalaliDayInYear() const
     return startDate.daysTo(endDate);
 }
 
-QString CJalaliDate::getCurrentJalaliDayName() const
+QString star::date::CJalaliDate::getCurrentJalaliDayName() const
 {
     QString result;
 
@@ -223,7 +222,7 @@ QString CJalaliDate::getCurrentJalaliDayName() const
     return result;
 }
 
-int CJalaliDate::getCurrentMillisecondOfDay() const
+int star::date::CJalaliDate::getCurrentMillisecondOfDay() const
 {
     return QTime::currentTime().msecsSinceStartOfDay();
 }
