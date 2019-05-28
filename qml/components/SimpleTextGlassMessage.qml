@@ -27,7 +27,7 @@ GlassMessage {
 
             text: qsTr("تایید")
 
-            onClicked: msg.close()
+            onClicked:msg.close()
         }
     }
 

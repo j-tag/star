@@ -16,14 +16,17 @@ void star::web::auth::OAuth2::login(const QString &strUsername, const QString &s
     queries.addQueryItem("password", strPassword);
     queries.addQueryItem("scope", "star");
 
+    // TODO: Use URL creator class
     s.getWebAccessManager()->post("https://puresoftware.org/user/en/oauth2/access/token.json", queries,
                             [=](QNetworkReply *, int) {
         qInfo() << Q_FUNC_INFO << ": Login to Pure account was successful.";
         functor(true, "ورود موفقیت آمیز بود");
+        // TODO: Fetch token and refresh token from JSON result and save it
     },
-    [=](QNetworkReply *reply, int) {
+    [=](QNetworkReply *reply, int status) {
 
         qWarning() << Q_FUNC_INFO << ": Login to Pure account were failed.";
+        qWarning() << status;
 
         if(reply->error() == QNetworkReply::NoError) {
             functor(false, "نام کاربری و گذرواژه با یکدیگر مطابقت ندارند");
@@ -33,4 +36,17 @@ void star::web::auth::OAuth2::login(const QString &strUsername, const QString &s
 
     },
     "application/x-www-form-urlencoded");
+}
+
+void star::web::auth::OAuth2::login(const QString &strUsername, const QString &strPassword)
+{
+    qWarning() << "Username" << strUsername << "password" << strPassword;
+    this->login(strUsername, strPassword, [this] (bool result, const QString &strMessage) {
+        emit this->loginResult(result, strMessage);
+    });
+}
+
+void star::web::auth::OAuth2::saveToken(const QString &strToken, const QString &strRefreshToken)
+{
+    // TODO: Save token and refresh token to be used later
 }

@@ -15,13 +15,19 @@ class OAuth2 : public QObject
 {
     Q_OBJECT
 public:
+
     explicit OAuth2(QObject *parent = nullptr);
 
-    void login(const QString &strUsername, const QString &strPassword, std::function<void(bool result, const QString &strResult)> functor);
+    void login(const QString &strUsername, const QString &strPassword, std::function<void(bool result, const QString &strMessage)> functor);
 
 signals:
+    void loginResult(bool result, QString strMessage);
 
 public slots:
+    void login(const QString &strUsername, const QString &strPassword);
+
+private:
+    void saveToken(const QString &strToken, const QString &strRefreshToken);
 };
 
 }

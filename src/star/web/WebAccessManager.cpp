@@ -29,13 +29,6 @@ void star::web::WebAccessManager::get(const QString &strUrl, std::function<void(
 
         reply->deleteLater();
     });
-
-    connect(reply, QOverload<QNetworkReply::NetworkError>::of(&QNetworkReply::error),
-            [=](){
-        qWarning() << Q_FUNC_INFO << ": Network error.";
-        failFunctor(reply, -1);
-        reply->deleteLater();
-    });
 }
 
 void star::web::WebAccessManager::post(const QString &strUrl, const QUrlQuery &queries, std::function<void(QNetworkReply *reply, int httpStatus)> functor,
@@ -58,13 +51,6 @@ void star::web::WebAccessManager::post(const QString &strUrl, const QUrlQuery &q
             failFunctor(reply, httpStatusCode);
         }
 
-        reply->deleteLater();
-    });
-
-    connect(reply, QOverload<QNetworkReply::NetworkError>::of(&QNetworkReply::error),
-            [=](){
-        qWarning() << Q_FUNC_INFO << ": Network error.";
-        failFunctor(reply, -1);
         reply->deleteLater();
     });
 }

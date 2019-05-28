@@ -35,6 +35,9 @@ int main(int argc, char *argv[])
     // Jalali date handler
     engine.rootContext()->setContextProperty("jalaliDate", s.getJalaliDate());
 
+    // OAuth2 handler
+    engine.rootContext()->setContextProperty("oauth2", s.getOAuth2());
+
     engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
 
     return app.exec();

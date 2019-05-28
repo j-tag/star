@@ -26,8 +26,9 @@ Item {
     Pane {
         id: paneMsg
         anchors.centerIn: rectBackground
-        width: Qt.platform.os === "android" ? msg.width/1.2 : msg.width/2
-        height: Qt.platform.os === "android" ? msg.height/1.5 : msg.height/3
+        clip: true
+        width: msg.width/1.5
+        height: msg.height/2
         scale: 0
 
         background: Rectangle
