@@ -31,16 +31,36 @@ void star::Star::start()
     // Initialize application objects
     this->initObjects();
 
+    pWebAccessManager->get("https://puresoftware.org/tfytfiyt", [=](QNetworkReply *reply, int httpStatus) {
+        qDebug() << "success";
+        qDebug() << reply->error();
+        qDebug() << httpStatus;
+        qDebug() << reply->readAll().length();
+    }, [=](QNetworkReply *reply, int httpStatus){
+        qDebug() << "error";
+        qDebug() << reply->error();
+        qDebug() << httpStatus;
+        qDebug() << reply->readAll().length();
+    });
+
     QUrlQuery queries;
     queries.addQueryItem("grant_type", "password");
     queries.addQueryItem("username", "hesamgholami@yahoo.com");
     queries.addQueryItem("password", "yourpassword");
     queries.addQueryItem("scope", "star");
 
-    pWebAccessManager->post("https://puresoftware.org/user/en/oauth2/access/token.json", queries, [=](QNetworkReply *reply) {
+    pWebAccessManager->post("https://puresoftware.org/user/en/oauth2/access/token.json", queries,
+                            [=](QNetworkReply *reply, int) {
+        qDebug() << "Success";
         qDebug() << reply->error();
         qDebug() << reply->readAll();
-    }, "application/x-www-form-urlencoded");
+    },
+    [=](QNetworkReply *reply, int) {
+        qDebug() << "Fail";
+        qDebug() << reply->error();
+        qDebug() << reply->readAll();
+    },
+    "application/x-www-form-urlencoded");
 }
 
 

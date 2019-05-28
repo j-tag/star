@@ -17,8 +17,11 @@ public:
     virtual ~WebAccessManager();
 
 
-    void get(const QString &strUrl, std::function<void(QNetworkReply *reply)> functor);
-    void post(const QString &strUrl, const QUrlQuery &queries, std::function<void(QNetworkReply *reply)> functor,
+    void get(const QString &strUrl, std::function<void(QNetworkReply *reply, int httpStatus)> functor,
+             std::function<void(QNetworkReply *reply, int httpStatus)> failFunctor);
+
+    void post(const QString &strUrl, const QUrlQuery &queries, std::function<void(QNetworkReply *reply, int httpStatus)> functor,
+              std::function<void(QNetworkReply *reply, int httpStatus)> failFunctor,
               const QString &strContentType = QStringLiteral("application/json"));
 
 private:
