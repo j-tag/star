@@ -91,7 +91,5 @@ function showMessage(message)
     glassMessage.blurContent = msgBlur
     // Show blur effect
     msgBlur.opacity = 1
-    // Show message dialog
-    glassMessage.rectMsg.scale = 1
-    glassMessage.opacity = 1
+    glassMessage.show()
 }

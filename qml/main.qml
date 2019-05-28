@@ -284,7 +284,7 @@ ApplicationWindow {
     }
 
 
-    GlassMessage
+    SimpleTextGlassMessage
     {
         id: glassMessage
         opacity: 0

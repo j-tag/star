@@ -7,10 +7,11 @@ import "../Main.js" as Main
 Item {
     // Note: width and height must be set by caller
 
-    property string strMessage
-    property var blurContent
-    property var mainContent
-    property alias rectMsg: rectMsg
+    property Item blurContent
+    property Item mainContent
+    property Item contentItem
+    property alias paneMsg: paneMsg
+    property alias msg: msg
 
     id: msg
 
@@ -22,47 +23,21 @@ Item {
         anchors.fill: msg
     }
 
-
-    Rectangle
-    {
-        id: rectMsg
+    Pane {
+        id: paneMsg
         anchors.centerIn: rectBackground
-        radius: 5
-        scale: 0
-        color: "#ffffff"
         width: Qt.platform.os === "android" ? msg.width/1.2 : msg.width/2
         height: Qt.platform.os === "android" ? msg.height/1.5 : msg.height/3
+        scale: 0
 
-        Text
+        background: Rectangle
         {
-            id: textMsg
-            text: strMessage
-            anchors.fill: rectMsg
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-            anchors.margins: 14
-            font.pixelSize: 14
-
-            wrapMode: Text.WordWrap
+            anchors.fill: parent
+            radius: 5
+            color: "#90ffffff"
         }
 
-        Button
-        {
-            anchors.horizontalCenter: rectMsg.horizontalCenter
-            anchors.bottomMargin: 14
-            anchors.bottom: rectMsg.bottom
-
-            text: qsTr("OK")
-
-            onClicked:
-            {
-                msg.opacity = 0
-                rectMsg.scale = 0
-                blurContent.opacity = 0
-                mainContent.enabled = true
-                mainWindow.header.enabled = true
-            }
-        }
+        contentItem: msg.contentItem
 
         Behavior on scale
         {
@@ -82,12 +57,28 @@ Item {
 
     Behavior on opacity
     {
-
         NumberAnimation
         {
             duration: Main.msgShowDuration
             easing.type: Main.msgEasingType
         }
+    }
+
+    // Functions
+
+    // Show message dialog
+    function show() {
+        paneMsg.scale = 1
+        opacity = 1
+    }
+
+    // Close message dialog
+    function close() {
+        msg.opacity = 0
+        paneMsg.scale = 0
+        blurContent.opacity = 0
+        mainContent.enabled = true
+        mainWindow.header.enabled = true
     }
 
 }

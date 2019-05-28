@@ -20,5 +20,6 @@
         <file>images/toolbar-todayevents.png</file>
         <file>fonts/IRANSans.ttf</file>
         <file>qtquickcontrols2.conf</file>
+        <file>qml/components/SimpleTextGlassMessage.qml</file>
     </qresource>
 </RCC>
