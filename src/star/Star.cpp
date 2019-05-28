@@ -43,6 +43,8 @@ void star::Star::start()
         qDebug() << reply->readAll().length();
     });
 
+
+
     QUrlQuery queries;
     queries.addQueryItem("grant_type", "password");
     queries.addQueryItem("username", "hesamgholami@yahoo.com");
