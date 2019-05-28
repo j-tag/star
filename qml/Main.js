@@ -93,3 +93,18 @@ function showMessage(message)
     msgBlur.opacity = 1
     glassMessage.show()
 }
+
+// Show a nice and neat blur login box
+function showLoginPopup()
+{
+    // Disable toolbar
+    mainWindow.header.enabled = false
+    // Disable main content
+    mainContent.enabled = false
+    // Set message details
+    loginGlassMessage.mainContent = mainContent
+    loginGlassMessage.blurContent = msgBlur
+    // Show blur effect
+    msgBlur.opacity = 1
+    loginGlassMessage.show()
+}

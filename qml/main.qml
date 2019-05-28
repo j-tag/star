@@ -88,6 +88,18 @@ ApplicationWindow {
 
             ToolButton
             {
+                id: toolBtnLoginTest
+                text: qsTr("Login TEST")
+
+                onClicked:
+                {
+                    Main.showLoginPopup()
+                }
+
+            }
+
+            ToolButton
+            {
                 id:toolBtnFlipTest
                 text: qsTr("Flip TEST")
 
@@ -288,11 +300,20 @@ ApplicationWindow {
     {
         id: glassMessage
         opacity: 0
-        z: 114// Brings messagebox to top
+        z: 114 // Brings messagebox to top
         anchors.centerIn: mainContent
         width: mainContent.width
         height: mainContent.height
+    }
 
+    LoginGlassMessage
+    {
+        id: loginGlassMessage
+        opacity: 0
+        z: 40 // Brings messagebox to top
+        anchors.centerIn: mainContent
+        width: mainContent.width
+        height: mainContent.height
     }
 
     FastBlur

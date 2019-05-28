@@ -1,7 +1,6 @@
 #include "includes/star/Star.hpp"
 
 #include <QNetworkReply>
-#include <QUrlQuery>
 
 star::Star::Star(QObject *parent) : QObject(parent)
 {
@@ -43,26 +42,6 @@ void star::Star::start()
         qDebug() << reply->readAll().length();
     });
 
-
-
-    QUrlQuery queries;
-    queries.addQueryItem("grant_type", "password");
-    queries.addQueryItem("username", "hesamgholami@yahoo.com");
-    queries.addQueryItem("password", "yourpassword");
-    queries.addQueryItem("scope", "star");
-
-    pWebAccessManager->post("https://puresoftware.org/user/en/oauth2/access/token.json", queries,
-                            [=](QNetworkReply *reply, int) {
-        qDebug() << "Success";
-        qDebug() << reply->error();
-        qDebug() << reply->readAll();
-    },
-    [=](QNetworkReply *reply, int) {
-        qDebug() << "Fail";
-        qDebug() << reply->error();
-        qDebug() << reply->readAll();
-    },
-    "application/x-www-form-urlencoded");
 }
 
 

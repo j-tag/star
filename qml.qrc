@@ -21,5 +21,6 @@
         <file>fonts/IRANSans.ttf</file>
         <file>qtquickcontrols2.conf</file>
         <file>qml/components/SimpleTextGlassMessage.qml</file>
+        <file>qml/components/LoginGlassMessage.qml</file>
     </qresource>
 </RCC>

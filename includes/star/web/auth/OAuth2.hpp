@@ -17,7 +17,7 @@ class OAuth2 : public QObject
 public:
     explicit OAuth2(QObject *parent = nullptr);
 
-    bool login(const QString &strUsername, const QString &strPassword, std::function<void(bool result, const QString &strResult)> functor);
+    void login(const QString &strUsername, const QString &strPassword, std::function<void(bool result, const QString &strResult)> functor);
 
 signals:
 

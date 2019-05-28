@@ -3,13 +3,12 @@ import QtQuick.Controls 2.12
 
 GlassMessage {
     // Note: width and height must be set by caller
-    property string strMessage
 
     contentItem: Item {
         Text
         {
             id: textMsg
-            text: strMessage
+            text: qsTr("ورود به حساب کاربری پیورسافت")
             anchors.fill: parent
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
@@ -25,7 +24,7 @@ GlassMessage {
             anchors.bottomMargin: 14
             anchors.bottom: parent.bottom
 
-            text: qsTr("تایید")
+            text: qsTr("ورود")
 
             onClicked: msg.close()
         }
