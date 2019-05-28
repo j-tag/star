@@ -1,8 +1,7 @@
 #include "includes/star/Star.hpp"
 
-#include <QCoreApplication>
-
-
+#include <QNetworkReply>
+#include <QUrlQuery>
 
 star::Star::Star(QObject *parent) : QObject(parent)
 {
@@ -32,14 +31,16 @@ void star::Star::start()
     // Initialize application objects
     this->initObjects();
 
-    QNetworkRequest request;
-    request.setUrl(QUrl("https://puresoftware.org"));
-    request.setRawHeader("User-Agent", "MyOwnBrowser 1.0");
-    qDebug()<<"SSL version use for build: "<<QSslSocket::sslLibraryBuildVersionString();
-    qDebug()<<"SSL version use for run-time: "<<QSslSocket::sslLibraryVersionNumber();
-    qDebug()<<QCoreApplication::libraryPaths();
+    QUrlQuery queries;
+    queries.addQueryItem("grant_type", "password");
+    queries.addQueryItem("username", "hesamgholami@yahoo.com");
+    queries.addQueryItem("password", "yourpassword");
+    queries.addQueryItem("scope", "star");
 
-    pWebAccessManager->get(request);
+    pWebAccessManager->post("https://puresoftware.org/user/en/oauth2/access/token.json", queries, [=](QNetworkReply *reply) {
+        qDebug() << reply->error();
+        qDebug() << reply->readAll();
+    }, "application/x-www-form-urlencoded");
 }
 
 
