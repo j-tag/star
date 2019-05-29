@@ -16,8 +16,7 @@ void star::web::auth::OAuth2::login(const QString &strUsername, const QString &s
     queries.addQueryItem("password", strPassword);
     queries.addQueryItem("scope", "star");
 
-    // TODO: Use URL creator class
-    s.getWebAccessManager()->post("https://puresoftware.org/user/en/oauth2/access/token.json", queries,
+    s.getWebAccessManager()->post(s.getUrlManager()->getLoginUrl(), queries,
                             [=](QNetworkReply *, int) {
         qInfo() << Q_FUNC_INFO << ": Login to Pure account was successful.";
         functor(true, "ورود موفقیت آمیز بود");

@@ -19,6 +19,9 @@ star::Star::~Star()
     if(this->pWebAccessManager) {
         this->pWebAccessManager->deleteLater();
     }
+    if(this->pUrlManager) {
+        this->pUrlManager->deleteLater();
+    }
 
 }
 
@@ -53,6 +56,7 @@ void star::Star::initObjects()
     this->pJalaliDate = new date::CJalaliDate;
     this->pOAuth2 = new web::auth::OAuth2;
     this->pWebAccessManager = new web::WebAccessManager;
+    this->pUrlManager = new web::url::UrlManager;
 }
 
 /**
@@ -91,6 +95,16 @@ void star::Star::setWebAccessManager(star::web::WebAccessManager *webAccessManag
 star::web::WebAccessManager *star::Star::getWebAccessManager() const
 {
     return this->pWebAccessManager;
+}
+
+void star::Star::setUrlManager(star::web::url::UrlManager *urlManager)
+{
+    this->pUrlManager = urlManager;
+}
+
+star::web::url::UrlManager *star::Star::getUrlManager() const
+{
+    return this->pUrlManager;
 }
 
 

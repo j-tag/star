@@ -24,6 +24,7 @@
 #include "includes/star/date/CJalaliDate.hpp" // Jalali date handler class
 #include "includes/star/web/auth/OAuth2.hpp" // OAuth2 login handler class
 #include "includes/star/web/WebAccessManager.hpp" // Web access manager class
+#include "includes/star/web/url/UrlManager.hpp" // URL manager class
 
 namespace star {
 
@@ -40,6 +41,8 @@ public:
     web::auth::OAuth2 *getOAuth2() const;
     void setWebAccessManager(web::WebAccessManager *webAccessManager);
     web::WebAccessManager *getWebAccessManager() const;
+    void setUrlManager(web::url::UrlManager *urlManager);
+    web::url::UrlManager *getUrlManager() const;
 
 
 signals:
@@ -53,6 +56,7 @@ protected:
     QPointer<date::CJalaliDate> pJalaliDate;
     QPointer<web::auth::OAuth2> pOAuth2;
     QPointer<web::WebAccessManager> pWebAccessManager;
+    QPointer<web::url::UrlManager> pUrlManager;
 };
 
 }
