@@ -45,7 +45,7 @@ void star::web::auth::OAuth2::login(const QString &strUsername, const QString &s
 
         auto expiresIn = s.getJsonParser()->getSafeIntegerValue(json, "expires_in");
 
-        auto apiToken = new ApiToken(tokenType, accessToken, refreshToken, expiresIn);
+        ApiToken *apiToken = new ApiToken(tokenType, accessToken, refreshToken, expiresIn);
 
         this->saveToken(apiToken);
 
@@ -73,7 +73,14 @@ void star::web::auth::OAuth2::login(const QString &strUsername, const QString &s
     });
 }
 
-void star::web::auth::OAuth2::saveToken(const star::web::auth::ApiToken *apiToken)
+void star::web::auth::OAuth2::saveToken(star::web::auth::ApiToken *apiToken)
 {
-    // TODO: Save token data to be used later
+    // Save token data to be used later
+
+    s.getSettingsManager()->setValue("token/token_type", apiToken->getTokenType());
+    s.getSettingsManager()->setValue("token/access_token", apiToken->getAccessToken());
+    s.getSettingsManager()->setValue("token/refresh_token", apiToken->getRefreshToken());
+    s.getSettingsManager()->setValue("token/expires_in", apiToken->getExpiresIn());
+
+    s.setApiToken(apiToken);
 }

@@ -25,6 +25,12 @@ star::Star::~Star()
     if(this->pJsonParser) {
         this->pJsonParser->deleteLater();
     }
+    if(this->pSettingsManager) {
+        this->pSettingsManager->deleteLater();
+    }
+    if(this->pApiToken) {
+        this->pApiToken->deleteLater();
+    }
 
 }
 
@@ -61,6 +67,8 @@ void star::Star::initObjects()
     this->pWebAccessManager = new web::WebAccessManager;
     this->pUrlManager = new web::url::UrlManager;
     this->pJsonParser = new web::json::JsonParser;
+    this->pSettingsManager = new settings::SettingsManager;
+    this->pApiToken = nullptr;
 }
 
 /**
@@ -119,6 +127,26 @@ void star::Star::setJsonParser(star::web::json::JsonParser *jsonParser)
 star::web::json::JsonParser *star::Star::getJsonParser() const
 {
     return this->pJsonParser;
+}
+
+void star::Star::setSettingsManager(star::settings::SettingsManager *settingsManager)
+{
+    this->pSettingsManager = settingsManager;
+}
+
+star::settings::SettingsManager *star::Star::getSettingsManager() const
+{
+    return this->pSettingsManager;
+}
+
+void star::Star::setApiToken(star::web::auth::ApiToken *apiToken)
+{
+    this->pApiToken = apiToken;
+}
+
+star::web::auth::ApiToken *star::Star::getApiToken() const
+{
+    return this->pApiToken;
 }
 
 

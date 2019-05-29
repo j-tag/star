@@ -29,7 +29,7 @@ public slots:
     void login(const QString &strUsername, const QString &strPassword);
 
 private:
-    void saveToken(const ApiToken *apiToken);
+    void saveToken(ApiToken *apiToken);
 };
 
 }

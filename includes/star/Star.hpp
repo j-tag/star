@@ -27,6 +27,7 @@
 #include "includes/star/web/url/UrlManager.hpp" // URL manager class
 #include "includes/star/web/json/JsonParser.hpp" // JSON parser class
 #include "includes/star/web/auth/ApiToken.hpp" // API Token data model
+#include "includes/star/settings/SettingsManager.hpp" // Settings manager class
 
 namespace star {
 
@@ -47,6 +48,10 @@ public:
     web::url::UrlManager *getUrlManager() const;
     void setJsonParser(web::json::JsonParser *jsonParser);
     web::json::JsonParser *getJsonParser() const;
+    void setSettingsManager(settings::SettingsManager *settingsManager);
+    settings::SettingsManager *getSettingsManager() const;
+    void setApiToken(web::auth::ApiToken *apiToken);
+    web::auth::ApiToken *getApiToken() const;
 
 
 signals:
@@ -62,6 +67,8 @@ protected:
     QPointer<web::WebAccessManager> pWebAccessManager;
     QPointer<web::url::UrlManager> pUrlManager;
     QPointer<web::json::JsonParser> pJsonParser;
+    QPointer<settings::SettingsManager> pSettingsManager;
+    QPointer<web::auth::ApiToken> pApiToken;
 };
 
 }

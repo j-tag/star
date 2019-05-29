@@ -13,6 +13,7 @@ class ApiToken : public QObject
 {
     Q_OBJECT
 public:
+
     ApiToken(const QString &strTokenType, const QString &strAccessToken, const QString &strRefreshToken, int nExpiresIn)
         : _strTokenType(strTokenType), _strAccessToken(strAccessToken), _strRefreshToken(strRefreshToken), _nExpiresIn(nExpiresIn) {}
 
@@ -21,7 +22,7 @@ public:
     QString getTokenType() const { return this->_strTokenType; }
     QString getAccessToken() const { return this->_strAccessToken; }
     QString getRefreshToken() const { return this->_strRefreshToken; }
-    int getExpiresin() const { return this->_nExpiresIn; }
+    int getExpiresIn() const { return this->_nExpiresIn; }
 
 private:
     QString _strTokenType;
