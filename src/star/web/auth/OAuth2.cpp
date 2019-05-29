@@ -67,7 +67,6 @@ void star::web::auth::OAuth2::login(const QString &strUsername, const QString &s
 
 void star::web::auth::OAuth2::login(const QString &strUsername, const QString &strPassword)
 {
-    qWarning() << "Username" << strUsername << "password" << strPassword;
     this->login(strUsername, strPassword, [this] (bool result, const QString &strMessage) {
         emit this->loginResult(result, strMessage);
     });
