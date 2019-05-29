@@ -2,6 +2,8 @@
 
 #include <QUrlQuery>
 #include <QNetworkReply>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 star::web::auth::OAuth2::OAuth2(QObject *parent) : QObject(parent)
 {
@@ -17,10 +19,36 @@ void star::web::auth::OAuth2::login(const QString &strUsername, const QString &s
     queries.addQueryItem("scope", "star");
 
     s.getWebAccessManager()->post(s.getUrlManager()->getLoginUrl(), queries,
-                            [=](QNetworkReply *, int) {
+                            [=](QNetworkReply *reply, int) {
+
         qInfo() << Q_FUNC_INFO << ": Login to Pure account was successful.";
+
         functor(true, "ورود موفقیت آمیز بود");
-        // TODO: Fetch token and refresh token from JSON result and save it
+
+        // Now fetch token and refresh token from JSON result and save it
+
+        auto jsoc = QJsonDocument::fromJson(reply->readAll());
+
+        if(jsoc.isNull()) {
+            // JSON result was invalid
+            functor(false, "پاسخ دریافت شده از پیورسافت معتبر نیست");
+            return;
+        }
+
+        auto json = jsoc.object();
+
+        auto tokenType = s.getJsonParser()->getSafeStringValue(json, "token_type");
+
+        auto accessToken = s.getJsonParser()->getSafeStringValue(json, "access_token");
+
+        auto refreshToken = s.getJsonParser()->getSafeStringValue(json, "refresh_token");
+
+        auto expiresIn = s.getJsonParser()->getSafeIntegerValue(json, "expires_in");
+
+        auto apiToken = new ApiToken(tokenType, accessToken, refreshToken, expiresIn);
+
+        this->saveToken(apiToken);
+
     },
     [=](QNetworkReply *reply, int status) {
 
@@ -45,7 +73,7 @@ void star::web::auth::OAuth2::login(const QString &strUsername, const QString &s
     });
 }
 
-void star::web::auth::OAuth2::saveToken(const QString &strToken, const QString &strRefreshToken)
+void star::web::auth::OAuth2::saveToken(const star::web::auth::ApiToken *apiToken)
 {
-    // TODO: Save token and refresh token to be used later
+    // TODO: Save token data to be used later
 }

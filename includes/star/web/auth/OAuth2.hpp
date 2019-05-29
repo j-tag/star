@@ -1,6 +1,8 @@
 #ifndef OAUTH2_HPP
 #define OAUTH2_HPP
 
+#include "ApiToken.hpp"
+
 #include <functional>
 
 #include <QObject>
@@ -27,7 +29,7 @@ public slots:
     void login(const QString &strUsername, const QString &strPassword);
 
 private:
-    void saveToken(const QString &strToken, const QString &strRefreshToken);
+    void saveToken(const ApiToken *apiToken);
 };
 
 }

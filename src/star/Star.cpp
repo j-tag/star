@@ -22,6 +22,9 @@ star::Star::~Star()
     if(this->pUrlManager) {
         this->pUrlManager->deleteLater();
     }
+    if(this->pJsonParser) {
+        this->pJsonParser->deleteLater();
+    }
 
 }
 
@@ -57,6 +60,7 @@ void star::Star::initObjects()
     this->pOAuth2 = new web::auth::OAuth2;
     this->pWebAccessManager = new web::WebAccessManager;
     this->pUrlManager = new web::url::UrlManager;
+    this->pJsonParser = new web::json::JsonParser;
 }
 
 /**
@@ -105,6 +109,16 @@ void star::Star::setUrlManager(star::web::url::UrlManager *urlManager)
 star::web::url::UrlManager *star::Star::getUrlManager() const
 {
     return this->pUrlManager;
+}
+
+void star::Star::setJsonParser(star::web::json::JsonParser *jsonParser)
+{
+    this->pJsonParser = jsonParser;
+}
+
+star::web::json::JsonParser *star::Star::getJsonParser() const
+{
+    return this->pJsonParser;
 }
 
 
