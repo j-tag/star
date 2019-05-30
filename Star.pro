@@ -5,6 +5,7 @@ QT += qml quick quickcontrols2 widgets network
 SOURCES += src/main.cpp \
     src/star/date/CJalaliDate.cpp \
     src/star/settings/SettingsManager.cpp \
+    src/star/ui/home/UserDetails.cpp \
     src/star/web/WebAccessManager.cpp \
     src/star/web/auth/OAuth2.cpp \
     src/star/Star.cpp \
@@ -19,6 +20,7 @@ QML_IMPORT_PATH =
 HEADERS += \
     includes/star/date/CJalaliDate.hpp \
     includes/star/settings/SettingsManager.hpp \
+    includes/star/ui/home/UserDetails.hpp \
     includes/star/web/auth/ApiToken.hpp \
     includes/star/web/auth/OAuth2.hpp \
     includes/star/Star.hpp \

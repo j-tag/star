@@ -9,5 +9,7 @@ HomeForm {
                                easing.type: Main.pageEasingType
                            }
                        }
+
+    textName.text: qsTr("سلام %1 حالت چطوره؟").arg(userDetails.name)
 }
 

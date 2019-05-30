@@ -38,6 +38,9 @@ int main(int argc, char *argv[])
     // OAuth2 handler
     engine.rootContext()->setContextProperty("oauth2", s.getOAuth2());
 
+    // User details UI class
+    engine.rootContext()->setContextProperty("userDetails", s.getUiUserDetails());
+
     engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
 
     return app.exec();

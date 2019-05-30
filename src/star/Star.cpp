@@ -32,6 +32,9 @@ star::Star::~Star()
     if(this->pApiToken) {
         this->pApiToken->deleteLater();
     }
+    if(this->pUiUserDetails) {
+        this->pUiUserDetails->deleteLater();
+    }
 
 }
 
@@ -52,9 +55,11 @@ void star::Star::start()
 
     // Check to see if we have local token
     if(! possibleAccessToken.isNull()) {
+
         // Initialize API token
         this->setApiToken(new web::auth::ApiToken(possibleTokenType, possibleAccessToken, possibleRefreshToken, possibleExpiresIn));
 
+        // TODO: Show loading box here
 
         pWebAccessManager->withAuthenticationHeader()->get(this->getUrlManager()->getPureUrl("apps/fa/star-v3/settings/get.html"),
                                                            [=](QNetworkReply *reply, int ) {
@@ -64,7 +69,7 @@ void star::Star::start()
 
             // Name
             auto name = this->getJsonParser()->getSafeStringValue(json, "name");
-            this->getSettingsManager()->setValue("user/settigs/name", name.isNull() ? "[نام شما]" : name);
+            this->getUiUserDetails()->updateName(name.isNull() ? "[نام شما]" : name);
 
         }, [=](QNetworkReply *reply, int httpStatus){
             if(httpStatus == 404) {
@@ -102,6 +107,7 @@ void star::Star::initObjects()
     this->pJsonParser = new web::json::JsonParser;
     this->pSettingsManager = new settings::SettingsManager;
     this->pApiToken = nullptr;
+    this->pUiUserDetails = new ui::home::UserDetails;
 }
 
 /**
@@ -180,6 +186,16 @@ void star::Star::setApiToken(star::web::auth::ApiToken *apiToken)
 star::web::auth::ApiToken *star::Star::getApiToken() const
 {
     return this->pApiToken;
+}
+
+void star::Star::setUiUserDetails(star::ui::home::UserDetails *userDetails)
+{
+    this->pUiUserDetails = userDetails;
+}
+
+star::ui::home::UserDetails *star::Star::getUiUserDetails() const
+{
+    return this->pUiUserDetails;
 }
 
 

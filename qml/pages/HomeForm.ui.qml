@@ -6,6 +6,7 @@ Item {
 
     property alias flickableHome: flickableHome
     property alias rectBg: rectBg
+    property alias textName: textName
 
     id: home
     Layout.minimumWidth: 200
@@ -36,9 +37,9 @@ Item {
             height: home.height / 1.3
 
             Text {
+                id: textName
                 anchors.horizontalCenter: parent.horizontalCenter
                 topPadding: 40
-                text: qsTr("سلام")
             }
 
             Row {

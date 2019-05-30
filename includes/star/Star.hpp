@@ -28,6 +28,7 @@
 #include "includes/star/web/json/JsonParser.hpp" // JSON parser class
 #include "includes/star/web/auth/ApiToken.hpp" // API Token data model
 #include "includes/star/settings/SettingsManager.hpp" // Settings manager class
+#include "includes/star/ui/home/UserDetails.hpp" // User details UI class
 
 namespace star {
 
@@ -52,6 +53,8 @@ public:
     settings::SettingsManager *getSettingsManager() const;
     void setApiToken(web::auth::ApiToken *apiToken);
     web::auth::ApiToken *getApiToken() const;
+    void setUiUserDetails(ui::home::UserDetails *userDetails);
+    ui::home::UserDetails *getUiUserDetails() const;
 
 
 signals:
@@ -69,6 +72,7 @@ protected:
     QPointer<web::json::JsonParser> pJsonParser;
     QPointer<settings::SettingsManager> pSettingsManager;
     QPointer<web::auth::ApiToken> pApiToken;
+    QPointer<ui::home::UserDetails> pUiUserDetails;
 };
 
 }
