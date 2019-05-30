@@ -10,10 +10,21 @@ star::web::WebAccessManager::WebAccessManager():pManager(new QNetworkAccessManag
 
 star::web::WebAccessManager::~WebAccessManager() {}
 
+star::web::WebAccessManager *star::web::WebAccessManager::withAuthenticationHeader()
+{
+    auto apiToken = s.getApiToken();
+
+    this->hashHeaders["Authorization"] = "Bearer " + apiToken->getAccessToken();
+
+    return this;
+}
+
 void star::web::WebAccessManager::get(const QString &strUrl, std::function<void(QNetworkReply *reply, int httpStatus)> functor,
                                       std::function<void(QNetworkReply *reply, int httpStatus)> failFunctor = [](QNetworkReply *, int){})
 {
     QNetworkRequest request(this->generateNormalRequest(strUrl));
+
+    this->setHeaders(request);
 
     QNetworkReply *reply = this->pManager->get(request);
 
@@ -64,4 +75,14 @@ QNetworkRequest star::web::WebAccessManager::generateNormalRequest(const QString
     request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
 
     return request;
+}
+
+QNetworkRequest &star::web::WebAccessManager::setHeaders(QNetworkRequest &request)
+{
+    QHashIterator<QString, QString> i(this->hashHeaders);
+
+    while (i.hasNext()) {
+        i.next();
+        request.setRawHeader(i.key().toUtf8(), i.value().toUtf8());
+    }
 }

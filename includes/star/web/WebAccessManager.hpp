@@ -1,6 +1,7 @@
 #ifndef WEBACCESSMANAGER_HPP
 #define WEBACCESSMANAGER_HPP
 
+#include <QHash>
 #include <QObject>
 #include <QPointer>
 #include <QNetworkAccessManager>
@@ -16,6 +17,7 @@ public:
     WebAccessManager();
     virtual ~WebAccessManager();
 
+    WebAccessManager *withAuthenticationHeader();
 
     void get(const QString &strUrl, std::function<void(QNetworkReply *reply, int httpStatus)> functor,
              std::function<void(QNetworkReply *reply, int httpStatus)> failFunctor);
@@ -26,9 +28,12 @@ public:
 
 private:
     QNetworkRequest generateNormalRequest(const QString &strUrl);
+    QNetworkRequest &setHeaders(QNetworkRequest &request);
+
 
 private:
     QPointer<QNetworkAccessManager> pManager;
+    QHash<QString, QString> hashHeaders;
 };
 
 }

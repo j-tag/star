@@ -1,5 +1,6 @@
 #include "includes/star/Star.hpp"
 
+#include <QJsonDocument>
 #include <QNetworkReply>
 
 star::Star::Star(QObject *parent) : QObject(parent)
@@ -42,17 +43,49 @@ void star::Star::start()
     // Initialize application objects
     this->initObjects();
 
-    pWebAccessManager->get("https://puresoftware.org/tfytfiyt", [=](QNetworkReply *reply, int httpStatus) {
-        qDebug() << "success";
-        qDebug() << reply->error();
-        qDebug() << httpStatus;
-        qDebug() << reply->readAll().length();
-    }, [=](QNetworkReply *reply, int httpStatus){
-        qDebug() << "error";
-        qDebug() << reply->error();
-        qDebug() << httpStatus;
-        qDebug() << reply->readAll().length();
-    });
+    // Login to Pure account
+
+    auto possibleTokenType = this->pSettingsManager->getStringValue("auth/token/token_type");
+    auto possibleAccessToken = this->pSettingsManager->getStringValue("auth/token/access_token");
+    auto possibleRefreshToken = this->pSettingsManager->getStringValue("auth/token/refresh_token");
+    auto possibleExpiresIn = this->pSettingsManager->getIntValue("auth/token/expires_in");
+
+    // Check to see if we have local token
+    if(! possibleAccessToken.isNull()) {
+        // Initialize API token
+        this->setApiToken(new web::auth::ApiToken(possibleTokenType, possibleAccessToken, possibleRefreshToken, possibleExpiresIn));
+
+
+        pWebAccessManager->withAuthenticationHeader()->get(this->getUrlManager()->getPureUrl("apps/fa/star-v3/settings/get.html"),
+                                                           [=](QNetworkReply *reply, int ) {
+            // Read data
+            auto jsoc = QJsonDocument::fromJson(reply->readAll());
+            auto json = jsoc.object();
+
+            // Name
+            auto name = this->getJsonParser()->getSafeStringValue(json, "name");
+            this->getSettingsManager()->setValue("user/settigs/name", name.isNull() ? "[نام شما]" : name);
+
+        }, [=](QNetworkReply *reply, int httpStatus){
+            if(httpStatus == 404) {
+                // This user has not any settings yet
+            } else {
+                // Something else is wrong
+                qWarning() << Q_FUNC_INFO << ": Can't get user settings. HTTP Status:" << httpStatus <<
+                              "Result:" << reply->readAll();
+            }
+        });
+    }
+
+    // 1: We have a local token and it works
+    // OK, keep going
+
+    // 2: We have a local token but it don't work
+    // 2.1 Try refresh token and if it works, continue (TBT)
+    // 2.2 If refresh token don't work, show login box
+
+    // 3: We don't have local token
+    // Show login box
 
 }
 

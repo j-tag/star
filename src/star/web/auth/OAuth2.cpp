@@ -76,10 +76,10 @@ void star::web::auth::OAuth2::saveToken(star::web::auth::ApiToken *apiToken)
 {
     // Save token data to be used later
 
-    s.getSettingsManager()->setValue("token/token_type", apiToken->getTokenType());
-    s.getSettingsManager()->setValue("token/access_token", apiToken->getAccessToken());
-    s.getSettingsManager()->setValue("token/refresh_token", apiToken->getRefreshToken());
-    s.getSettingsManager()->setValue("token/expires_in", apiToken->getExpiresIn());
+    s.getSettingsManager()->setValue("auth/token/token_type", apiToken->getTokenType());
+    s.getSettingsManager()->setValue("auth/token/access_token", apiToken->getAccessToken());
+    s.getSettingsManager()->setValue("auth/token/refresh_token", apiToken->getRefreshToken());
+    s.getSettingsManager()->setValue("auth/token/expires_in", apiToken->getExpiresIn());
 
     s.setApiToken(apiToken);
 }

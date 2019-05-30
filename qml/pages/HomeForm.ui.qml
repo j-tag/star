@@ -35,6 +35,12 @@ Item {
             width: home.width / 1.2
             height: home.height / 1.3
 
+            Text {
+                anchors.horizontalCenter: parent.horizontalCenter
+                topPadding: 40
+                text: qsTr("سلام")
+            }
+
             Row {
                 id: rowHome
                 width: itemHome.width / 1.2
