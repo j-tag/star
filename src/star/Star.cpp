@@ -1,6 +1,7 @@
 #include "includes/star/Star.hpp"
 
 #include <QJsonDocument>
+#include <QJsonObject>
 #include <QNetworkReply>
 
 star::Star::Star(QObject *parent) : QObject(parent)
@@ -22,9 +23,6 @@ star::Star::~Star()
     }
     if(this->pUrlManager) {
         this->pUrlManager->deleteLater();
-    }
-    if(this->pJsonParser) {
-        this->pJsonParser->deleteLater();
     }
     if(this->pSettingsManager) {
         this->pSettingsManager->deleteLater();
@@ -70,7 +68,7 @@ void star::Star::start()
             // Close all login related boxes
             emit s.getOAuth2()->showLoginBox(false);
 
-        }, [=](QNetworkReply *reply, int httpStatus){
+        }, [=](QNetworkReply *reply, int httpStatus) {
             if(httpStatus == 404) {
 
                 // TODO: Here we should show user the first setup wizard
@@ -167,7 +165,6 @@ void star::Star::initObjects()
     this->pOAuth2 = new web::auth::OAuth2;
     this->pWebAccessManager = new web::WebAccessManager;
     this->pUrlManager = new web::url::UrlManager;
-    this->pJsonParser = new web::json::JsonParser;
     this->pSettingsManager = new settings::SettingsManager;
     this->pApiToken = nullptr;
     this->pUiUserDetails = new ui::home::UserDetails;
@@ -232,16 +229,6 @@ void star::Star::setUrlManager(star::web::url::UrlManager *urlManager)
 star::web::url::UrlManager *star::Star::getUrlManager() const
 {
     return this->pUrlManager;
-}
-
-void star::Star::setJsonParser(star::web::json::JsonParser *jsonParser)
-{
-    this->pJsonParser = jsonParser;
-}
-
-star::web::json::JsonParser *star::Star::getJsonParser() const
-{
-    return this->pJsonParser;
 }
 
 void star::Star::setSettingsManager(star::settings::SettingsManager *settingsManager)

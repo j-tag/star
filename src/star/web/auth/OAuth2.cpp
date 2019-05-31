@@ -63,13 +63,13 @@ void star::web::auth::OAuth2::tokenResultHandler(QNetworkReply *reply, int , std
 
     auto json = jsoc.object();
 
-    auto tokenType = s.getJsonParser()->getSafeStringValue(json, "token_type");
+    auto tokenType = json["token_type"].toString();
 
-    auto accessToken = s.getJsonParser()->getSafeStringValue(json, "access_token");
+    auto accessToken = json["access_token"].toString();
 
-    auto refreshToken = s.getJsonParser()->getSafeStringValue(json, "refresh_token");
+    auto refreshToken = json["refresh_token"].toString();
 
-    auto expiresIn = s.getJsonParser()->getSafeIntegerValue(json, "expires_in");
+    auto expiresIn = json["expires_in"].toInt(-1);
 
     ApiToken *apiToken = new ApiToken(tokenType, accessToken, refreshToken, expiresIn);
 

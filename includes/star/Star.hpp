@@ -25,7 +25,6 @@
 #include "includes/star/web/auth/OAuth2.hpp" // OAuth2 login handler class
 #include "includes/star/web/WebAccessManager.hpp" // Web access manager class
 #include "includes/star/web/url/UrlManager.hpp" // URL manager class
-#include "includes/star/web/json/JsonParser.hpp" // JSON parser class
 #include "includes/star/web/auth/ApiToken.hpp" // API Token data model
 #include "includes/star/settings/SettingsManager.hpp" // Settings manager class
 #include "includes/star/ui/home/UserDetails.hpp" // User details UI class
@@ -48,8 +47,6 @@ public:
     web::WebAccessManager *getWebAccessManager() const;
     void setUrlManager(web::url::UrlManager *urlManager);
     web::url::UrlManager *getUrlManager() const;
-    void setJsonParser(web::json::JsonParser *jsonParser);
-    web::json::JsonParser *getJsonParser() const;
     void setSettingsManager(settings::SettingsManager *settingsManager);
     settings::SettingsManager *getSettingsManager() const;
     void setApiToken(web::auth::ApiToken *apiToken);
@@ -75,7 +72,6 @@ protected:
     QPointer<web::auth::OAuth2> pOAuth2;
     QPointer<web::WebAccessManager> pWebAccessManager;
     QPointer<web::url::UrlManager> pUrlManager;
-    QPointer<web::json::JsonParser> pJsonParser;
     QPointer<settings::SettingsManager> pSettingsManager;
     QPointer<web::auth::ApiToken> pApiToken;
     QPointer<ui::home::UserDetails> pUiUserDetails;
