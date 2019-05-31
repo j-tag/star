@@ -14,7 +14,7 @@ ApplicationWindow {
     id: mainWindow
     title: qsTr("نرم افزار تقویم شمسی ستاره")
     width: 740
-    height: 480
+    height: 520
     minimumWidth: 600
     minimumHeight: 480
     visible: true
@@ -23,6 +23,41 @@ ApplicationWindow {
     FontLoader {
         id: appFont
         source: "qrc:/fonts/IRANSans.ttf"
+    }
+
+    Connections {
+        target: oauth2
+        onShowLoginBox: {
+
+            // result -> bool
+            if(result) {
+                // Here we should show login box
+                glassProgressMessage.close()
+                Main.showLoginPopup()
+            } else {
+                // In this case we don't need to show login box
+                // So close everything related to login
+
+                loginGlassMessage.close()
+                glassProgressMessage.close()
+            }
+        }
+    }
+
+    Connections {
+        target: alerts
+        onShowError: {
+
+            // strMessage -> string
+
+            glassMessage.close()
+            Main.showMessage(strMessage)
+
+        }
+    }
+
+    Component.onCompleted: {
+        Main.showGlassProgressMessage()
     }
 
     header: ToolBar
@@ -309,6 +344,16 @@ ApplicationWindow {
     LoginGlassMessage
     {
         id: loginGlassMessage
+        opacity: 0
+        z: 40 // Brings messagebox to top
+        anchors.centerIn: mainContent
+        width: mainContent.width
+        height: mainContent.height
+    }
+
+    GlassProgressMessage
+    {
+        id: glassProgressMessage
         opacity: 0
         z: 40 // Brings messagebox to top
         anchors.centerIn: mainContent

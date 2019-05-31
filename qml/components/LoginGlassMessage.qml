@@ -30,9 +30,8 @@ GlassMessage {
         }
     }
 
-    contentItem: Item{
+    contentItem: Item {
         anchors.fill: parent
-
 
         Flickable {
             id: flickable
@@ -121,6 +120,27 @@ GlassMessage {
                     easing.type: Main.msgEasingType
                 }
             }
+        }
+
+        Button {
+            anchors {
+                top: parent.top
+                right: parent.right
+                topMargin: 5
+                rightMargin: 20
+            }
+            width: 40
+            height: 40
+            flat: true
+
+            Text {
+                id: textClose
+                anchors.centerIn: parent
+                text: "×"
+                color: "#333"
+            }
+
+            onClicked: msg.close()
         }
 
     }

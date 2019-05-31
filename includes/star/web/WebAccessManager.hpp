@@ -20,7 +20,7 @@ public:
     WebAccessManager *withAuthenticationHeader();
 
     void get(const QString &strUrl, std::function<void(QNetworkReply *reply, int httpStatus)> functor,
-             std::function<void(QNetworkReply *reply, int httpStatus)> failFunctor);
+             std::function<void(QNetworkReply *reply, int httpStatus)> failFunctor = [](QNetworkReply *, int){});
 
     void post(const QString &strUrl, const QUrlQuery &queries, std::function<void(QNetworkReply *reply, int httpStatus)> functor,
               std::function<void(QNetworkReply *reply, int httpStatus)> failFunctor,

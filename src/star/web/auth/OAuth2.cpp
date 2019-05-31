@@ -19,36 +19,8 @@ void star::web::auth::OAuth2::login(const QString &strUsername, const QString &s
     queries.addQueryItem("scope", "star");
 
     s.getWebAccessManager()->post(s.getUrlManager()->getLoginUrl(), queries,
-                            [=](QNetworkReply *reply, int) {
-
-        qInfo() << Q_FUNC_INFO << ": Login to Pure account was successful.";
-
-        functor(true, "ورود موفقیت آمیز بود");
-
-        // Now fetch token and refresh token from JSON result and save it
-
-        auto jsoc = QJsonDocument::fromJson(reply->readAll());
-
-        if(jsoc.isNull()) {
-            // JSON result was invalid
-            functor(false, "پاسخ دریافت شده از پیورسافت معتبر نیست");
-            return;
-        }
-
-        auto json = jsoc.object();
-
-        auto tokenType = s.getJsonParser()->getSafeStringValue(json, "token_type");
-
-        auto accessToken = s.getJsonParser()->getSafeStringValue(json, "access_token");
-
-        auto refreshToken = s.getJsonParser()->getSafeStringValue(json, "refresh_token");
-
-        auto expiresIn = s.getJsonParser()->getSafeIntegerValue(json, "expires_in");
-
-        ApiToken *apiToken = new ApiToken(tokenType, accessToken, refreshToken, expiresIn);
-
-        this->saveToken(apiToken);
-
+                            [=](QNetworkReply *reply, int httpStatus) {
+        this->tokenResultHandler(reply, httpStatus, functor);
     },
     [=](QNetworkReply *reply, int status) {
 
@@ -70,6 +42,39 @@ void star::web::auth::OAuth2::login(const QString &strUsername, const QString &s
     this->login(strUsername, strPassword, [this] (bool result, const QString &strMessage) {
         emit this->loginResult(result, strMessage);
     });
+}
+
+void star::web::auth::OAuth2::tokenResultHandler(QNetworkReply *reply, int , std::function<void(bool, const QString &)> functor)
+{
+
+    // Now fetch token and refresh token from JSON result and save it
+
+    auto jsoc = QJsonDocument::fromJson(reply->readAll());
+
+    if(jsoc.isNull()) {
+        // JSON result was invalid
+        functor(false, "پاسخ دریافت شده از پیورسافت معتبر نیست");
+        return;
+    }
+
+    qInfo() << Q_FUNC_INFO << ": Login to Pure account was successful.";
+
+    functor(true, "ورود موفقیت آمیز بود");
+
+    auto json = jsoc.object();
+
+    auto tokenType = s.getJsonParser()->getSafeStringValue(json, "token_type");
+
+    auto accessToken = s.getJsonParser()->getSafeStringValue(json, "access_token");
+
+    auto refreshToken = s.getJsonParser()->getSafeStringValue(json, "refresh_token");
+
+    auto expiresIn = s.getJsonParser()->getSafeIntegerValue(json, "expires_in");
+
+    ApiToken *apiToken = new ApiToken(tokenType, accessToken, refreshToken, expiresIn);
+
+    this->saveToken(apiToken);
+
 }
 
 void star::web::auth::OAuth2::saveToken(star::web::auth::ApiToken *apiToken)

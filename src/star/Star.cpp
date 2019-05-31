@@ -35,6 +35,9 @@ star::Star::~Star()
     if(this->pUiUserDetails) {
         this->pUiUserDetails->deleteLater();
     }
+    if(this->pUiAlerts) {
+        this->pUiAlerts->deleteLater();
+    }
 
 }
 
@@ -59,38 +62,98 @@ void star::Star::start()
         // Initialize API token
         this->setApiToken(new web::auth::ApiToken(possibleTokenType, possibleAccessToken, possibleRefreshToken, possibleExpiresIn));
 
-        // TODO: Show loading box here
-
         pWebAccessManager->withAuthenticationHeader()->get(this->getUrlManager()->getPureUrl("apps/fa/star-v3/settings/get.html"),
                                                            [=](QNetworkReply *reply, int ) {
-            // Read data
-            auto jsoc = QJsonDocument::fromJson(reply->readAll());
-            auto json = jsoc.object();
+            // Update settings in app
+            this->setSettings(reply);
 
-            // Name
-            auto name = this->getJsonParser()->getSafeStringValue(json, "name");
-            this->getUiUserDetails()->updateName(name.isNull() ? "[نام شما]" : name);
+            // Close all login related boxes
+            emit s.getOAuth2()->showLoginBox(false);
 
         }, [=](QNetworkReply *reply, int httpStatus){
             if(httpStatus == 404) {
+
+                // TODO: Here we should show user the first setup wizard
+
                 // This user has not any settings yet
+                // Close all login related boxes
+                emit s.getOAuth2()->showLoginBox(false);
+
+            } else if(httpStatus == 401) {
+
+                // Token is expired, so try refresh token
+                qInfo() << Q_FUNC_INFO << ": Possibly expired access token. HTTP Status:" << httpStatus <<
+                              "Result:" << reply->readAll();
+                qInfo() << Q_FUNC_INFO << ": Now trying to use refresh token...";
+
+                // Using refresh token
+                pWebAccessManager->get(this->getUrlManager()->getPureUrl("apps/fa/star-v3/settings/get.html"),
+                                       [=](QNetworkReply *reply, int httpStatus) {
+
+
+
+
+                    s.getOAuth2()->tokenResultHandler(reply, httpStatus, [=] (bool result, const QString &strMessage) {
+
+                        if(result) {
+                            // Using refresh token was successful
+                            qInfo() << Q_FUNC_INFO << ": Successfully logged in using refresh token.";
+
+                            // Update settings in app
+                            this->setSettings(reply);
+
+                            // Close all login related boxes
+                            emit s.getOAuth2()->showLoginBox(false);
+                        } else {
+                            // Failed to use refresh token
+                            qInfo() << Q_FUNC_INFO << ": Failed to use refresh token. Possibly expired refresh token:"
+                                    << strMessage;
+                            // Because we have failed using refresh token, finally we should show login box to user
+                            emit s.getOAuth2()->showLoginBox(true);
+                        }
+
+                    });
+
+                }, [=](QNetworkReply *reply, int httpStatus){
+
+
+                    if(httpStatus == 404) {
+
+                        // This user has not any settings yet
+
+                        // TODO: Here we should show user the first setup wizard
+
+                        // Close all login related boxes
+                        emit s.getOAuth2()->showLoginBox(false);
+
+                    } else if(httpStatus == 401) {
+
+                        qInfo() << Q_FUNC_INFO << ": Tried refresh token and also that was invalid. Now we should sow login box.";
+
+                        // Refresh token is also expired, so show login box here
+                        emit s.getOAuth2()->showLoginBox(true);
+                    } else {
+                        // Something else is wrong
+                        qWarning() << Q_FUNC_INFO << ": Can't get user settings. HTTP Status:" << httpStatus <<
+                                      "Result:" << reply->readAll();
+
+                        s.getUiAlerts()->showErrorMessage("نمیتوان تنظیمات شما را از پیورسافت دریافت کرد، لطفاً اتصال اینترنت خود را بررسی کنید و در صورت بر قرار بودن اینترنت لطفاً به پشتیبانی وبسایت پیورسافت اطلاع دهید");
+                    }
+
+                });
+
             } else {
                 // Something else is wrong
                 qWarning() << Q_FUNC_INFO << ": Can't get user settings. HTTP Status:" << httpStatus <<
                               "Result:" << reply->readAll();
+
+                s.getUiAlerts()->showErrorMessage("نمیتوان تنظیمات شما را از پیورسافت دریافت کرد، لطفاً اتصال اینترنت خود را بررسی کنید و در صورت بر قرار بودن اینترنت لطفاً به پشتیبانی وبسایت پیورسافت اطلاع دهید");
             }
         });
+    } else {
+        // We don't have any token stored, so show login box
+        emit s.getOAuth2()->showLoginBox(true);
     }
-
-    // 1: We have a local token and it works
-    // OK, keep going
-
-    // 2: We have a local token but it don't work
-    // 2.1 Try refresh token and if it works, continue (TBT)
-    // 2.2 If refresh token don't work, show login box
-
-    // 3: We don't have local token
-    // Show login box
 
 }
 
@@ -108,6 +171,7 @@ void star::Star::initObjects()
     this->pSettingsManager = new settings::SettingsManager;
     this->pApiToken = nullptr;
     this->pUiUserDetails = new ui::home::UserDetails;
+    this->pUiAlerts = new ui::general::Alerts;
 }
 
 /**
@@ -115,6 +179,18 @@ void star::Star::initObjects()
  */
 void star::Star::end()
 {
+
+}
+
+void star::Star::setSettings(QNetworkReply *reply)
+{
+    // Read data
+    auto jsoc = QJsonDocument::fromJson(reply->readAll());
+    auto json = jsoc.object();
+
+    // Name
+    auto name = json["user"].toObject()["name"].toString();
+    this->getUiUserDetails()->updateName(name.isNull() ? "[نام شما]" : name);
 
 }
 
@@ -196,6 +272,16 @@ void star::Star::setUiUserDetails(star::ui::home::UserDetails *userDetails)
 star::ui::home::UserDetails *star::Star::getUiUserDetails() const
 {
     return this->pUiUserDetails;
+}
+
+void star::Star::setUiAlerts(star::ui::general::Alerts *alerts)
+{
+    this->pUiAlerts = alerts;
+}
+
+star::ui::general::Alerts *star::Star::getUiAlerts() const
+{
+    return this->pUiAlerts;
 }
 
 

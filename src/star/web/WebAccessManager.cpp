@@ -20,7 +20,7 @@ star::web::WebAccessManager *star::web::WebAccessManager::withAuthenticationHead
 }
 
 void star::web::WebAccessManager::get(const QString &strUrl, std::function<void(QNetworkReply *reply, int httpStatus)> functor,
-                                      std::function<void(QNetworkReply *reply, int httpStatus)> failFunctor = [](QNetworkReply *, int){})
+                                      std::function<void(QNetworkReply *reply, int httpStatus)> failFunctor)
 {
     QNetworkRequest request(this->generateNormalRequest(strUrl));
 
@@ -85,4 +85,6 @@ QNetworkRequest &star::web::WebAccessManager::setHeaders(QNetworkRequest &reques
         i.next();
         request.setRawHeader(i.key().toUtf8(), i.value().toUtf8());
     }
+
+    return request;
 }

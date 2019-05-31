@@ -29,6 +29,7 @@
 #include "includes/star/web/auth/ApiToken.hpp" // API Token data model
 #include "includes/star/settings/SettingsManager.hpp" // Settings manager class
 #include "includes/star/ui/home/UserDetails.hpp" // User details UI class
+#include "includes/star/ui/general/Alerts.hpp" // UI Alerts derived from C++ side
 
 namespace star {
 
@@ -55,6 +56,8 @@ public:
     web::auth::ApiToken *getApiToken() const;
     void setUiUserDetails(ui::home::UserDetails *userDetails);
     ui::home::UserDetails *getUiUserDetails() const;
+    void setUiAlerts(ui::general::Alerts *alerts);
+    ui::general::Alerts *getUiAlerts() const;
 
 
 signals:
@@ -63,6 +66,9 @@ public slots:
     void start();
     void initObjects();
     void end();
+
+private:
+    void setSettings(QNetworkReply *reply);
 
 protected:
     QPointer<date::CJalaliDate> pJalaliDate;
@@ -73,6 +79,7 @@ protected:
     QPointer<settings::SettingsManager> pSettingsManager;
     QPointer<web::auth::ApiToken> pApiToken;
     QPointer<ui::home::UserDetails> pUiUserDetails;
+    QPointer<ui::general::Alerts> pUiAlerts;
 };
 
 }

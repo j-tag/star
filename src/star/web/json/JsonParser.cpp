@@ -13,3 +13,8 @@ int star::web::json::JsonParser::getSafeIntegerValue(const QJsonObject &json, co
 {
     return json[strKey].toInt(defaultValue);
 }
+
+QJsonObject star::web::json::JsonParser::getSafeObjectValue(const QJsonObject &json, const QString &strKey) const
+{
+    return json[strKey].toObject();
+}

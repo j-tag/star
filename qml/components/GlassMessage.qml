@@ -13,6 +13,8 @@ Item {
     property alias paneMsg: paneMsg
     property alias msg: msg
 
+    property bool showing: false
+
     id: msg
 
     Rectangle
@@ -69,12 +71,16 @@ Item {
 
     // Show message dialog
     function show() {
+        showing = true
         paneMsg.scale = 1
         opacity = 1
     }
 
     // Close message dialog
     function close() {
+        if(showing === false) {
+            return
+        }
         msg.opacity = 0
         paneMsg.scale = 0
         blurContent.opacity = 0

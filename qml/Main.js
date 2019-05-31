@@ -108,3 +108,18 @@ function showLoginPopup()
     msgBlur.opacity = 1
     loginGlassMessage.show()
 }
+
+// Show a nice and neat blur progress indicator message
+function showGlassProgressMessage() {
+
+    // Disable toolbar
+    mainWindow.header.enabled = false
+    // Disable main content
+    mainContent.enabled = false
+    // Set message details
+    glassProgressMessage.mainContent = mainContent
+    glassProgressMessage.blurContent = msgBlur
+    // Show blur effect
+    msgBlur.opacity = 1
+    glassProgressMessage.show()
+}

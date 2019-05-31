@@ -18,8 +18,8 @@ public:
     virtual ~JsonParser();
 
     QString getSafeStringValue(const QJsonObject &json, const QString &strKey) const;
-
     int getSafeIntegerValue(const QJsonObject &json, const QString &strKey, int defaultValue = -1);
+    QJsonObject getSafeObjectValue(const QJsonObject &json, const QString &strKey) const;
 };
 
 }

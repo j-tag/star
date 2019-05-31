@@ -41,6 +41,9 @@ int main(int argc, char *argv[])
     // User details UI class
     engine.rootContext()->setContextProperty("userDetails", s.getUiUserDetails());
 
+    // Alerts UI class
+    engine.rootContext()->setContextProperty("alerts", s.getUiAlerts());
+
     engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
 
     return app.exec();
