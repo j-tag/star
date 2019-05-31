@@ -23,5 +23,6 @@
         <file>qml/components/SimpleTextGlassMessage.qml</file>
         <file>qml/components/LoginGlassMessage.qml</file>
         <file>qml/components/GlassProgressMessage.qml</file>
+        <file>qml/pages/setup/SetupWizard.qml</file>
     </qresource>
 </RCC>

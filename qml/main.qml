@@ -5,6 +5,7 @@ import QtQuick.Dialogs 1.2
 import QtGraphicalEffects 1.0
 import "components"
 import "pages"
+import "pages/setup"
 
 
 // Main page js file
@@ -123,18 +124,6 @@ ApplicationWindow {
 
             ToolButton
             {
-                id: toolBtnLoginTest
-                text: qsTr("Login TEST")
-
-                onClicked:
-                {
-                    Main.showLoginPopup()
-                }
-
-            }
-
-            ToolButton
-            {
                 id:toolBtnFlipTest
                 text: qsTr("Flip TEST")
 
@@ -157,7 +146,7 @@ ApplicationWindow {
         property bool flipped: false
 
         front: mainContent
-        back: tt
+        back: setupWizard
 
         transform: Rotation
         {
@@ -181,24 +170,12 @@ ApplicationWindow {
         }
     }
 
-    Item
+    SetupWizard
     {
-        id: tt
+        id: setupWizard
 
         width: mainWindow.width
         height: mainWindow.height
-
-        Rectangle
-        {
-            anchors.fill: tt
-            color: "red"
-        }
-
-        Text {
-            id: testText
-            anchors.centerIn: parent
-            text: qsTr("TODO : Calendar placeholder")
-        }
     }
 
 

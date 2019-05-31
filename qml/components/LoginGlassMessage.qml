@@ -62,6 +62,7 @@ GlassMessage {
                     Layout.alignment: Qt.AlignHCenter
                     placeholderText: qsTr("نام کاربری")
                     bottomPadding: 14
+                    selectByMouse: true
                 }
 
                 TextField
@@ -72,6 +73,7 @@ GlassMessage {
                     placeholderText: qsTr("گذرواژه")
                     bottomPadding: 14
                     echoMode: TextInput.Password
+                    selectByMouse: true
                 }
 
                 Label {

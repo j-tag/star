@@ -13,6 +13,7 @@ star::web::auth::OAuth2::OAuth2(QObject *parent) : QObject(parent)
 void star::web::auth::OAuth2::login(const QString &strUsername, const QString &strPassword, std::function<void (bool, const QString &)> functor)
 {
     QUrlQuery queries;
+
     queries.addQueryItem("grant_type", "password");
     queries.addQueryItem("username", strUsername);
     queries.addQueryItem("password", strPassword);
@@ -20,12 +21,12 @@ void star::web::auth::OAuth2::login(const QString &strUsername, const QString &s
 
     s.getWebAccessManager()->post(s.getUrlManager()->getLoginUrl(), queries,
                             [=](QNetworkReply *reply, int httpStatus) {
+
         this->tokenResultHandler(reply, httpStatus, functor);
     },
     [=](QNetworkReply *reply, int status) {
 
-        qWarning() << Q_FUNC_INFO << ": Login to Pure account were failed.";
-        qWarning() << status;
+        qWarning() << Q_FUNC_INFO << ": Login to Pure account were failed. HTTP Status:" << status;
 
         if(reply->error() == QNetworkReply::NoError) {
             functor(false, "نام کاربری و گذرواژه با یکدیگر مطابقت ندارند");
