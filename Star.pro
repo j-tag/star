@@ -4,6 +4,8 @@ QT += qml quick quickcontrols2 widgets network
 
 SOURCES += src/main.cpp \
     src/star/date/CJalaliDate.cpp \
+    src/star/date/HijriDate.cpp \
+    src/star/date/HijriDateCalculator.cpp \
     src/star/settings/SettingsManager.cpp \
     src/star/ui/general/Alerts.cpp \
     src/star/ui/home/UserDetails.cpp \
@@ -20,6 +22,7 @@ QML_IMPORT_PATH =
 
 HEADERS += \
     includes/star/date/CJalaliDate.hpp \
+    includes/star/date/HijriDateCalculator.hpp \
     includes/star/settings/SettingsManager.hpp \
     includes/star/ui/general/Alerts.hpp \
     includes/star/ui/home/UserDetails.hpp \
@@ -28,4 +31,5 @@ HEADERS += \
     includes/star/web/auth/OAuth2.hpp \
     includes/star/Star.hpp \
     includes/star/web/WebAccessManager.hpp \
-    includes/star/web/url/UrlManager.hpp
+    includes/star/web/url/UrlManager.hpp \
+    includes/star/date/HijriDate.hpp

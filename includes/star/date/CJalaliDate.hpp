@@ -20,6 +20,7 @@ public:
 signals:
 
 public slots:
+    QString getCurrentGregorianDate() const;
     QString getCurrentJalaliDate() const;
     QString getCurrentJalaliYear() const;
     QString getCurrentJalaliMonth() const;

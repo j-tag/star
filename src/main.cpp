@@ -50,6 +50,9 @@ int main(int argc, char *argv[])
     // Setup wizard class
     engine.rootContext()->setContextProperty("setup", s.getUiSetupWizard());
 
+    // Hijri date handler
+    engine.rootContext()->setContextProperty("hijriDate", s.getHijriDate());
+
     engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
 
     return app.exec();

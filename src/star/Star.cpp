@@ -39,6 +39,9 @@ star::Star::~Star()
     if(this->pUiSetupWizard) {
         this->pUiSetupWizard->deleteLater();
     }
+    if(this->pHijriDate) {
+        this->pHijriDate->deleteLater();
+    }
 
 }
 
@@ -170,6 +173,7 @@ void star::Star::initObjects()
     this->pUiUserDetails = new ui::home::UserDetails;
     this->pUiAlerts = new ui::general::Alerts;
     this->pUiSetupWizard = new ui::setup::SetupWizard;
+    this->pHijriDate = new date::HijriDateCalculator;
 }
 
 /**
@@ -284,6 +288,16 @@ void star::Star::setUiSetupWizard(star::ui::setup::SetupWizard *setupWizard)
 star::ui::setup::SetupWizard *star::Star::getUiSetupWizard() const
 {
     return this->pUiSetupWizard;
+}
+
+void star::Star::setHijriDate(star::date::HijriDateCalculator *hijriDate)
+{
+    this->pHijriDate = hijriDate;
+}
+
+star::date::HijriDateCalculator *star::Star::getHijriDate() const
+{
+    return this->pHijriDate;
 }
 
 

@@ -2,6 +2,8 @@ import QtQuick 2.7
 import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
 
+import "../Main.js" as Main
+
 Item {
 
     id: itemToday
@@ -14,19 +16,19 @@ Item {
         Text {
             Layout.fillWidth: true
             horizontalAlignment: Text.AlignHCenter
-            text: qsTr("تاریخ شمسی")
+            text: Main.englishNumberToPersian(jalaliDate.getCurrentJalaliDate())
         }
 
         Text {
             Layout.fillWidth: true
             horizontalAlignment: Text.AlignHCenter
-            text: qsTr("تاریخ قمری")
+            text: Main.englishNumberToPersian(hijriDate.getCurrentHijriDate())
         }
 
         Text {
             Layout.fillWidth: true
             horizontalAlignment: Text.AlignHCenter
-            text: qsTr("تاریخ میلادی")
+            text: Main.englishNumberToPersian(jalaliDate.getCurrentGregorianDate())
         }
 
         Text {

@@ -11,6 +11,11 @@ star::date::CJalaliDate::~CJalaliDate()
 
 }
 
+QString star::date::CJalaliDate::getCurrentGregorianDate() const
+{
+    return QDate::currentDate().toString("yyyy/MM/dd");
+}
+
 /* -------------- Date Functions -------------- */
 
 // Get Gregorian Date and Convert it to Jalali Date
