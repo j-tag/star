@@ -24,6 +24,10 @@ public:
 
     void post(const QString &strUrl, const QUrlQuery &queries, std::function<void(QNetworkReply *reply, int httpStatus)> functor,
               std::function<void(QNetworkReply *reply, int httpStatus)> failFunctor,
+              const QString &strContentType = QStringLiteral("application/x-www-form-urlencoded"));
+
+    void post(const QString &strUrl, const QString &strBody, std::function<void(QNetworkReply *reply, int httpStatus)> functor,
+              std::function<void(QNetworkReply *reply, int httpStatus)> failFunctor = [](QNetworkReply *, int){},
               const QString &strContentType = QStringLiteral("application/json"));
 
 private:

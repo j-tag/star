@@ -129,7 +129,7 @@ ApplicationWindow {
 
                 onClicked:
                 {
-                    flipableMainWindow.flipped = !flipableMainWindow.flipped
+                    Main.toggleFlipToSetupWizard()
                 }
 
             }

@@ -2,7 +2,29 @@ import QtQuick 2.7
 import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
 
+import "../../Main.js" as Main
+
 Item {
+
+    Connections {
+        target: settings
+
+        onOnlineSettingsUpdated: {
+            // result -> bool
+            // newSettings -> QString (JSON string)
+
+            if(result) {
+                // Settings updated successfully
+                Main.toggleFlipToSetupWizard()
+            } else {
+                // Failed to update settings
+                // TODO: Show error message
+                buttonSave.enabled = true
+            }
+
+            closeOverlay()
+        }
+    }
 
     Rectangle
     {
@@ -51,31 +73,123 @@ Item {
             Layout.topMargin: 40
 
             ComboBox {
-                // TODO: Add rest
-                model: ["۱", "۲", "۳"]
+
+                id: comboYear
+
+                Component.onCompleted: {
+                    let years = []
+
+                    for (let i = 0; i < 200; i++) {
+                      years[i] = Main.englishNumberToPersian(i + 1300)
+                    }
+
+                    model = years
+                }
+
             }
 
             ComboBox {
-                // TODO: Add rest
-                model: ["فروردین", "اردیبهشت", "خرداد"]
+
+                id: comboMonth
+
+                model: [
+                "فروردین",
+                "اردیبهشت",
+                "خرداد",
+                "تیر",
+                "مرداد",
+                "شهریور",
+                "مهر",
+                "آبان",
+                "آذر",
+                "دی",
+                "بهمن",
+                "اسفند"
+                ]
             }
 
             ComboBox {
-                // TODO: Add rest
-                model: ["1300", "1301", "1302"]
+
+                id: comboDay
+
+                Component.onCompleted: {
+                    let days = []
+
+                    for (let i = 0; i < 31; i++) {
+                      days[i] = Main.englishNumberToPersian(i + 1)
+                    }
+
+                    model = days
+                }
+
             }
 
         }
 
         Button {
+            id: buttonSave
+
             Layout.alignment: Qt.AlignCenter
             Layout.topMargin: 40
             text: qsTr("شروع")
             onClicked: {
-                // TODO: Save settings and reload them and start using them
+
+                enabled = false
+                showOverlay()
+
+                const year = Main.persianNumberToEnglish(comboYear.currentText)
+                const month = Main.persianNumberToEnglish(comboMonth.currentIndex + 1)
+                const day = Main.persianNumberToEnglish(comboDay.currentIndex + 1)
+
+                // Save settings in Pure account
+                const json = {
+                    user: {
+                            name: textName.text,
+                            birthday: jalaliDate.jalaliToUnixTimestamp(year, month, day)
+                        }
+                    }
+
+                settings.setOnlineValue(JSON.stringify(json))
+
             }
         }
     }
 
+    Rectangle {
+        id: rectOverlay
+        anchors.fill: parent
+        visible: false
+        opacity: 0
+        color: "#903d0d6f"
+
+        BusyIndicator {
+            id: busyIndicator
+            anchors.centerIn: parent
+            running: true
+        }
+
+        Behavior on opacity
+        {
+            NumberAnimation
+            {
+                duration: Main.msgShowDuration
+                easing.type: Main.msgEasingType
+            }
+        }
+    }
+
+
+    // Functions
+
+    function showOverlay() {
+        rectOverlay.visible = true
+        rectOverlay.opacity = 1
+        busyIndicator.running = true
+    }
+
+    function closeOverlay() {
+        rectOverlay.opacity = 0
+        busyIndicator.running = false
+    }
 
 }

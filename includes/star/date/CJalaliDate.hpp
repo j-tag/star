@@ -27,10 +27,12 @@ public slots:
     qint64 getCurrentJalaliDayInYear() const;
     QString getCurrentJalaliDayName() const;
     int getCurrentMillisecondOfDay() const;
+    QString jalaliToGregorian(const int year, const int month, const int day) const;
+    qint64 jalaliToUnixTimestamp(const int year, const int month, const int day) const;
 
 protected:
     QString gregorianToJalali(const int year, const int month, const int day) const;
-    QString jalaliToGregorian(const int year, const int month, const int day) const;
+
 
 };
 

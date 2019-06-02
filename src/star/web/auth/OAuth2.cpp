@@ -45,8 +45,7 @@ void star::web::auth::OAuth2::regenerateAccessToken(const QString &strRefreshTok
     queries.addQueryItem("grant_type", "refresh_token");
     queries.addQueryItem("refresh_token", strRefreshToken);
 
-    s.getWebAccessManager()->post(s.getUrlManager()->getLoginUrl(), queries, functor, failFunctor,
-                                  "application/x-www-form-urlencoded");
+    s.getWebAccessManager()->post(s.getUrlManager()->getLoginUrl(), queries, functor, failFunctor);
 }
 
 void star::web::auth::OAuth2::login(const QString &strUsername, const QString &strPassword)

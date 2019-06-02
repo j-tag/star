@@ -48,9 +48,35 @@ void star::web::WebAccessManager::post(const QString &strUrl, const QUrlQuery &q
 {
     QNetworkRequest request(this->generateNormalRequest(strUrl));
 
+    this->setHeaders(request);
+
     request.setHeader(QNetworkRequest::ContentTypeHeader, strContentType);
 
     QNetworkReply *reply = this->pManager->post(request, queries.query(QUrl::FullyEncoded).toUtf8());
+
+    connect(reply, &QIODevice::readyRead, [reply, functor, failFunctor]() {
+
+        int httpStatusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+
+        if(reply->error() == QNetworkReply::NoError && httpStatusCode >= 200 && httpStatusCode < 300) {
+            functor(reply, httpStatusCode);
+        } else {
+            failFunctor(reply, httpStatusCode);
+        }
+
+        reply->deleteLater();
+    });
+}
+
+void star::web::WebAccessManager::post(const QString &strUrl, const QString &strBody, std::function<void (QNetworkReply *, int)> functor, std::function<void (QNetworkReply *, int)> failFunctor, const QString &strContentType)
+{
+    QNetworkRequest request(this->generateNormalRequest(strUrl));
+
+    this->setHeaders(request);
+
+    request.setHeader(QNetworkRequest::ContentTypeHeader, strContentType);
+
+    QNetworkReply *reply = this->pManager->post(request, strBody.toUtf8());
 
     connect(reply, &QIODevice::readyRead, [reply, functor, failFunctor]() {
 

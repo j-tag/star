@@ -150,6 +150,13 @@ QString star::date::CJalaliDate::jalaliToGregorian(int year, int month, int day)
     return result;
 }
 
+qint64 star::date::CJalaliDate::jalaliToUnixTimestamp(const int year, const int month, const int day) const
+{
+    QDateTime date = QDateTime::fromString(this->jalaliToGregorian(year, month, day), "yyyy/MM/dd");
+
+    return date.toSecsSinceEpoch();
+}
+
 /* -------------- /Date Functions -------------- */
 
 QString star::date::CJalaliDate::getCurrentJalaliDate() const

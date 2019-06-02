@@ -123,3 +123,36 @@ function showGlassProgressMessage() {
     msgBlur.opacity = 1
     glassProgressMessage.show()
 }
+
+// Flip main content to setup wizard
+function toggleFlipToSetupWizard() {
+    flipableMainWindow.flipped = !flipableMainWindow.flipped
+}
+
+// Convert an English number to Persian variation
+function englishNumberToPersian(number) {
+
+    if(number !== 0 && !number) {
+        return number
+    }
+
+    return number.toString().replace(/0/g, "۰").
+    replace(/1/g, "۱").replace(/2/g, "۲").replace(/3/g, "۳").
+    replace(/4/g, "۴").replace(/5/g, "۵").replace(/6/g, "۶").
+    replace(/7/g, "۷").replace(/8/g, "۸").replace(/9/g, "۹")
+
+}
+
+// Convert a Persian number to English variation
+function persianNumberToEnglish(number) {
+
+    if(number !== 0 && !number) {
+        return number
+    }
+
+    return number.toString().replace(/۰/g, "0").
+    replace(/۱/g, "1").replace(/۲/g, "2").replace(/۳/g, "3").
+    replace(/۴/g, "4").replace(/۵/g, "5").replace(/۶/g, "6").
+    replace(/۷/g, "7").replace(/۸/g, "8").replace(/۹/g, "9")
+
+}

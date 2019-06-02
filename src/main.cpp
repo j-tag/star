@@ -44,6 +44,9 @@ int main(int argc, char *argv[])
     // Alerts UI class
     engine.rootContext()->setContextProperty("alerts", s.getUiAlerts());
 
+    // Settings manager class
+    engine.rootContext()->setContextProperty("settings", s.getSettingsManager());
+
     engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
 
     return app.exec();
