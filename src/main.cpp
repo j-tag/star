@@ -47,6 +47,9 @@ int main(int argc, char *argv[])
     // Settings manager class
     engine.rootContext()->setContextProperty("settings", s.getSettingsManager());
 
+    // Setup wizard class
+    engine.rootContext()->setContextProperty("setup", s.getUiSetupWizard());
+
     engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
 
     return app.exec();

@@ -29,6 +29,7 @@
 #include "includes/star/settings/SettingsManager.hpp" // Settings manager class
 #include "includes/star/ui/home/UserDetails.hpp" // User details UI class
 #include "includes/star/ui/general/Alerts.hpp" // UI Alerts derived from C++ side
+#include "includes/star/ui/setup/SetupWizard.hpp" // Setup wizrad handler class
 
 namespace star {
 
@@ -55,6 +56,8 @@ public:
     ui::home::UserDetails *getUiUserDetails() const;
     void setUiAlerts(ui::general::Alerts *alerts);
     ui::general::Alerts *getUiAlerts() const;
+    void setUiSetupWizard(ui::setup::SetupWizard *setupWizard);
+    ui::setup::SetupWizard *getUiSetupWizard() const;
 
 
 signals:
@@ -76,6 +79,7 @@ protected:
     QPointer<web::auth::ApiToken> pApiToken;
     QPointer<ui::home::UserDetails> pUiUserDetails;
     QPointer<ui::general::Alerts> pUiAlerts;
+    QPointer<ui::setup::SetupWizard> pUiSetupWizard;
 };
 
 }

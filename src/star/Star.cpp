@@ -36,6 +36,9 @@ star::Star::~Star()
     if(this->pUiAlerts) {
         this->pUiAlerts->deleteLater();
     }
+    if(this->pUiSetupWizard) {
+        this->pUiSetupWizard->deleteLater();
+    }
 
 }
 
@@ -71,9 +74,9 @@ void star::Star::start()
         }, [=](QNetworkReply *reply, int httpStatus) {
             if(httpStatus == 404) {
 
-                // TODO: Here we should show user the first setup wizard
+                // This user has not any settings yet, so show them setup wizard to begin
+                emit this->pUiSetupWizard->initSetupWizard();
 
-                // This user has not any settings yet
                 // Close all login related boxes
                 emit s.getOAuth2()->showLoginBox(false);
 
@@ -115,9 +118,8 @@ void star::Star::start()
 
                     if(httpStatus == 404) {
 
-                        // This user has not any settings yet
-
-                        // TODO: Here we should show user the first setup wizard
+                        // This user has not any settings yet, so show them setup wizard to begin
+                        emit this->pUiSetupWizard->initSetupWizard();
 
                         // Close all login related boxes
                         emit s.getOAuth2()->showLoginBox(false);
@@ -167,6 +169,7 @@ void star::Star::initObjects()
     this->pApiToken = nullptr;
     this->pUiUserDetails = new ui::home::UserDetails;
     this->pUiAlerts = new ui::general::Alerts;
+    this->pUiSetupWizard = new ui::setup::SetupWizard;
 }
 
 /**
@@ -186,6 +189,8 @@ void star::Star::setSettings(QNetworkReply *reply)
     // Name
     auto name = json["user"].toObject()["name"].toString();
     this->getUiUserDetails()->updateName(name.isNull() ? "[نام شما]" : name);
+
+    // TODO: Load birthday date
 
 }
 
@@ -267,6 +272,16 @@ void star::Star::setUiAlerts(star::ui::general::Alerts *alerts)
 star::ui::general::Alerts *star::Star::getUiAlerts() const
 {
     return this->pUiAlerts;
+}
+
+void star::Star::setUiSetupWizard(star::ui::setup::SetupWizard *setupWizard)
+{
+    this->pUiSetupWizard = setupWizard;
+}
+
+star::ui::setup::SetupWizard *star::Star::getUiSetupWizard() const
+{
+    return this->pUiSetupWizard;
 }
 
 

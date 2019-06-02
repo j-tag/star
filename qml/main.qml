@@ -27,10 +27,19 @@ ApplicationWindow {
     }
 
     Connections {
+        target: setup
+
+        onInitSetupWizard: {
+            Main.toggleFlipToSetupWizard()
+        }
+    }
+
+    Connections {
         target: oauth2
         onShowLoginBox: {
 
             // result -> bool
+
             if(result) {
                 // Here we should show login box
                 glassProgressMessage.close()
