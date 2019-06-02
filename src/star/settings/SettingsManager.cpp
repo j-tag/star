@@ -57,7 +57,7 @@ void star::settings::SettingsManager::failedOnlineSettingsFunctor(QNetworkReply 
                   httpStatus << reply->readAll();
 }
 
-void star::settings::SettingsManager::successOnlineSettingsFunctor(QNetworkReply *reply, int httpStatus)
+void star::settings::SettingsManager::successOnlineSettingsFunctor(QNetworkReply *reply, int)
 {
     // Online settings retrived successfully, now we can update it in our app
     emit this->onlineSettingsUpdated(true, reply->readAll());

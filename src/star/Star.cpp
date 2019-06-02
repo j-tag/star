@@ -188,9 +188,11 @@ void star::Star::setSettings(QNetworkReply *reply)
 
     // Name
     auto name = json["user"].toObject()["name"].toString();
-    this->getUiUserDetails()->updateName(name.isNull() ? "[نام شما]" : name);
+    this->pUiUserDetails->updateName(name.isNull() ? "[نام شما]" : name);
 
-    // TODO: Load birthday date
+    // Birthday
+    auto birthday = QDateTime::fromSecsSinceEpoch(json["user"].toObject()["birthday"].toInt());
+    this->pUiUserDetails->updateBirthday(birthday);
 
 }
 

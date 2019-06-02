@@ -133,15 +133,16 @@ ApplicationWindow {
 
             ToolButton
             {
-                id:toolBtnFlipTest
-                text: qsTr("Flip TEST")
+                id: toolBtnSettings
+                text: qsTr("SETTINGS")
 
                 onClicked:
                 {
-                    Main.toggleFlipToSetupWizard()
+                    Main.showMessage("تنظیمات")
                 }
 
             }
+
         }
     }
 

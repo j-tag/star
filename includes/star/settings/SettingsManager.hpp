@@ -32,7 +32,7 @@ public slots:
 
 private:
 
-    void successOnlineSettingsFunctor(QNetworkReply *reply, int httpStatus);
+    void successOnlineSettingsFunctor(QNetworkReply *reply, int);
     void failedOnlineSettingsFunctor(QNetworkReply *reply, int httpStatus);
 
 private:

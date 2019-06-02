@@ -39,7 +39,8 @@ Item {
             Text {
                 id: textName
                 anchors.horizontalCenter: parent.horizontalCenter
-                topPadding: 40
+                topPadding: 20
+                font.pointSize: 14
             }
 
             Row {
@@ -52,20 +53,23 @@ Item {
                 BirthTimes {
                     id: birthTimesHome
                     width: rowHome.width / 2
-                    height: rowHome.height / 2
+                    height: rowHome.height / 1.5
                     anchors.verticalCenter: rowHome.verticalCenter
                 }
 
                 Today {
                     id: todayHome
                     width: rowHome.width / 2
-                    height: rowHome.height / 2
+                    height: rowHome.height / 1.5
                     anchors.verticalCenter: rowHome.verticalCenter
                 }
             }
         }
     }
 }
+
+
+
 
 /*##^## Designer {
     D{i:0;autoSize:true;height:480;width:640}

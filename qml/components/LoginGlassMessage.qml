@@ -18,7 +18,6 @@ GlassMessage {
             if(result === true) {
                 // Login was successful
                 msg.close()
-                // TODO: Refresh user details in app
             } else {
                 // Login were failed
                 labelError.text = strMessage

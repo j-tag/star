@@ -150,6 +150,8 @@ QString star::date::CJalaliDate::jalaliToGregorian(int year, int month, int day)
     return result;
 }
 
+/* -------------- /Date Functions -------------- */
+
 qint64 star::date::CJalaliDate::jalaliToUnixTimestamp(const int year, const int month, const int day) const
 {
     QDateTime date = QDateTime::fromString(this->jalaliToGregorian(year, month, day), "yyyy/MM/dd");
@@ -157,7 +159,45 @@ qint64 star::date::CJalaliDate::jalaliToUnixTimestamp(const int year, const int 
     return date.toSecsSinceEpoch();
 }
 
-/* -------------- /Date Functions -------------- */
+qint64 star::date::CJalaliDate::secondsDiffTillNow(const QDateTime &dateTime)
+{
+    return dateTime.secsTo(QDateTime::currentDateTime());
+}
+
+qint64 star::date::CJalaliDate::minutesDiffTillNow(const QDateTime &dateTime)
+{
+    return this->secondsDiffTillNow(dateTime) / 60;
+}
+
+qint64 star::date::CJalaliDate::hoursDiffTillNow(const QDateTime &dateTime)
+{
+    return this->minutesDiffTillNow(dateTime) / 60;
+}
+
+qint64 star::date::CJalaliDate::daysDiffTillNow(const QDateTime &dateTime)
+{
+    return dateTime.daysTo(QDateTime::currentDateTime());
+}
+
+qint64 star::date::CJalaliDate::weeksDiffTillNow(const QDateTime &dateTime)
+{
+    return this->daysDiffTillNow(dateTime) / 7;
+}
+
+qint64 star::date::CJalaliDate::monthsDiffTillNow(const QDateTime &dateTime)
+{
+    return this->daysDiffTillNow(dateTime) / 30;
+}
+
+qint64 star::date::CJalaliDate::seasonsDiffTillNow(const QDateTime &dateTime)
+{
+    return this->monthsDiffTillNow(dateTime) / 3;
+}
+
+qint64 star::date::CJalaliDate::yearsDiffTillNow(const QDateTime &dateTime)
+{
+    return this->monthsDiffTillNow(dateTime) / 12;
+}
 
 QString star::date::CJalaliDate::getCurrentJalaliDate() const
 {

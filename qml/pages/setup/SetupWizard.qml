@@ -18,7 +18,9 @@ Item {
                 Main.toggleFlipToSetupWizard()
             } else {
                 // Failed to update settings
-                // TODO: Show error message
+
+                alerts.showErrorMessage("متاسفیم! اما نتوانستیم تنظیمات شما را در پیورسافت ذخیره کنیم. لطفاً مجدداً تلاش کنید و در صورت بر طرف نشدن مشکل با پشتیبانی پیورسافت تماس حاصل فرمایید")
+
                 buttonSave.enabled = true
             }
 
@@ -66,6 +68,7 @@ Item {
             Layout.topMargin: 40
             text: qsTr("تاریخ تولد شما")
             color: "#fff"
+            font.pointSize: 14
         }
 
         RowLayout {

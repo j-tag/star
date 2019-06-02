@@ -1,39 +1,74 @@
 import QtQuick 2.7
+import QtQuick.Layouts 1.12
+
+import "../Main.js" as Main
 
 Item
 {
-    Column {
+
+    Timer {
+        running: true
+        repeat: true
+        interval: 1000
+        onTriggered: userDetails.updateAge()
+    }
+
+    ColumnLayout {
+        width: parent.width
+
         Text {
             id: birthInSecond
-            text: qsTr("Birth in second")
+            Layout.alignment: Qt.AlignHCenter
+            text: "سن شما به ثانیه: " + Main.englishNumberToPersian(userDetails.birthdayInSeconds) + " ثانیه"
+
         }
         Text {
             id: birthInMinute
-            text: qsTr("Birth in minute")
+            Layout.alignment: Qt.AlignHCenter
+            text: "سن شما به دقیقه: " + Main.englishNumberToPersian(userDetails.birthdayInMinutes) + " دقیقه"
         }
         Text {
             id: birthInHour
-            text: qsTr("Birth in hour")
+            Layout.alignment: Qt.AlignHCenter
+            text: "سن شما به ساعت: " + Main.englishNumberToPersian(userDetails.birthdayInHours) + " ساعت"
         }
         Text {
             id: birthInDay
-            text: qsTr("Birth in day")
+            Layout.alignment: Qt.AlignHCenter
+            text: "سن شما به روز: " + Main.englishNumberToPersian(userDetails.birthdayInDays) + " روز"
         }
         Text {
             id: birthInWeek
-            text: qsTr("Birth in week")
+            Layout.alignment: Qt.AlignHCenter
+            text: "سن شما به هفته: " + Main.englishNumberToPersian(userDetails.birthdayInWeeks) + " هفته"
         }
         Text {
             id: birthInMonth
-            text: qsTr("Birth in month")
+            Layout.alignment: Qt.AlignHCenter
+            text: "سن شما به ماه: " + Main.englishNumberToPersian(userDetails.birthdayInMonths) + " ماه"
         }
         Text {
             id: birthInSeason
-            text: qsTr("Birth in season")
+            Layout.alignment: Qt.AlignHCenter
+            text: "سن شما به فصل: " + Main.englishNumberToPersian(userDetails.birthdayInSeasons) + " فصل"
         }
         Text {
             id: birthInYear
-            text: qsTr("Birth in year")
+            Layout.alignment: Qt.AlignHCenter
+            text: "سن شما به سال: " + Main.englishNumberToPersian(userDetails.birthdayInYears) + " سال"
         }
     }
 }
+
+
+
+
+
+
+
+
+
+/*##^## Designer {
+    D{i:0;autoSize:true;height:480;width:640}
+}
+ ##^##*/

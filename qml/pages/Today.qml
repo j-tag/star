@@ -14,6 +14,24 @@ Item {
         Text {
             Layout.fillWidth: true
             horizontalAlignment: Text.AlignHCenter
+            text: qsTr("تاریخ شمسی")
+        }
+
+        Text {
+            Layout.fillWidth: true
+            horizontalAlignment: Text.AlignHCenter
+            text: qsTr("تاریخ قمری")
+        }
+
+        Text {
+            Layout.fillWidth: true
+            horizontalAlignment: Text.AlignHCenter
+            text: qsTr("تاریخ میلادی")
+        }
+
+        Text {
+            Layout.fillWidth: true
+            horizontalAlignment: Text.AlignHCenter
             text: qsTr("زمان سپری شده از امسال")
         }
 
@@ -63,3 +81,8 @@ Item {
 
 
 }
+
+/*##^## Designer {
+    D{i:0;autoSize:true;height:480;width:640}
+}
+ ##^##*/
