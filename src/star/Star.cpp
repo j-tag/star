@@ -85,10 +85,8 @@ void star::Star::start()
                 qInfo() << Q_FUNC_INFO << ": Now trying to use refresh token...";
 
                 // Using refresh token
-                pWebAccessManager->get(this->getUrlManager()->getPureUrl("apps/fa/star-v3/settings/get.html"),
+                this->pOAuth2->regenerateAccessToken(possibleRefreshToken,
                                        [=](QNetworkReply *reply, int httpStatus) {
-
-
 
 
                     s.getOAuth2()->tokenResultHandler(reply, httpStatus, [=] (bool result, const QString &strMessage) {
@@ -126,7 +124,7 @@ void star::Star::start()
 
                     } else if(httpStatus == 401) {
 
-                        qInfo() << Q_FUNC_INFO << ": Tried refresh token and also that was invalid. Now we should sow login box.";
+                        qInfo() << Q_FUNC_INFO << ": Tried refresh token and also that was invalid. Now we should show login box.";
 
                         // Refresh token is also expired, so show login box here
                         emit s.getOAuth2()->showLoginBox(true);

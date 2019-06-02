@@ -38,6 +38,17 @@ void star::web::auth::OAuth2::login(const QString &strUsername, const QString &s
     "application/x-www-form-urlencoded");
 }
 
+void star::web::auth::OAuth2::regenerateAccessToken(const QString &strRefreshToken, std::function<void (QNetworkReply *, int)> functor, std::function<void (QNetworkReply *, int)> failFunctor)
+{
+    QUrlQuery queries;
+
+    queries.addQueryItem("grant_type", "refresh_token");
+    queries.addQueryItem("refresh_token", strRefreshToken);
+
+    s.getWebAccessManager()->post(s.getUrlManager()->getLoginUrl(), queries, functor, failFunctor,
+                                  "application/x-www-form-urlencoded");
+}
+
 void star::web::auth::OAuth2::login(const QString &strUsername, const QString &strPassword)
 {
     this->login(strUsername, strPassword, [this] (bool result, const QString &strMessage) {
