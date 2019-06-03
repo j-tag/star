@@ -50,7 +50,7 @@ void star::web::auth::OAuth2::regenerateAccessToken(const QString &strRefreshTok
 
 void star::web::auth::OAuth2::login(const QString &strUsername, const QString &strPassword)
 {
-    this->login(strUsername, strPassword, [this] (bool result, const QString &strMessage) {
+    this->login(strUsername, strPassword, [=] (bool result, const QString &strMessage) {
         emit this->loginResult(result, strMessage);
     });
 }
@@ -70,22 +70,18 @@ void star::web::auth::OAuth2::tokenResultHandler(QNetworkReply *reply, int , std
 
     qInfo() << Q_FUNC_INFO << ": Login to Pure account was successful.";
 
-    functor(true, "ورود موفقیت آمیز بود");
-
     auto json = jsoc.object();
 
     auto tokenType = json["token_type"].toString();
-
     auto accessToken = json["access_token"].toString();
-
     auto refreshToken = json["refresh_token"].toString();
-
     auto expiresIn = json["expires_in"].toInt(-1);
 
     ApiToken *apiToken = new ApiToken(tokenType, accessToken, refreshToken, expiresIn);
 
     this->saveToken(apiToken);
 
+    functor(true, "ورود موفقیت آمیز بود");
 }
 
 void star::web::auth::OAuth2::saveToken(star::web::auth::ApiToken *apiToken)

@@ -18,6 +18,8 @@ public:
     SettingsManager();
     virtual ~SettingsManager();
 
+    void setLocalSettings(QNetworkReply *reply);
+
 signals:
     void onlineSettingsUpdated(bool result, QString newSettings);
 

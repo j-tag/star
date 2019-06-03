@@ -70,9 +70,6 @@ public slots:
     void initObjects();
     void end();
 
-private:
-    void setSettings(QNetworkReply *reply);
-
 protected:
     QPointer<date::CJalaliDate> pJalaliDate;
     QPointer<web::auth::OAuth2> pOAuth2;

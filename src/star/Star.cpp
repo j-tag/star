@@ -50,9 +50,6 @@ star::Star::~Star()
  */
 void star::Star::start()
 {
-    // Initialize application objects
-    this->initObjects();
-
     // Login to Pure account
 
     auto possibleTokenType = this->pSettingsManager->getStringValue("auth/token/token_type");
@@ -63,13 +60,15 @@ void star::Star::start()
     // Check to see if we have local token
     if(! possibleAccessToken.isNull()) {
 
+        qInfo() << Q_FUNC_INFO << ": Found local token. Going to use it.";
+
         // Initialize API token
         this->setApiToken(new web::auth::ApiToken(possibleTokenType, possibleAccessToken, possibleRefreshToken, possibleExpiresIn));
 
         pWebAccessManager->withAuthenticationHeader()->get(this->getUrlManager()->getPureUrl("apps/fa/star-v3/settings/get.html"),
                                                            [=](QNetworkReply *reply, int ) {
             // Update settings in app
-            this->setSettings(reply);
+            this->pSettingsManager->setLocalSettings(reply);
 
             // Close all login related boxes
             emit s.getOAuth2()->showLoginBox(false);
@@ -101,8 +100,8 @@ void star::Star::start()
                             // Using refresh token was successful
                             qInfo() << Q_FUNC_INFO << ": Successfully logged in using refresh token.";
 
-                            // Update settings in app
-                            this->setSettings(reply);
+                            // Reload settings in app
+                            this->pSettingsManager->getOnlineSettings();
 
                             // Close all login related boxes
                             emit s.getOAuth2()->showLoginBox(false);
@@ -110,6 +109,7 @@ void star::Star::start()
                             // Failed to use refresh token
                             qInfo() << Q_FUNC_INFO << ": Failed to use refresh token. Possibly expired refresh token:"
                                     << strMessage;
+
                             // Because we have failed using refresh token, finally we should show login box to user
                             emit s.getOAuth2()->showLoginBox(true);
                         }
@@ -152,6 +152,8 @@ void star::Star::start()
             }
         });
     } else {
+        qInfo() << Q_FUNC_INFO << ": No local token found. Showing login form.";
+
         // We don't have any token stored, so show login box
         emit s.getOAuth2()->showLoginBox(true);
     }
@@ -181,22 +183,6 @@ void star::Star::initObjects()
  */
 void star::Star::end()
 {
-
-}
-
-void star::Star::setSettings(QNetworkReply *reply)
-{
-    // Read data
-    auto jsoc = QJsonDocument::fromJson(reply->readAll());
-    auto json = jsoc.object();
-
-    // Name
-    auto name = json["user"].toObject()["name"].toString();
-    this->pUiUserDetails->updateName(name.isNull() ? "[نام شما]" : name);
-
-    // Birthday
-    auto birthday = QDateTime::fromSecsSinceEpoch(json["user"].toObject()["birthday"].toInt());
-    this->pUiUserDetails->updateBirthday(birthday);
 
 }
 

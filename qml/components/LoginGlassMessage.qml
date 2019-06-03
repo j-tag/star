@@ -17,6 +17,11 @@ GlassMessage {
 
             if(result === true) {
                 // Login was successful
+
+                // Load settings
+                settings.getOnlineSettings()
+
+                // Close login dialog
                 msg.close()
             } else {
                 // Login were failed

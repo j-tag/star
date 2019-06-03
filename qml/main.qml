@@ -35,6 +35,10 @@ ApplicationWindow {
     }
 
     Connections {
+
+        // This is the entry point of C++ logic
+        Component.onCompleted: star.start()
+
         target: oauth2
         onShowLoginBox: {
 
@@ -66,9 +70,8 @@ ApplicationWindow {
         }
     }
 
-    Component.onCompleted: {
-        Main.showGlassProgressMessage()
-    }
+    Component.onCompleted: Main.showGlassProgressMessage()
+
 
     header: ToolBar
     {

@@ -235,7 +235,7 @@ qint64 star::date::CJalaliDate::getCurrentJalaliDayInYear() const
     QDate endDate = QDate::fromString(this->jalaliToGregorian(this->getCurrentJalaliYear().toInt(), this->getCurrentJalaliMonth().toInt()
                         , this->getCurrentJalaliDayInMonth().toInt()), "yyyy/MM/dd");
 
-    qDebug() << "Days from start of year till now:" << startDate.daysTo(endDate);
+    qInfo() << "Days from start of year till now:" << startDate.daysTo(endDate);
 
     return startDate.daysTo(endDate);
 }

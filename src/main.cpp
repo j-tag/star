@@ -27,7 +27,10 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
 
     // Load C++ side, modules
-    s.start();
+
+
+    // Initialize application objects
+    s.initObjects();
 
     // Star main object
     engine.rootContext()->setContextProperty("star", &s);

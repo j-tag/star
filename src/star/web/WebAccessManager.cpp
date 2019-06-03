@@ -14,6 +14,10 @@ star::web::WebAccessManager *star::web::WebAccessManager::withAuthenticationHead
 {
     auto apiToken = s.getApiToken();
 
+    if(apiToken == nullptr) {
+        qCritical() << Q_FUNC_INFO << "No API token found, but a request with authentication header made.";
+    }
+
     this->hashHeaders["Authorization"] = "Bearer " + apiToken->getAccessToken();
 
     return this;

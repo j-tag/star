@@ -1,3 +1,5 @@
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <functional>
 #include "includes/star/Star.hpp"
 
@@ -5,6 +7,21 @@
 star::settings::SettingsManager::SettingsManager() {}
 
 star::settings::SettingsManager::~SettingsManager() {}
+
+void star::settings::SettingsManager::setLocalSettings(QNetworkReply *reply)
+{
+    // Read data
+    auto jsoc = QJsonDocument::fromJson(reply->readAll());
+    auto json = jsoc.object();
+
+    // Name
+    auto name = json["user"].toObject()["name"].toString();
+    s.getUiUserDetails()->updateName(name.isNull() ? "[نام شما]" : name);
+
+    // Birthday
+    auto birthday = QDateTime::fromSecsSinceEpoch(json["user"].toObject()["birthday"].toInt());
+    s.getUiUserDetails()->updateBirthday(birthday);
+}
 
 void star::settings::SettingsManager::setOnlineValue(const QString &strJson)
 {
@@ -60,5 +77,8 @@ void star::settings::SettingsManager::failedOnlineSettingsFunctor(QNetworkReply 
 void star::settings::SettingsManager::successOnlineSettingsFunctor(QNetworkReply *reply, int)
 {
     // Online settings retrived successfully, now we can update it in our app
+
+    this->setLocalSettings(reply);
+
     emit this->onlineSettingsUpdated(true, reply->readAll());
 }

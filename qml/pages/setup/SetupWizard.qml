@@ -6,16 +6,23 @@ import "../../Main.js" as Main
 
 Item {
 
+    property bool active: false
+
     Connections {
         target: settings
 
         onOnlineSettingsUpdated: {
+
+            if(!active) {
+                return
+            }
+
             // result -> bool
             // newSettings -> QString (JSON string)
 
             if(result) {
                 // Settings updated successfully
-                Main.toggleFlipToSetupWizard()
+                Main.toggleFlipToMainContent()
             } else {
                 // Failed to update settings
 
