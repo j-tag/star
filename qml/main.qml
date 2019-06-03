@@ -75,22 +75,15 @@ ApplicationWindow {
 
     header: ToolBar
     {
-
         Row
         {
 
             ToolButton
             {
-                id:toolBtnHome
-                text: qsTr("Home")
+                id: toolBtnHome
+                text: qsTr("صفحه‌ی اصلی")
 
-                onClicked:
-                {
-                    stack.replace(home)
-
-                    Main.disablePages(home)
-                    Main.changeBackground()
-                }
+                onClicked: Main.changePage(home)
             }
 
             ToolButton
@@ -98,28 +91,15 @@ ApplicationWindow {
                 id:toolBtnTodayHolidays
                 text: qsTr("Today Holidays")
 
-                onClicked:
-                {
-                    stack.replace(todayHolidays)
-
-                    Main.disablePages(todayHolidays)
-                    Main.changeBackground()
-                }
+                onClicked: Main.changePage(todayHolidays)
             }
 
             ToolButton
             {
-                id:toolBtnTodayEvents
+                id: toolBtnTodayEvents
                 text: qsTr("Today Events")
 
-                onClicked:
-                {
-                    stack.replace(todayEvents)
-
-                    Main.disablePages(todayEvents)
-                    Main.changeBackground()
-                }
-
+                onClicked: Main.changePage(todayEvents)
             }
 
             ToolButton
@@ -164,8 +144,8 @@ ApplicationWindow {
         transform: Rotation
         {
             id: rotation
-            origin.x: flipableMainWindow.width/2
-            origin.y: flipableMainWindow.height/2
+            origin.x: flipableMainWindow.width / 2
+            origin.y: flipableMainWindow.height / 2
             axis.x: 1; axis.y: 0; axis.z: 0     // set axis.x to 1 to rotate around x-axis
             angle: 0    // the default angle
         }
@@ -361,10 +341,7 @@ ApplicationWindow {
         height: mainContent.height
         radius: 80
 
-        onOpacityChanged:
-        {
-            visible = msgBlur.opacity === 0 ? false : true
-        }
+        onOpacityChanged: visible = msgBlur.opacity === 0 ? false : true
 
         Behavior on opacity
         {

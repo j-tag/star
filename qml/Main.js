@@ -65,9 +65,6 @@ function changeBackground()
         imgBackground2.opacity = 0
         imgBackground3.opacity = 0
     }
-
-
-    console.log("Background changed")
 }
 
 // This function will disable all page instead of one page that gets from parameter
@@ -76,6 +73,24 @@ function disablePages(except_item)
     home.enabled = except_item === home
     todayHolidays.enabled = except_item === todayHolidays
     todayEvents.enabled = except_item === todayEvents
+}
+
+// This function will change current item of main stack view
+function changePage(targetItem) {
+
+    if(stack.busy) {
+        return
+    }
+
+    if(stack.currentItem === targetItem) {
+        changeBackground()
+        return
+    }
+
+    stack.replace(targetItem)
+
+    disablePages(targetItem)
+    changeBackground()
 }
 
 // Show a nice and neat blur message box
