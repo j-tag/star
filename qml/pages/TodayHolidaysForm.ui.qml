@@ -1,5 +1,5 @@
-import QtQuick 2.7
-import QtQuick.Layouts 1.1
+import QtQuick 2.12
+import QtQuick.Layouts 1.12
 import "../Main.js" as Main
 
 Item {
@@ -35,15 +35,39 @@ Item {
             width: todayHolidays.width / 1.2
             height: todayHolidays.height / 1.3
 
-            Row {
+            ColumnLayout {
                 id: rowTodayHolidays
                 width: itemTodayHolidays.width / 1.2
                 height: itemTodayHolidays.height / 1.1
-                spacing: 2
-                anchors.centerIn: parent
+                spacing: 40
+                anchors.fill: parent
 
                 Text {
-                    text: "TODAY HOLYDAYS"
+                    Layout.alignment: Qt.AlignCenter
+                    topPadding: 20
+                    text: qsTr("مناسبت‌های امروز")
+                    font.pixelSize: 24
+                }
+
+                Text {
+                    visible: todayEvents.holiday
+                    color: "#ef3e3e"
+                    Layout.alignment: Qt.AlignCenter
+                    text: qsTr("تعطیل")
+                    font.bold: true
+                    font.pixelSize: 26
+                }
+
+                ListView {
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    model: todayEvents.events
+                    delegate: Text {
+                        width: parent.width - 20
+                        horizontalAlignment: Text.AlignRight
+                        text: modelData
+                        font.pixelSize: 22
+                    }
                 }
             }
         }

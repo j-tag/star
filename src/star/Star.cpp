@@ -42,6 +42,9 @@ star::Star::~Star()
     if(this->pHijriDate) {
         this->pHijriDate->deleteLater();
     }
+    if(this->pTodayEvents) {
+        this->pTodayEvents->deleteLater();
+    }
 
 }
 
@@ -58,7 +61,14 @@ void star::Star::start()
     auto possibleExpiresIn = this->pSettingsManager->getIntValue("auth/token/expires_in");
 
     // Check to see if we have local token
-    if(! possibleAccessToken.isNull()) {
+    if(possibleAccessToken.isNull()) {
+
+        qInfo() << Q_FUNC_INFO << ": No local token found. Showing login form.";
+
+        // We don't have any token stored, so show login box
+        emit s.getOAuth2()->showLoginBox(true);
+
+    } else {
 
         qInfo() << Q_FUNC_INFO << ": Found local token. Going to use it.";
 
@@ -69,6 +79,8 @@ void star::Star::start()
                                                            [=](QNetworkReply *reply, int ) {
             // Update settings in app
             this->pSettingsManager->setLocalSettings(reply);
+
+            emit s.getOAuth2()->loginResult(true, "");
 
             // Close all login related boxes
             emit s.getOAuth2()->showLoginBox(false);
@@ -151,11 +163,6 @@ void star::Star::start()
                 s.getUiAlerts()->showErrorMessage("نمیتوان تنظیمات شما را از پیورسافت دریافت کرد، لطفاً اتصال اینترنت خود را بررسی کنید و در صورت بر قرار بودن اینترنت لطفاً به پشتیبانی وبسایت پیورسافت اطلاع دهید");
             }
         });
-    } else {
-        qInfo() << Q_FUNC_INFO << ": No local token found. Showing login form.";
-
-        // We don't have any token stored, so show login box
-        emit s.getOAuth2()->showLoginBox(true);
     }
 
 }
@@ -176,6 +183,7 @@ void star::Star::initObjects()
     this->pUiAlerts = new ui::general::Alerts;
     this->pUiSetupWizard = new ui::setup::SetupWizard;
     this->pHijriDate = new date::HijriDateCalculator;
+    this->pTodayEvents = new date::events::TodayEvents;
 }
 
 /**
@@ -284,6 +292,16 @@ void star::Star::setHijriDate(star::date::HijriDateCalculator *hijriDate)
 star::date::HijriDateCalculator *star::Star::getHijriDate() const
 {
     return this->pHijriDate;
+}
+
+void star::Star::setTodayEvents(star::date::events::TodayEvents *todayEvents)
+{
+    this->pTodayEvents = todayEvents;
+}
+
+star::date::events::TodayEvents *star::Star::getTodayEvents() const
+{
+    return this->pTodayEvents;
 }
 
 

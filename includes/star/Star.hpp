@@ -31,6 +31,7 @@
 #include "includes/star/ui/general/Alerts.hpp" // UI Alerts derived from C++ side
 #include "includes/star/ui/setup/SetupWizard.hpp" // Setup wizrad handler class
 #include "includes/star/date/HijriDateCalculator.hpp" // Hijri date handler class
+#include "includes/star/date/events/TodayEvents.hpp" // Today events handler class
 
 namespace star {
 
@@ -61,6 +62,8 @@ public:
     ui::setup::SetupWizard *getUiSetupWizard() const;
     void setHijriDate(date::HijriDateCalculator *hijriDate);
     date::HijriDateCalculator *getHijriDate() const;
+    void setTodayEvents(date::events::TodayEvents *todayEvents);
+    date::events::TodayEvents *getTodayEvents() const;
 
 
 signals:
@@ -81,6 +84,7 @@ protected:
     QPointer<ui::general::Alerts> pUiAlerts;
     QPointer<ui::setup::SetupWizard> pUiSetupWizard;
     QPointer<date::HijriDateCalculator> pHijriDate;
+    QPointer<date::events::TodayEvents> pTodayEvents;
 };
 
 }

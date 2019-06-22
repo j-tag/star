@@ -56,6 +56,9 @@ int main(int argc, char *argv[])
     // Hijri date handler
     engine.rootContext()->setContextProperty("hijriDate", s.getHijriDate());
 
+    // Today events handler
+    engine.rootContext()->setContextProperty("todayEvents", s.getTodayEvents());
+
     engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
 
     return app.exec();

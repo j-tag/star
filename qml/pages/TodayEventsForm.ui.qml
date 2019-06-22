@@ -7,7 +7,7 @@ Item {
     property alias flickableTodayEvents: flickableTodayEvents
     property alias rectBg: rectBg
 
-    id: todayEvents
+    id: todayEventsPage
     Layout.minimumWidth: 200
     Layout.minimumHeight: 200
 
@@ -15,8 +15,8 @@ Item {
         id: flickableTodayEvents
         transformOrigin: Item.Center
         anchors.centerIn: parent
-        width: todayEvents.width / 1.21
-        height: todayEvents.height / 1.21
+        width: todayEventsPage.width / 1.21
+        height: todayEventsPage.height / 1.21
         contentHeight: itemTodayEvents.height
         contentWidth: itemTodayEvents.width
 
@@ -32,8 +32,8 @@ Item {
         Item {
             id: itemTodayEvents
             anchors.centerIn: parent
-            width: todayEvents.width / 1.2
-            height: todayEvents.height / 1.3
+            width: todayEventsPage.width / 1.2
+            height: todayEventsPage.height / 1.3
 
             Row {
                 id: rowTodayEvents

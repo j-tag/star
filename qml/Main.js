@@ -72,7 +72,7 @@ function disablePages(except_item)
 {
     home.enabled = except_item === home
     todayHolidays.enabled = except_item === todayHolidays
-    todayEvents.enabled = except_item === todayEvents
+    todayEventsPage.enabled = except_item === todayEventsPage
 }
 
 // This function will change current item of main stack view

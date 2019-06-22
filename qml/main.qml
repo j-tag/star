@@ -1,6 +1,6 @@
-import QtQuick 2.7
+import QtQuick 2.12
 import QtQuick.Controls 2.12
-import QtQuick.Window 2.2
+import QtQuick.Window 2.12
 import QtQuick.Dialogs 1.2
 import QtGraphicalEffects 1.0
 import "components"
@@ -88,8 +88,8 @@ ApplicationWindow {
 
             ToolButton
             {
-                id:toolBtnTodayHolidays
-                text: qsTr("Today Holidays")
+                id: toolBtnTodayHolidays
+                text: qsTr("مناسبت‌های امروز")
 
                 onClicked: Main.changePage(todayHolidays)
             }
@@ -99,7 +99,7 @@ ApplicationWindow {
                 id: toolBtnTodayEvents
                 text: qsTr("Today Events")
 
-                onClicked: Main.changePage(todayEvents)
+                onClicked: Main.changePage(todayEventsPage)
             }
 
             ToolButton
@@ -294,7 +294,7 @@ ApplicationWindow {
         // Today events page
         TodayEvents
         {
-            id: todayEvents
+            id: todayEventsPage
             visible: false
         }
 

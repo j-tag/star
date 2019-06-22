@@ -6,6 +6,7 @@ SOURCES += src/main.cpp \
     src/star/date/CJalaliDate.cpp \
     src/star/date/HijriDate.cpp \
     src/star/date/HijriDateCalculator.cpp \
+    src/star/date/events/TodayEvents.cpp \
     src/star/settings/SettingsManager.cpp \
     src/star/ui/general/Alerts.cpp \
     src/star/ui/home/UserDetails.cpp \
@@ -23,6 +24,7 @@ QML_IMPORT_PATH =
 HEADERS += \
     includes/star/date/CJalaliDate.hpp \
     includes/star/date/HijriDateCalculator.hpp \
+    includes/star/date/events/TodayEvents.hpp \
     includes/star/settings/SettingsManager.hpp \
     includes/star/ui/general/Alerts.hpp \
     includes/star/ui/home/UserDetails.hpp \
