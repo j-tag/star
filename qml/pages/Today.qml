@@ -16,24 +16,28 @@ Item {
         Text {
             Layout.fillWidth: true
             horizontalAlignment: Text.AlignHCenter
-            text: Main.englishNumberToPersian(jalaliDate.getCurrentJalaliDate())
+            color: Main.textColor
+            text: todayEvents.persianDate
         }
 
         Text {
             Layout.fillWidth: true
             horizontalAlignment: Text.AlignHCenter
-            text: Main.englishNumberToPersian(hijriDate.getCurrentHijriDate())
+            color: Main.textColor
+            text: todayEvents.islamicDate
         }
 
         Text {
             Layout.fillWidth: true
             horizontalAlignment: Text.AlignHCenter
-            text: Main.englishNumberToPersian(jalaliDate.getCurrentGregorianDate())
+            color: Main.textColor
+            text: todayEvents.gregorianDate
         }
 
         Text {
             Layout.fillWidth: true
             horizontalAlignment: Text.AlignHCenter
+            color: Main.textColor
             text: qsTr("زمان سپری شده از امسال")
         }
 
@@ -51,6 +55,7 @@ Item {
         Text {
             Layout.fillWidth: true
             horizontalAlignment: Text.AlignHCenter
+            color: Main.textColor
             text: qsTr("زمان سپری شده از این ماه")
         }
 
@@ -67,6 +72,7 @@ Item {
         Text {
             Layout.fillWidth: true
             horizontalAlignment: Text.AlignHCenter
+            color: Main.textColor
             text: qsTr("زمان سپری شده از امروز")
         }
 
@@ -83,6 +89,10 @@ Item {
 
 
 }
+
+
+
+
 
 /*##^## Designer {
     D{i:0;autoSize:true;height:480;width:640}

@@ -36,6 +36,11 @@ var pageRadius = 3
 // Page opacity
 var pageOpacity = .7
 
+/* Texts */
+
+// Default text color
+const textColor = "#333"
+
 /* Flipper */
 
 // Flipper Easing type

@@ -28,6 +28,15 @@ void star::date::events::TodayEvents::reload()
         // Events
         this->_varLstEvents = json["events"].toArray().toVariantList();
 
+        // Islamic date
+        this->_strIslamicDate = json["islamicDate"].toString();
+
+        // Persian date
+        this->_strPersianDate = json["persianDate"].toString();
+
+        // Gregorian date
+        this->_strGregorianDate = json["gregorianDate"].toString();
+
         // Populate changes
         emit this->eventsChanged(this->_varLstEvents, this->_bHoliday);
     });
@@ -41,5 +50,20 @@ QVariantList star::date::events::TodayEvents::getEvents() const
 bool star::date::events::TodayEvents::isHoliday()
 {
     return this->_bHoliday;
+}
+
+QString star::date::events::TodayEvents::getIslamicDate() const
+{
+    return this->_strIslamicDate;
+}
+
+QString star::date::events::TodayEvents::getPersianDate() const
+{
+    return this->_strPersianDate;
+}
+
+QString star::date::events::TodayEvents::getGregorianDate() const
+{
+    return this->_strGregorianDate;
 }
 

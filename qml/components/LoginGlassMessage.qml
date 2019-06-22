@@ -51,7 +51,7 @@ GlassMessage {
                 {
                     Layout.fillWidth: true
                     text: qsTr("ورود به حساب کاربری پیورسافت")
-                    color: "#333"
+                    color: Main.textColor
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
                     topPadding: 40
@@ -143,7 +143,7 @@ GlassMessage {
                 id: textClose
                 anchors.centerIn: parent
                 text: "×"
-                color: "#333"
+                color: Main.textColor
             }
 
             onClicked: msg.close()

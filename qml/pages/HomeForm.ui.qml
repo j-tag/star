@@ -41,6 +41,7 @@ Item {
                 anchors.horizontalCenter: parent.horizontalCenter
                 topPadding: 20
                 font.pointSize: 14
+                color: Main.textColor
             }
 
             Row {
