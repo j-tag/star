@@ -29,13 +29,20 @@ TodayTasksForm {
             height: 220
             anchors.centerIn: parent
 
-            color: "yellow"
+            state: "normal"
             radius: 10
 
+            MouseArea {
+                anchors.fill: rectCardBg
+                hoverEnabled: true
+                onEntered: rectCardBg.state = "hover"
+                onExited: rectCardBg.state = "normal"
+                onPressed: rectCardBg.state = "pressing"
+                onReleased: rectCardBg.state = "normal"
+            }
+
             ColumnLayout {
-                anchors {
-                    fill: parent
-                }
+                anchors.fill: parent
                 spacing: 0
 
                 Item {
@@ -79,8 +86,28 @@ TodayTasksForm {
                         flat: true
                         Layout.margins: 0
                         padding: 0
+                        onClicked: console.log("Hi")
                     }
                 }
+            }
+
+            states: [
+                State {
+                    name: "normal"
+                    PropertyChanges { target: rectCardBg; color: "#ffff66" }
+                },
+                State {
+                    name: "hover"
+                    PropertyChanges { target: rectCardBg; color: "#adff2f" }
+                },
+                State {
+                    name: "pressing"
+                    PropertyChanges { target: rectCardBg; color: "#7ecf55" }
+                }
+            ]
+
+            transitions: Transition {
+                ColorAnimation { target: rectCardBg; duration: Main.pageDuration; easing.type: Main.pageEasingType}
             }
         }
 
