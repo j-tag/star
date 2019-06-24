@@ -23,7 +23,6 @@ GlassMessage {
             // id -> int
             // result -> bool
 
-            todayTasks.reload()
             closeOverlay()
             msg.close()
 

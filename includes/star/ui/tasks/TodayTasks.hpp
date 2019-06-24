@@ -14,6 +14,8 @@ class TodayTasks : public QObject
 {
 public:
     Q_PROPERTY(QVariantList tasks READ getTasks NOTIFY tasksChanged)
+    Q_PROPERTY(int pageCount READ getPageCount NOTIFY paginationChanged)
+    Q_PROPERTY(int currentPage READ getCurrentPage NOTIFY paginationChanged)
 
     Q_OBJECT
 public:
@@ -23,14 +25,20 @@ public:
 signals:
     void tasksChanged(QVariantList tasks);
     void deleteTaskResult(int id, bool result);
+    void paginationChanged(int pageCount, int currentPage);
 
 public slots:
     void reload(int page = 1);
+    void append(int page = 1);
     QVariantList getTasks() const;
     void deleteTask(int id);
+    int getPageCount();
+    int getCurrentPage();
 
 private:
     QVariantList _varLstTasks;
+    int _nPageCount;
+    int _nCurrentPage;
 };
 
 }
