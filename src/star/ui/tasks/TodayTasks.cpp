@@ -69,6 +69,8 @@ void star::ui::tasks::TodayTasks::deleteTask(int id)
 
     s.getWebAccessManager()->withAuthenticationHeader()->deleteResource(s.getUrlManager()->getPureUrl(strUrl), [=](QNetworkReply *, int ) {
 
+        // Success
+
         // Delete item from local list
         for (QVariantList::iterator j = this->_varLstTasks.begin(); j != this->_varLstTasks.end(); j++)
         {
@@ -82,8 +84,45 @@ void star::ui::tasks::TodayTasks::deleteTask(int id)
         emit this->tasksChanged(this->_varLstTasks);
         emit this->deleteTaskResult(id, true);
     }, [=](QNetworkReply *, int ) {
+
+        // Fail
+
         // Populate changes
         emit this->deleteTaskResult(id, false);
+    });
+}
+
+void star::ui::tasks::TodayTasks::editTask(int id, const QString &strTitle, const QString &strDescription, int triggerDate, const QString &strTriggerTime)
+{
+    QString patternUrl("apps/fa/star-v3/tasks/%ID.json");
+
+    auto strUrl = patternUrl.replace("%ID", QString::number(id));
+
+    // TODO: Generate JSON request body
+    QString strBody = "";
+
+    s.getWebAccessManager()->withAuthenticationHeader()->put(s.getUrlManager()->getPureUrl(strUrl), strBody, [=](QNetworkReply *, int ) {
+
+        // Success
+
+        // Edit item in local list
+        for (QVariantList::iterator j = this->_varLstTasks.begin(); j != this->_varLstTasks.end(); j++)
+        {
+            if((*j).toJsonObject()["id"].toInt() == id) {
+                // TODO: Edit item: this->_varLstTasks...
+                break;
+            }
+        }
+
+        // Populate changes
+        emit this->tasksChanged(this->_varLstTasks);
+        emit this->editTaskResult(id, true);
+    }, [=](QNetworkReply *, int ) {
+
+        // Fail
+
+        // Populate changes
+        emit this->editTaskResult(id, false);
     });
 }
 

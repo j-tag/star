@@ -170,13 +170,22 @@ Item {
                                     Layout.alignment: Qt.AlignRight
                                     spacing: 0
                                     RoundButton {
-                                        text: "⋮"
+                                        icon.source: "qrc:/images/pencil-edit-button.svg"
+                                        icon.height: 16
+                                        icon.width: 16
+                                        icon.color: Main.textColor
                                         flat: true
                                         Layout.margins: 0
                                         padding: 0
+                                        onClicked: {
+                                            // TODO: Show edit box
+                                        }
                                     }
                                     RoundButton {
-                                        text: "×"
+                                        icon.source: "qrc:/images/trash.svg"
+                                        icon.height: 18
+                                        icon.width: 18
+                                        icon.color: Main.textColor
                                         flat: true
                                         Layout.margins: 0
                                         padding: 0
@@ -186,6 +195,8 @@ Item {
                                             Main.deleteTask(modelData.id)
                                         }
                                     }
+
+                                    // TODO: Place trigger date here
                                 }
                             }
 

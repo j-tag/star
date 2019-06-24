@@ -103,29 +103,33 @@ GlassMessage {
                     Layout.fillWidth: true
                 }
 
-                Button {
-                    flat: true
-                    text: qsTr("بستن")
+                // TODO: Place trigger date here
+                // TODO: Place trigger time here
 
-                    onClicked: msg.close()
-                }
-                Button {
-                    flat: true
-                    text: qsTr("بستن")
-
-                    onClicked: msg.close()
-                }
                 RoundButton {
-                    Layout.rightMargin: 10
+                    icon.source: "qrc:/images/trash.svg"
+                    icon.height: 18
+                    icon.width: 18
+                    icon.color: Main.textColor
                     flat: true
-                    text: "×"
 
                     onClicked: {
                         showOverlay()
                         Main.deleteTask(modelId)
                     }
                 }
+                RoundButton {
+                    icon.source: "qrc:/images/pencil-edit-button.svg"
+                    icon.height: 16
+                    icon.width: 16
+                    icon.color: Main.textColor
+                    flat: true
+                    Layout.rightMargin: 10
 
+                    onClicked: {
+                        // TODO: Show edit box
+                    }
+                }
             }
         }
 

@@ -24,5 +24,8 @@
         <file>qml/components/GlassProgressMessage.qml</file>
         <file>qml/pages/setup/SetupWizard.qml</file>
         <file>qml/components/GlassTaskCardView.qml</file>
+        <file>images/menu.svg</file>
+        <file>images/trash.svg</file>
+        <file>images/pencil-edit-button.svg</file>
     </qresource>
 </RCC>
