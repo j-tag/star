@@ -45,6 +45,9 @@ star::Star::~Star()
     if(this->pTodayEvents) {
         this->pTodayEvents->deleteLater();
     }
+    if(this->pTodayTasks) {
+        this->pTodayTasks->deleteLater();
+    }
 
 }
 
@@ -130,7 +133,6 @@ void star::Star::start()
 
                 }, [=](QNetworkReply *reply, int httpStatus){
 
-
                     if(httpStatus == 404) {
 
                         // This user has not any settings yet, so show them setup wizard to begin
@@ -184,6 +186,7 @@ void star::Star::initObjects()
     this->pUiSetupWizard = new ui::setup::SetupWizard;
     this->pHijriDate = new date::HijriDateCalculator;
     this->pTodayEvents = new date::events::TodayEvents;
+    this->pTodayTasks = new ui::tasks::TodayTasks;
 }
 
 /**
@@ -302,6 +305,16 @@ void star::Star::setTodayEvents(star::date::events::TodayEvents *todayEvents)
 star::date::events::TodayEvents *star::Star::getTodayEvents() const
 {
     return this->pTodayEvents;
+}
+
+void star::Star::setTodayTasks(star::ui::tasks::TodayTasks *todayTasks)
+{
+    this->pTodayTasks = todayTasks;
+}
+
+star::ui::tasks::TodayTasks *star::Star::getTodayTasks() const
+{
+    return this->pTodayTasks;
 }
 
 

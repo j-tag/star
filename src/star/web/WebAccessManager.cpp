@@ -107,7 +107,7 @@ QNetworkRequest star::web::WebAccessManager::generateNormalRequest(const QString
     QNetworkRequest request;
 
     request.setUrl(QUrl(strUrl));
-    request.setRawHeader("User-Agent", "StarApplication 3.0");
+    request.setRawHeader("User-Agent", "StarDesktopApplication 3.0");
     request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
 
     return request;

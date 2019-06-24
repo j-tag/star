@@ -15,6 +15,8 @@
 //#define QT_NO_INFO_OUTPUT
 //#define QT_NO_WARNING_OUTPUT
 
+// Ignore SSL errors [Only for developemnt porpuses]
+#define IGNORE_SSL_ERRORS
 
 #include <QObject>
 #include <QDebug>
@@ -32,6 +34,7 @@
 #include "includes/star/ui/setup/SetupWizard.hpp" // Setup wizrad handler class
 #include "includes/star/date/HijriDateCalculator.hpp" // Hijri date handler class
 #include "includes/star/date/events/TodayEvents.hpp" // Today events handler class
+#include "includes/star/ui/tasks/TodayTasks.hpp" // Today tasks handler class
 
 namespace star {
 
@@ -64,6 +67,8 @@ public:
     date::HijriDateCalculator *getHijriDate() const;
     void setTodayEvents(date::events::TodayEvents *todayEvents);
     date::events::TodayEvents *getTodayEvents() const;
+    void setTodayTasks(ui::tasks::TodayTasks *todayTasks);
+    ui::tasks::TodayTasks *getTodayTasks() const;
 
 
 signals:
@@ -85,6 +90,7 @@ protected:
     QPointer<ui::setup::SetupWizard> pUiSetupWizard;
     QPointer<date::HijriDateCalculator> pHijriDate;
     QPointer<date::events::TodayEvents> pTodayEvents;
+    QPointer<ui::tasks::TodayTasks> pTodayTasks;
 };
 
 }

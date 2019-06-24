@@ -1,13 +1,14 @@
 import QtQuick 2.7
-import QtQuick.Layouts 1.1
+import QtQuick.Layouts 1.12
 import "../Main.js" as Main
 
 Item {
 
     property alias flickableTodayEvents: flickableTodayEvents
     property alias rectBg: rectBg
+    property alias gridviewTodayEvents: gridviewTodayEvents
 
-    id: todayEventsPage
+    id: todayTasksPage
     Layout.minimumWidth: 200
     Layout.minimumHeight: 200
 
@@ -15,8 +16,8 @@ Item {
         id: flickableTodayEvents
         transformOrigin: Item.Center
         anchors.centerIn: parent
-        width: todayEventsPage.width / 1.21
-        height: todayEventsPage.height / 1.21
+        width: todayTasksPage.width / 1.21
+        height: todayTasksPage.height / 1.21
         contentHeight: itemTodayEvents.height
         contentWidth: itemTodayEvents.width
 
@@ -32,19 +33,20 @@ Item {
         Item {
             id: itemTodayEvents
             anchors.centerIn: parent
-            width: todayEventsPage.width / 1.2
-            height: todayEventsPage.height / 1.3
+            width: todayTasksPage.width / 1.2
+            height: todayTasksPage.height / 1.3
 
-            Row {
-                id: rowTodayEvents
+            GridView {
+                id: gridviewTodayEvents
                 width: itemTodayEvents.width / 1.2
                 height: itemTodayEvents.height / 1.1
-                spacing: 2
-                anchors.centerIn: parent
+                anchors.fill: parent
+                cellWidth: width / Math.floor(width / 200)
+                cellHeight: 240
+                clip: true
+                layoutDirection: Qt.RightToLeft
 
-                Text {
-                    text: "TODAY EVENTS"
-                }
+                model: todayTasks.tasks
             }
         }
     }

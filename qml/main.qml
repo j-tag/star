@@ -96,10 +96,10 @@ ApplicationWindow {
 
             ToolButton
             {
-                id: toolBtnTodayEvents
-                text: qsTr("Today Events")
+                id: toolBtnTodayTasks
+                text: qsTr("یادآوری‌های من")
 
-                onClicked: Main.changePage(todayEventsPage)
+                onClicked: Main.changePage(todayTasksPage)
             }
 
             ToolButton
@@ -291,10 +291,10 @@ ApplicationWindow {
             visible: false
         }
 
-        // Today events page
-        TodayEvents
+        // Today tasks page
+        TodayTasks
         {
-            id: todayEventsPage
+            id: todayTasksPage
             visible: false
         }
 

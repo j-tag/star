@@ -15,8 +15,8 @@
         <file>qml/components/GlassMessage.qml</file>
         <file>images/toolbar-home.png</file>
         <file>images/toolbar-todayholidays.png</file>
-        <file>qml/pages/TodayEvents.qml</file>
-        <file>qml/pages/TodayEventsForm.ui.qml</file>
+        <file>qml/pages/TodayTasks.qml</file>
+        <file>qml/pages/TodayTasksForm.ui.qml</file>
         <file>images/toolbar-todayevents.png</file>
         <file>fonts/IRANSans.ttf</file>
         <file>qtquickcontrols2.conf</file>

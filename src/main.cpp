@@ -7,8 +7,6 @@
 // C++ Modules
 #include "includes/star/Star.hpp"
 
-
-
 int main(int argc, char *argv[])
 {
     // Organization details
@@ -26,8 +24,14 @@ int main(int argc, char *argv[])
     // Make QML engine
     QQmlApplicationEngine engine;
 
-    // Load C++ side, modules
+#ifdef IGNORE_SSL_ERRORS
+    // Ignore SSL Errors
+    QSslConfiguration sslConf = QSslConfiguration::defaultConfiguration();
+    sslConf.setPeerVerifyMode(QSslSocket::VerifyNone);
+    QSslConfiguration::setDefaultConfiguration(sslConf);
+#endif
 
+    // Load C++ side, modules
 
     // Initialize application objects
     s.initObjects();
@@ -58,6 +62,9 @@ int main(int argc, char *argv[])
 
     // Today events handler
     engine.rootContext()->setContextProperty("todayEvents", s.getTodayEvents());
+
+    // Today tasks handler
+    engine.rootContext()->setContextProperty("todayTasks", s.getTodayTasks());
 
     engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
 

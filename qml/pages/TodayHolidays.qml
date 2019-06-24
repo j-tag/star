@@ -1,7 +1,8 @@
-import QtQuick 2.7
+import QtQuick 2.12
 import "../Main.js" as Main
 
 TodayHolidaysForm {
+
     Connections {
         target: oauth2
         onLoginResult: {
