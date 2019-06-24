@@ -102,6 +102,30 @@ void star::web::WebAccessManager::post(const QString &strUrl, const QString &str
     });
 }
 
+void star::web::WebAccessManager::deleteResource(const QString &strUrl, std::function<void (QNetworkReply *, int)> functor, std::function<void (QNetworkReply *, int)> failFunctor)
+{
+    qDebug() << "HTTP request: DELETE:" << strUrl;
+
+    QNetworkRequest request(this->generateNormalRequest(strUrl));
+
+    this->setHeaders(request);
+
+    QNetworkReply *reply = this->pManager->deleteResource(request);
+
+    connect(reply, &QNetworkReply::finished,  [reply, functor, failFunctor]() {
+
+        int httpStatusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+
+        if(reply->error() == QNetworkReply::NoError && httpStatusCode >= 200 && httpStatusCode < 300) {
+            functor(reply, httpStatusCode);
+        } else {
+            failFunctor(reply, httpStatusCode);
+        }
+
+        reply->deleteLater();
+    });
+}
+
 QNetworkRequest star::web::WebAccessManager::generateNormalRequest(const QString &strUrl)
 {
     QNetworkRequest request;

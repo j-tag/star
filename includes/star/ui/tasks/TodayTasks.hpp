@@ -22,10 +22,12 @@ public:
 
 signals:
     void tasksChanged(QVariantList tasks);
+    void deleteTaskResult(int id, bool result);
 
 public slots:
     void reload(int page = 1);
     QVariantList getTasks() const;
+    void deleteTask(int id);
 
 private:
     QVariantList _varLstTasks;

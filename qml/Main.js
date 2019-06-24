@@ -156,6 +156,33 @@ function toggleFlipToMainContent() {
     flipableMainWindow.flipped = !flipableMainWindow.flipped
 }
 
+// Show a task
+function showTask(id, title, description, triggerDate, triggerTime, createdAt, updatedAt) {
+    // Disable toolbar
+    mainWindow.header.enabled = false
+    // Disable main content
+    mainContent.enabled = false
+    // Set message details
+    glassTaskCardView.mainContent = mainContent
+    glassTaskCardView.blurContent = msgBlur
+    glassTaskCardView.modelId = id
+    glassTaskCardView.title = title
+    glassTaskCardView.description = description
+    glassTaskCardView.triggerDate = triggerDate
+    glassTaskCardView.triggerTime = triggerTime
+    glassTaskCardView.createdAt = createdAt
+    glassTaskCardView.updatedAt = updatedAt
+
+    // Show blur effect
+    msgBlur.opacity = 1
+    glassTaskCardView.show()
+}
+
+// Delete a task
+function deleteTask(id) {
+    todayTasks.deleteTask(id)
+}
+
 // Convert an English number to Persian variation
 function englishNumberToPersian(number) {
 

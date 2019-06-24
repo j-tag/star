@@ -30,3 +30,18 @@ QVariantList star::ui::tasks::TodayTasks::getTasks() const
 {
     return this->_varLstTasks;
 }
+
+void star::ui::tasks::TodayTasks::deleteTask(int id)
+{
+    QString patternUrl("apps/fa/star-v3/tasks/%ID.json");
+
+    auto strUrl = patternUrl.replace("%ID", QString::number(id));
+
+    s.getWebAccessManager()->withAuthenticationHeader()->deleteResource(s.getUrlManager()->getPureUrl(strUrl), [=](QNetworkReply *, int ) {
+        // Populate changes
+        emit this->deleteTaskResult(id, true);
+    }, [=](QNetworkReply *, int ) {
+        // Populate changes
+        emit this->deleteTaskResult(id, false);
+    });
+}

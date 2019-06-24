@@ -321,6 +321,16 @@ ApplicationWindow {
         height: mainContent.height
     }
 
+    GlassTaskCardView
+    {
+        id: glassTaskCardView
+        opacity: 0
+        z: 40 // Brings messagebox to top
+        anchors.centerIn: mainContent
+        width: mainContent.width
+        height: mainContent.height
+    }
+
     GlassProgressMessage
     {
         id: glassProgressMessage

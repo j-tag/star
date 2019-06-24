@@ -5,6 +5,7 @@ import QtGraphicalEffects 1.0
 import "../Main.js" as Main
 
 TodayTasksForm {
+    id: mainItem
 
     Connections {
         target: oauth2
@@ -16,6 +17,16 @@ TodayTasksForm {
                 // Login was successful
                 todayTasks.reload(1)
             }
+        }
+    }
+
+    Connections {
+        target: todayTasks
+        onDeleteTaskResult: {
+            // id -> int
+            // result -> bool
+
+            closeOverlay()
         }
     }
 
@@ -39,6 +50,10 @@ TodayTasksForm {
                 onExited: rectCardBg.state = "normal"
                 onPressed: rectCardBg.state = "pressing"
                 onReleased: rectCardBg.state = "normal"
+                onClicked: {
+                    Main.showTask(modelData.id, modelData.title, modelData.description,
+                                  modelData.trigger_date, modelData.trigger_time, modelData.created_at, modelData.updated_at)
+                }
             }
 
             ColumnLayout {
@@ -58,6 +73,7 @@ TodayTasksForm {
                         Text {
                             Layout.fillWidth: true
                             text: (modelData.title + "").slice(0, 85)
+                            color: Main.textColor
                             wrapMode: Text.Wrap
                             font.bold: true
                         }
@@ -66,6 +82,7 @@ TodayTasksForm {
                             Layout.fillWidth: true
                             Layout.fillHeight: true
                             text: modelData.description
+                            color: Main.textColor
                             wrapMode: Text.Wrap
                         }
                     }
@@ -86,7 +103,10 @@ TodayTasksForm {
                         flat: true
                         Layout.margins: 0
                         padding: 0
-                        onClicked: console.log("Hi")
+                        onClicked: {
+                            showOverlay()
+                            Main.deleteTask(modelData.id)
+                        }
                     }
                 }
             }
@@ -123,25 +143,52 @@ TodayTasksForm {
         }
     }
 
+    // Overlay
+    Rectangle {
+        id: rectOverlay
+        anchors.fill: mainItem
+        visible: opacity !== 0
+        opacity: 0
+        color: "#903d0d6f"
+
+        BusyIndicator {
+            id: busyIndicator
+            anchors.centerIn: parent
+            running: false
+        }
+
+        Behavior on opacity
+        {
+            NumberAnimation
+            {
+                duration: Main.msgShowDuration
+                easing.type: Main.msgEasingType
+            }
+        }
+    }
+
     flickableTodayEvents.rebound: Transition {
-                           NumberAnimation {
-                               properties: "x,y"
-                               duration: Main.pageDuration
-                               easing.type: Main.pageEasingType
-                           }
-                       }
+        NumberAnimation {
+            properties: "x,y"
+            duration: Main.pageDuration
+            easing.type: Main.pageEasingType
+        }
+    }
+
+    // Functions
+
+    function showOverlay() {
+        mainItem.enabled = false
+        busyIndicator.running = true
+        rectOverlay.opacity = 1
+    }
+
+    function closeOverlay() {
+        mainItem.enabled = true
+        busyIndicator.running = false
+        rectOverlay.opacity = 0
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
 
 /*##^## Designer {
     D{i:0;autoSize:true;height:480;width:640}

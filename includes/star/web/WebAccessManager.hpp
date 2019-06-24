@@ -30,6 +30,9 @@ public:
               std::function<void(QNetworkReply *reply, int httpStatus)> failFunctor = [](QNetworkReply *, int){},
               const QString &strContentType = QStringLiteral("application/json"));
 
+    void deleteResource(const QString &strUrl, std::function<void(QNetworkReply *reply, int httpStatus)> functor,
+           std::function<void(QNetworkReply *reply, int httpStatus)> failFunctor = [](QNetworkReply *, int){});
+
 private:
     QNetworkRequest generateNormalRequest(const QString &strUrl);
     QNetworkRequest &setHeaders(QNetworkRequest &request);
