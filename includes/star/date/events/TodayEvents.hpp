@@ -37,7 +37,7 @@ public slots:
 
 private:
     QVariantList _varLstEvents;
-    bool _bHoliday;
+    bool _bHoliday = false;
     QString _strIslamicDate;
     QString _strPersianDate;
     QString _strGregorianDate;

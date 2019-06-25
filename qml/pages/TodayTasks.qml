@@ -165,6 +165,7 @@ Item {
                                     }
                                 }
                                 RowLayout {
+                                    id: layoutCardButtons
                                     Layout.fillWidth: true
                                     layoutDirection: Qt.RightToLeft
                                     Layout.alignment: Qt.AlignRight
@@ -177,6 +178,7 @@ Item {
                                         flat: true
                                         Layout.margins: 0
                                         padding: 0
+                                        onHoveredChanged: rectCardBg.state = hovered ? "hover" : "normal"
                                         onClicked: {
                                             // TODO: Show edit box
                                         }
@@ -189,6 +191,7 @@ Item {
                                         flat: true
                                         Layout.margins: 0
                                         padding: 0
+                                        onHoveredChanged: rectCardBg.state = hovered ? "hover" : "normal"
                                         onClicked: {
                                             showOverlay()
                                             lastInteractedIndex = index
@@ -204,10 +207,12 @@ Item {
                                 State {
                                     name: "normal"
                                     PropertyChanges { target: rectCardBg; color: "#ffff66" }
+                                    PropertyChanges { target: layoutCardButtons; opacity: 0 }
                                 },
                                 State {
                                     name: "hover"
                                     PropertyChanges { target: rectCardBg; color: "#adff2f" }
+                                    PropertyChanges { target: layoutCardButtons; opacity: 1 }
                                 },
                                 State {
                                     name: "pressing"
@@ -217,6 +222,7 @@ Item {
 
                             transitions: Transition {
                                 ColorAnimation { target: rectCardBg; duration: Main.pageDuration; easing.type: Main.pageEasingType}
+                                NumberAnimation { target: layoutCardButtons; property: "opacity"; duration: 200; easing.type: Easing.InOutQuad }
                             }
                         }
 
@@ -279,6 +285,8 @@ Item {
         todayTasks.append(++currentPage)
     }
 }
+
+
 /*##^## Designer {
     D{i:0;autoSize:true;height:480;width:640}
 }
