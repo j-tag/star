@@ -199,7 +199,14 @@ Item {
                                         }
                                     }
 
-                                    // TODO: Place trigger date here
+                                    Text {
+                                        Layout.fillWidth: true
+                                        Layout.leftMargin: 8
+                                        horizontalAlignment: Qt.AlignLeft
+                                        text: modelData.trigger_date ? Main.englishNumberToPersian(jalaliDate.getMiniDate(modelData.trigger_date)) : ""
+                                        color: Main.textColor
+                                    }
+
                                 }
                             }
 

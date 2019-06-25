@@ -94,6 +94,38 @@ QString star::date::CJalaliDate::gregorianToJalali(int year, int month, int day)
     return result;
 }
 
+QString star::date::CJalaliDate::getJalaliMonthName(int month) const
+{
+    switch (month) {
+    case 1:
+        return QStringLiteral("فروردین");
+    case 2:
+        return QStringLiteral("اردیبهشت");
+    case 3:
+        return QStringLiteral("خرداد");
+    case 4:
+        return QStringLiteral("تیر");
+    case 5:
+        return QStringLiteral("مرداد");
+    case 6:
+        return QStringLiteral("شهریور");
+    case 7:
+        return QStringLiteral("مهر");
+    case 8:
+        return QStringLiteral("آبان");
+    case 9:
+        return QStringLiteral("آذر");
+    case 10:
+        return QStringLiteral("دی");
+    case 11:
+        return QStringLiteral("بهمن");
+    case 12:
+        return QStringLiteral("اسفند");
+    default:
+        return QStringLiteral("");
+    }
+}
+
 // Get Jalali Date and Convert it to Gregorian Date
 QString star::date::CJalaliDate::jalaliToGregorian(int year, int month, int day) const
 {
@@ -164,6 +196,12 @@ qint64 star::date::CJalaliDate::jalaliToUnixTimestamp(const int year, const int 
     return date.toSecsSinceEpoch();
 }
 
+QString star::date::CJalaliDate::unixTimestampToJalali(int timestamp) const
+{
+    auto date = QDateTime::fromSecsSinceEpoch(timestamp).date();
+    return this->gregorianToJalali(date.year(), date.month(), date.day());
+}
+
 qint64 star::date::CJalaliDate::secondsDiffTillNow(const QDateTime &dateTime)
 {
     return dateTime.secsTo(QDateTime::currentDateTime());
@@ -202,6 +240,12 @@ qint64 star::date::CJalaliDate::seasonsDiffTillNow(const QDateTime &dateTime)
 qint64 star::date::CJalaliDate::yearsDiffTillNow(const QDateTime &dateTime)
 {
     return this->monthsDiffTillNow(dateTime) / 12;
+}
+
+QString star::date::CJalaliDate::getMiniDate(int timestamp) const
+{
+    auto jalaliDate = this->unixTimestampToJalali(timestamp);
+    return jalaliDate.right(2) + " ،" + this->getJalaliMonthName(jalaliDate.mid(5,2).toInt());
 }
 
 QString star::date::CJalaliDate::getCurrentJalaliDate() const
