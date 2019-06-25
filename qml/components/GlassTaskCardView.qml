@@ -48,7 +48,7 @@ GlassMessage {
 
                 Layout.fillHeight: true
                 Layout.fillWidth: true
-                contentHeight: layout.height + 40
+                contentHeight: layout.height + 10
                 clip: true
 
                 ColumnLayout {
@@ -79,6 +79,17 @@ GlassMessage {
                         font.pointSize: 12
                     }
 
+                    Text {
+                        Layout.fillWidth: true
+                        Layout.topMargin: 10
+                        Layout.rightMargin: 30
+                        Layout.leftMargin: 30
+                        text: updatedAt ? "آخرین ویرایش در: " + Main.englishNumberToPersian(jalaliDate.unixTimestampToJalali(updatedAt)) : ""
+                        color: Qt.lighter(Main.textColor)
+                        font.italic: true
+                        font.pointSize: 8
+                    }
+
                 }
 
                 ScrollBar.vertical: ScrollBar { }
@@ -91,6 +102,7 @@ GlassMessage {
             }
             RowLayout {
                 Layout.fillWidth: true
+
                 Button {
                     Layout.leftMargin: 10
                     flat: true
@@ -103,8 +115,15 @@ GlassMessage {
                     Layout.fillWidth: true
                 }
 
-                // TODO: Place trigger date here
-                // TODO: Place trigger time here
+                Text {
+                    text: triggerDate ? Main.englishNumberToPersian(jalaliDate.unixTimestampToJalali(triggerDate)) : ""
+                    color: Main.textColor
+                }
+
+                Text {
+                    text: triggerTime ? Main.englishNumberToPersian(triggerTime) : ""
+                    color: Main.textColor
+                }
 
                 RoundButton {
                     icon.source: "qrc:/images/trash.svg"
