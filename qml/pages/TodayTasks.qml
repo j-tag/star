@@ -27,6 +27,14 @@ Item {
 
     Connections {
         target: todayTasks
+
+        onEditTaskResult: {
+            // id -> int
+            // result -> bool
+
+            closeOverlay()
+        }
+
         onDeleteTaskResult: {
             // id -> int
             // result -> bool
@@ -180,7 +188,8 @@ Item {
                                         padding: 0
                                         onHoveredChanged: rectCardBg.state = hovered ? "hover" : "normal"
                                         onClicked: {
-                                            // TODO: Show edit box
+                                            Main.showEditTask(modelData.id, modelData.title, modelData.description,
+                                                          modelData.trigger_date, modelData.trigger_time, modelData.created_at, modelData.updated_at)
                                         }
                                     }
                                     RoundButton {

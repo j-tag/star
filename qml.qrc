@@ -27,5 +27,6 @@
         <file>images/menu.svg</file>
         <file>images/trash.svg</file>
         <file>images/pencil-edit-button.svg</file>
+        <file>qml/components/GlassTaskCardEdit.qml</file>
     </qresource>
 </RCC>

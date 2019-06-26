@@ -178,6 +178,36 @@ function showTask(id, title, description, triggerDate, triggerTime, createdAt, u
     glassTaskCardView.show()
 }
 
+// Show edit task dialog
+function showEditTask(id, title, description, triggerDate, triggerTime, createdAt, updatedAt) {
+    // Disable toolbar
+    mainWindow.header.enabled = false
+    // Disable main content
+    mainContent.enabled = false
+    // Set message details
+    glassTaskCardEdit.mainContent = mainContent
+    glassTaskCardEdit.blurContent = msgBlur
+    glassTaskCardEdit.modelId = id
+    glassTaskCardEdit.title = title
+    glassTaskCardEdit.description = description
+    glassTaskCardEdit.triggerDate = triggerDate
+    glassTaskCardEdit.triggerTime = triggerTime
+    glassTaskCardEdit.createdAt = createdAt
+    glassTaskCardEdit.updatedAt = updatedAt
+
+    glassTaskCardEdit.placeTextFieldValues()
+
+    // Show blur effect
+    msgBlur.opacity = 1
+    glassTaskCardEdit.show()
+}
+
+// Edit a task
+function editTask(id, title, description, triggerDate, triggerTime) {
+    const timestampTriggerDate = triggerDate === -1 ? -1 : jalaliDate.jalaliToUnixTimestamp(triggerDate)
+    todayTasks.editTask(id, title, description, timestampTriggerDate, triggerTime)
+}
+
 // Delete a task
 function deleteTask(id) {
     todayTasks.deleteTask(id)

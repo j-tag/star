@@ -146,7 +146,8 @@ GlassMessage {
                     Layout.rightMargin: 10
 
                     onClicked: {
-                        // TODO: Show edit box
+                        msg.close()
+                        Main.showEditTask(modelId, title, description, triggerDate, triggerTime, createdAt, updatedAt)
                     }
                 }
             }

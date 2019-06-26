@@ -30,6 +30,7 @@ public slots:
     int getCurrentMillisecondOfDay() const;
     QString jalaliToGregorian(const int year, const int month, const int day) const;
     qint64 jalaliToUnixTimestamp(const int year, const int month, const int day) const;
+    qint64 jalaliToUnixTimestamp(const QString &strDate) const;
     QString unixTimestampToJalali(int timestamp) const;
     qint64 secondsDiffTillNow(const QDateTime &dateTime);
     qint64 minutesDiffTillNow(const QDateTime &dateTime);

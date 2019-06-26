@@ -98,20 +98,51 @@ void star::ui::tasks::TodayTasks::editTask(int id, const QString &strTitle, cons
 
     auto strUrl = patternUrl.replace("%ID", QString::number(id));
 
-    // TODO: Generate JSON request body
-    QString strBody = "";
+    // Generate JSON request body
+    QJsonObject json = QJsonObject();
+    QJsonDocument jsoc = QJsonDocument();
 
-    s.getWebAccessManager()->withAuthenticationHeader()->put(s.getUrlManager()->getPureUrl(strUrl), strBody, [=](QNetworkReply *, int ) {
+    json["title"] = strTitle;
+
+    if(strDescription.trimmed().length() > 0) {
+        json["description"] = strDescription.trimmed();
+    } else {
+        json["description"] = QJsonValue(QJsonValue::Null);
+    }
+
+    if(triggerDate != -1) {
+        json["trigger_date"] = triggerDate;
+    } else {
+        json["trigger_date"] = QJsonValue(QJsonValue::Null);
+    }
+
+    if(strTriggerTime.trimmed().length() > 0) {
+        json["trigger_time"] = strTriggerTime;
+    } else {
+        json["trigger_time"] = QJsonValue(QJsonValue::Null);
+    }
+
+
+    jsoc.setObject(json);
+
+    QString strBody = jsoc.toJson();
+
+    s.getWebAccessManager()->withAuthenticationHeader()->put(s.getUrlManager()->getPureUrl(strUrl), strBody, [=](QNetworkReply *reply, int ) {
 
         // Success
 
+        auto json = QJsonDocument::fromJson(reply->readAll()).object();
+
+        int i = 0;
         // Edit item in local list
         for (QVariantList::iterator j = this->_varLstTasks.begin(); j != this->_varLstTasks.end(); j++)
         {
             if((*j).toJsonObject()["id"].toInt() == id) {
-                // TODO: Edit item: this->_varLstTasks...
+                this->_varLstTasks.replace(i, json);
                 break;
             }
+
+            ++i;
         }
 
         // Populate changes

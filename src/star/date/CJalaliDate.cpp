@@ -196,6 +196,11 @@ qint64 star::date::CJalaliDate::jalaliToUnixTimestamp(const int year, const int 
     return date.toSecsSinceEpoch();
 }
 
+qint64 star::date::CJalaliDate::jalaliToUnixTimestamp(const QString &strDate) const
+{
+    return this->jalaliToUnixTimestamp(strDate.left(4).toInt(), strDate.mid(5,2).toInt(), strDate.right(2).toInt());
+}
+
 QString star::date::CJalaliDate::unixTimestampToJalali(int timestamp) const
 {
     auto date = QDateTime::fromSecsSinceEpoch(timestamp).date();
