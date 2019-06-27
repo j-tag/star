@@ -33,6 +33,10 @@ Item {
             // result -> bool
 
             closeOverlay()
+
+            if(result === true) {
+                Main.showToast("نوت ویرایش شد")
+            }
         }
 
         onDeleteTaskResult: {
@@ -40,6 +44,10 @@ Item {
             // result -> bool
 
             closeOverlay()
+
+            if(result === true) {
+                Main.showToast("نوت حذف شد")
+            }
         }
 
         onPaginationChanged: {

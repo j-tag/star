@@ -114,6 +114,15 @@ function showMessage(message)
     glassMessage.show()
 }
 
+// Show a nice and blur toast message
+function showToast(message, interval = 5000) {
+    // Set message details
+    blurToastMessage.strMessage = message
+    blurToastMessage.interval = interval
+    // Show toast message
+    blurToastMessage.show()
+}
+
 // Show a nice and neat blur login box
 function showLoginPopup()
 {

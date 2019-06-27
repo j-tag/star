@@ -300,7 +300,6 @@ ApplicationWindow {
 
     }
 
-
     SimpleTextGlassMessage
     {
         id: glassMessage
@@ -349,6 +348,11 @@ ApplicationWindow {
         anchors.centerIn: mainContent
         width: mainContent.width
         height: mainContent.height
+    }
+
+    BlurToastMessage {
+        id: blurToastMessage
+        anchors.fill: mainContent
     }
 
     FastBlur

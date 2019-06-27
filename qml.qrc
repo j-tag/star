@@ -28,5 +28,6 @@
         <file>images/trash.svg</file>
         <file>images/pencil-edit-button.svg</file>
         <file>qml/components/GlassTaskCardEdit.qml</file>
+        <file>qml/components/BlurToastMessage.qml</file>
     </qresource>
 </RCC>
