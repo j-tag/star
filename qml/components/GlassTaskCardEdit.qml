@@ -55,6 +55,15 @@ GlassMessage {
                     id: layout
                     width: parent.width
 
+                    Text {
+                        Layout.fillWidth: true
+                        Layout.rightMargin: 30
+                        text: qsTr("*فقط فیلد عنوان یادآوری اجباریست، بقیه اختیاری هستند")
+                        font.italic: true
+                        font.pointSize: 8
+                        color: "grey"
+                    }
+
                     Label
                     {
                         Layout.fillWidth: true
