@@ -26,6 +26,7 @@ signals:
     void tasksChanged(QVariantList tasks);
     void deleteTaskResult(int id, bool result);
     void editTaskResult(int id, bool result);
+    void createTaskResult(bool result);
     void paginationChanged(int pageCount, int currentPage);
 
 public slots:
@@ -34,6 +35,8 @@ public slots:
     QVariantList getTasks() const;
     void deleteTask(int id);
     void editTask(int id, const QString &strTitle, const QString &strDescription = QString(),
+                  int triggerDate = -1, const QString &strTriggerTime = QString());
+    void createTask(const QString &strTitle, const QString &strDescription = QString(),
                   int triggerDate = -1, const QString &strTriggerTime = QString());
     int getPageCount();
     int getCurrentPage();

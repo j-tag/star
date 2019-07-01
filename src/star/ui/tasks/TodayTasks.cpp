@@ -157,6 +157,59 @@ void star::ui::tasks::TodayTasks::editTask(int id, const QString &strTitle, cons
     });
 }
 
+void star::ui::tasks::TodayTasks::createTask(const QString &strTitle, const QString &strDescription, int triggerDate, const QString &strTriggerTime)
+{
+    QString strUrl("apps/fa/star-v3/tasks.json");
+
+    // Generate JSON request body
+    QJsonObject json = QJsonObject();
+    QJsonDocument jsoc = QJsonDocument();
+
+    json["title"] = strTitle;
+
+    if(strDescription.trimmed().length() > 0) {
+        json["description"] = strDescription.trimmed();
+    } else {
+        json["description"] = QJsonValue(QJsonValue::Null);
+    }
+
+    if(triggerDate != -1) {
+        json["trigger_date"] = triggerDate;
+    } else {
+        json["trigger_date"] = QJsonValue(QJsonValue::Null);
+    }
+
+    if(strTriggerTime.trimmed().length() > 0) {
+        json["trigger_time"] = strTriggerTime;
+    } else {
+        json["trigger_time"] = QJsonValue(QJsonValue::Null);
+    }
+
+
+    jsoc.setObject(json);
+
+    QString strBody = jsoc.toJson();
+
+    s.getWebAccessManager()->withAuthenticationHeader()->post(s.getUrlManager()->getPureUrl(strUrl), strBody, [=](QNetworkReply *reply, int ) {
+
+        // Success
+
+        auto json = QJsonDocument::fromJson(reply->readAll()).object();
+
+        this->_varLstTasks.prepend(json);
+
+        // Populate changes
+        emit this->tasksChanged(this->_varLstTasks);
+        emit this->createTaskResult(true);
+    }, [=](QNetworkReply *, int ) {
+
+        // Fail
+
+        // Populate changes
+        emit this->createTaskResult(false);
+    });
+}
+
 int star::ui::tasks::TodayTasks::getPageCount()
 {
     return this->_nPageCount;

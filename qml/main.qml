@@ -330,6 +330,16 @@ ApplicationWindow {
         height: mainContent.height
     }
 
+    GlassTaskCardNew
+    {
+        id: glassTaskCardNew
+        opacity: 0
+        z: 40 // Brings messagebox to top
+        anchors.centerIn: mainContent
+        width: mainContent.width
+        height: mainContent.height
+    }
+
     GlassTaskCardEdit
     {
         id: glassTaskCardEdit

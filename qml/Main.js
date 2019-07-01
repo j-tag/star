@@ -115,7 +115,7 @@ function showMessage(message)
 }
 
 // Show a nice and blur toast message
-function showToast(message, interval = 5000) {
+function showToast(message, interval = 10000) {
     // Set message details
     blurToastMessage.strMessage = message
     blurToastMessage.interval = interval
@@ -187,6 +187,21 @@ function showTask(id, title, description, triggerDate, triggerTime, createdAt, u
     glassTaskCardView.show()
 }
 
+// Show new task dialog
+function showNewTask() {
+    // Disable toolbar
+    mainWindow.header.enabled = false
+    // Disable main content
+    mainContent.enabled = false
+    // Set message details
+    glassTaskCardNew.mainContent = mainContent
+    glassTaskCardNew.blurContent = msgBlur
+
+    // Show blur effect
+    msgBlur.opacity = 1
+    glassTaskCardNew.show()
+}
+
 // Show edit task dialog
 function showEditTask(id, title, description, triggerDate, triggerTime, createdAt, updatedAt) {
     // Disable toolbar
@@ -209,6 +224,12 @@ function showEditTask(id, title, description, triggerDate, triggerTime, createdA
     // Show blur effect
     msgBlur.opacity = 1
     glassTaskCardEdit.show()
+}
+
+// Create a new task
+function createTask(title, description, triggerDate, triggerTime) {
+    const timestampTriggerDate = triggerDate === -1 ? -1 : jalaliDate.jalaliToUnixTimestamp(triggerDate)
+    todayTasks.createTask(title, description, timestampTriggerDate, triggerTime)
 }
 
 // Edit a task

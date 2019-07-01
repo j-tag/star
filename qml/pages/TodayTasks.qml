@@ -50,6 +50,16 @@ Item {
             }
         }
 
+        onCreateTaskResult: {
+            // result -> bool
+
+            closeOverlay()
+
+            if(result === true) {
+                Main.showToast("نوت ایجاد شد")
+            }
+        }
+
         onPaginationChanged: {
             // pageCount -> int
             // currentPage -> int
@@ -87,6 +97,21 @@ Item {
 
             radius: Main.pageRadius
             opacity: Main.pageOpacity
+        }
+
+        Button {
+            id: buttonNew
+            anchors{
+                right: itemTodayEvents.right
+                bottom: itemTodayEvents.top
+            }
+            Text {
+                anchors.centerIn: parent
+                color: "white"
+                text: qsTr("جدید +")
+            }
+            flat: true
+            onClicked: Main.showNewTask()
         }
 
         Item {

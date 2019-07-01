@@ -29,5 +29,6 @@
         <file>images/pencil-edit-button.svg</file>
         <file>qml/components/GlassTaskCardEdit.qml</file>
         <file>qml/components/BlurToastMessage.qml</file>
+        <file>qml/components/GlassTaskCardNew.qml</file>
     </qresource>
 </RCC>

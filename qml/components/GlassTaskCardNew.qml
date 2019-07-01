@@ -9,28 +9,19 @@ import "../Main.js" as Main
 GlassMessage {
     // Note: width and height must be set by caller
 
-    property int modelId: -1
-    property string title: ""
-    property string description: ""
-    property var triggerDate: null
-    property var triggerTime: null
-    property var createdAt: null
-    property var updatedAt: null
-
     Connections {
         target: todayTasks
-        onEditTaskResult: {
-            // id -> int
+        onCreateTaskResult: {
             // result -> bool
 
             closeOverlay()
             msg.close()
 
             if(result === true) {
-                // Edit was successful
+                // Creation was successful
             } else {
-                // Edit were failed
-                Main.showMessage("ویرایش موفقیت آمیز نبود")
+                // Creation were failed
+                Main.showMessage("ایجاد نوت موفقیت آمیز نبود")
             }
         }
     }
@@ -169,7 +160,7 @@ GlassMessage {
                 Button {
                     Layout.rightMargin: 10
                     flat: true
-                    text: qsTr("ثبت تغییرات")
+                    text: qsTr("ایجاد نوت")
                     highlighted: true
 
                     onClicked: {
@@ -194,7 +185,7 @@ GlassMessage {
 
                         showOverlay()
 
-                        Main.editTask(modelId, textTitle.text.trim(), textDescription.text.trim(),
+                        Main.createTask(textTitle.text.trim(), textDescription.text.trim(),
                                       finalTriggerDate, finalTriggerTime)
 
                     }

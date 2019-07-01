@@ -10,7 +10,7 @@ Item {
     id: mainItem
 
     property string strMessage
-    property int interval: 5000
+    property int interval: 10000
 
     state: "hidden"
 
