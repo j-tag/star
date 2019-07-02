@@ -3,6 +3,7 @@ import QtQuick.Controls 2.12
 import QtQuick.Window 2.12
 import QtQuick.Dialogs 1.2
 import QtGraphicalEffects 1.0
+import Qt.labs.settings 1.0
 import "components"
 import "pages"
 import "pages/setup"
@@ -14,8 +15,8 @@ import "Main.js" as Main
 ApplicationWindow {
     id: mainWindow
     title: qsTr("نرم افزار تقویم شمسی ستاره")
-    width: 740
-    height: 520
+    width: 850
+    height: 620
     minimumWidth: 600
     minimumHeight: 480
     visible: true
@@ -395,5 +396,13 @@ ApplicationWindow {
                 easing.type: Main.msgEasingType
             }
         }
+    }
+
+    // Save window geometry to be used later on startup
+    Settings {
+        property alias x: mainWindow.x
+        property alias y: mainWindow.y
+        property alias width: mainWindow.width
+        property alias height: mainWindow.height
     }
 }
