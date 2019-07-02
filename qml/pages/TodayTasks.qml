@@ -235,9 +235,8 @@ Item {
                                         padding: 0
                                         onHoveredChanged: rectCardBg.state = hovered ? "hover" : "normal"
                                         onClicked: {
-                                            showOverlay()
+                                            Main.showRemoveTaskQuestion(modelData.id, modelData.title)
                                             lastInteractedIndex = index
-                                            Main.deleteTask(modelData.id)
                                         }
                                     }
 

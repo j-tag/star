@@ -17,24 +17,6 @@ GlassMessage {
     property var createdAt: null
     property var updatedAt: null
 
-    Connections {
-        target: todayTasks
-        onDeleteTaskResult: {
-            // id -> int
-            // result -> bool
-
-            closeOverlay()
-            msg.close()
-
-            if(result === true) {
-                // Delete was successful
-            } else {
-                // Delete were failed
-                Main.showMessage("حذف موفقیت آمیز نبود")
-            }
-        }
-    }
-
     contentItem: Item {
         id: mainLayout
         anchors.fill: parent
@@ -133,8 +115,8 @@ GlassMessage {
                     flat: true
 
                     onClicked: {
-                        showOverlay()
-                        Main.deleteTask(modelId)
+                        msg.close()
+                        Main.showRemoveTaskQuestion(modelId, title)
                     }
                 }
                 RoundButton {
@@ -176,19 +158,5 @@ GlassMessage {
                 }
             }
         }
-    }
-
-    // Functions
-
-    function showOverlay() {
-        mainLayout.enabled = false
-        busyIndicator.running = true
-        rectOverlay.opacity = 1
-    }
-
-    function closeOverlay() {
-        mainLayout.enabled = true
-        busyIndicator.running = false
-        rectOverlay.opacity = 0
     }
 }

@@ -165,6 +165,23 @@ function toggleFlipToMainContent() {
     flipableMainWindow.flipped = !flipableMainWindow.flipped
 }
 
+// Show a nice and neat blur message box about deleting task
+function showRemoveTaskQuestion(id, title)
+{
+    // Disable toolbar
+    mainWindow.header.enabled = false
+    // Disable main content
+    mainContent.enabled = false
+    // Set message details
+    glassTaskRemoveQuestion.modelId = id
+    glassTaskRemoveQuestion.strTitle = title
+    glassTaskRemoveQuestion.mainContent = mainContent
+    glassTaskRemoveQuestion.blurContent = msgBlur
+    // Show blur effect
+    msgBlur.opacity = 1
+    glassTaskRemoveQuestion.show()
+}
+
 // Show a task
 function showTask(id, title, description, triggerDate, triggerTime, createdAt, updatedAt) {
     // Disable toolbar

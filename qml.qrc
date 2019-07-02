@@ -30,5 +30,6 @@
         <file>qml/components/GlassTaskCardEdit.qml</file>
         <file>qml/components/BlurToastMessage.qml</file>
         <file>qml/components/GlassTaskCardNew.qml</file>
+        <file>qml/components/GlassTaskRemoveQuestion.qml</file>
     </qresource>
 </RCC>

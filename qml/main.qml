@@ -300,6 +300,16 @@ ApplicationWindow {
 
     }
 
+    GlassTaskRemoveQuestion
+    {
+        id: glassTaskRemoveQuestion
+        opacity: 0
+        z: 114 // Brings messagebox to top
+        anchors.centerIn: mainContent
+        width: mainContent.width
+        height: mainContent.height
+    }
+
     SimpleTextGlassMessage
     {
         id: glassMessage
