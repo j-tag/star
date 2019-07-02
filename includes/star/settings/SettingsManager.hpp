@@ -31,6 +31,7 @@ public slots:
     void setValue(const QString &strKey, const QVariant &value);
     QString getStringValue(const QString &strKey, const QString &strDefaultValue = QString()) const;
     int getIntValue(const QString &strKey, int nDefaultValue = 0);
+    void removeValue(const QString &strKey);
 
 private:
 

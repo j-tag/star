@@ -55,6 +55,14 @@ void star::web::auth::OAuth2::login(const QString &strUsername, const QString &s
     });
 }
 
+void star::web::auth::OAuth2::logout()
+{
+    s.getSettingsManager()->removeValue("auth/token/token_type");
+    s.getSettingsManager()->removeValue("auth/token/access_token");
+    s.getSettingsManager()->removeValue("auth/token/refresh_token");
+    s.getSettingsManager()->removeValue("auth/token/expires_in");
+}
+
 void star::web::auth::OAuth2::tokenResultHandler(QNetworkReply *reply, int , std::function<void(bool, const QString &)> functor)
 {
 

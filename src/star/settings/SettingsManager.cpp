@@ -64,6 +64,11 @@ int star::settings::SettingsManager::getIntValue(const QString &strKey, int nDef
     return this->_settings.value(strKey, nDefaultValue).toInt();
 }
 
+void star::settings::SettingsManager::removeValue(const QString &strKey)
+{
+    return this->_settings.remove(strKey);
+}
+
 void star::settings::SettingsManager::failedOnlineSettingsFunctor(QNetworkReply *reply, int httpStatus)
 {
     // Online settings failed to retrive, so we can update with false result

@@ -32,6 +32,7 @@ signals:
 
 public slots:
     void login(const QString &strUsername, const QString &strPassword);
+    void logout();
 
 
 private:

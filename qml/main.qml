@@ -127,6 +127,19 @@ ApplicationWindow {
 
             }
 
+            ToolButton
+            {
+                id: toolBtnLogout
+                text: qsTr("خروج از حساب کاربری")
+
+                onClicked:
+                {
+                    oauth2.logout()
+                    Qt.quit()
+                }
+
+            }
+
         }
     }
 
