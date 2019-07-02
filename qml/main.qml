@@ -118,12 +118,9 @@ ApplicationWindow {
             ToolButton
             {
                 id: toolBtnSettings
-                text: qsTr("SETTINGS")
+                text: qsTr("تنظیمات")
 
-                onClicked:
-                {
-                    Main.showMessage("تنظیمات")
-                }
+                onClicked: Main.changePage(settingsPage)
 
             }
 
@@ -309,6 +306,13 @@ ApplicationWindow {
         TodayTasks
         {
             id: todayTasksPage
+            visible: false
+        }
+
+        // Settings page
+        SettingsPage
+        {
+            id: settingsPage
             visible: false
         }
 
