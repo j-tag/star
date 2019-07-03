@@ -7,6 +7,27 @@ star::Star::~Star() {
     if(this->pJalaliDate) {
         this->pJalaliDate->deleteLater();
     }
+    if(this->pOAuth2) {
+        this->pOAuth2->deleteLater();
+    }
+    if(this->pWebAccessManager) {
+        this->pWebAccessManager->deleteLater();
+    }
+    if(this->pUrlManager) {
+        this->pUrlManager->deleteLater();
+    }
+    if(this->pSettingsManager) {
+        this->pSettingsManager->deleteLater();
+    }
+    if(this->pApiToken) {
+        this->pApiToken->deleteLater();
+    }
+    if(this->pUserDetails) {
+        this->pUserDetails->deleteLater();
+    }
+    if(this->pTaskManager) {
+        this->pTaskManager->deleteLater();
+    }
 }
 
 /**
@@ -123,6 +144,13 @@ void star::Star::start() {
  */
 void star::Star::initObjects() {
     this->pJalaliDate = new date::CJalaliDate;
+    this->pOAuth2 = new web::auth::OAuth2;
+    this->pWebAccessManager = new web::WebAccessManager;
+    this->pUrlManager = new web::url::UrlManager;
+    this->pSettingsManager = new settings::SettingsManager;
+    this->pApiToken = nullptr;
+    this->pUserDetails = new user::UserDetails;
+    this->pTaskManager = new task::TaskManager;
 }
 
 /**
@@ -198,6 +226,26 @@ void star::Star::setApiToken(star::web::auth::ApiToken *apiToken)
 star::web::auth::ApiToken *star::Star::getApiToken() const
 {
     return this->pApiToken;
+}
+
+void star::Star::setUserDetails(star::user::UserDetails *userDetails)
+{
+    this->pUserDetails = userDetails;
+}
+
+star::user::UserDetails *star::Star::getUserDetails() const
+{
+    return this->pUserDetails;
+}
+
+void star::Star::setTaskManager(star::task::TaskManager *taskManager)
+{
+    this->pTaskManager = taskManager;
+}
+
+star::task::TaskManager *star::Star::getTaskManager() const
+{
+    return this->pTaskManager;
 }
 
 // Main app object

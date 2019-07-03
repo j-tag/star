@@ -29,6 +29,8 @@
 #include "includes/star/web/url/UrlManager.hpp" // URL manager class
 #include "includes/star/web/auth/ApiToken.hpp" // API Token data model
 #include "includes/star/settings/SettingsManager.hpp" // Settings manager class
+#include "includes/star/user/UserDetails.hpp" // User details manager class
+#include "includes/star/task/TaskManager.hpp" // Task manager class
 
 namespace star {
 
@@ -51,6 +53,10 @@ public:
     settings::SettingsManager *getSettingsManager() const;
     void setApiToken(web::auth::ApiToken *apiToken);
     web::auth::ApiToken *getApiToken() const;
+    void setUserDetails(user::UserDetails *userDetails);
+    user::UserDetails *getUserDetails() const;
+    void setTaskManager(task::TaskManager *taskManager);
+    task::TaskManager *getTaskManager() const;
 
 public slots:
     void start();
@@ -66,6 +72,8 @@ protected:
     QPointer<web::url::UrlManager> pUrlManager;
     QPointer<settings::SettingsManager> pSettingsManager;
     QPointer<web::auth::ApiToken> pApiToken;
+    QPointer<user::UserDetails> pUserDetails;
+    QPointer<task::TaskManager> pTaskManager;
 };
 
 }
