@@ -121,6 +121,9 @@ void star::Star::start()
                             // Reload settings in app
                             this->pSettingsManager->getOnlineSettings();
 
+                            // Notify app that user logged in successfully
+                            emit s.getOAuth2()->loginResult(true, "");
+
                             // Close all login related boxes
                             emit s.getOAuth2()->showLoginBox(false);
                         } else {
