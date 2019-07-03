@@ -7,14 +7,15 @@ Item
 {
 
     Timer {
-        running: true
-        repeat: true
+        running: userDetails.showBirthVariants
+        repeat: userDetails.showBirthVariants
         interval: 1000
         onTriggered: userDetails.updateAge()
     }
 
     ColumnLayout {
         width: parent.width
+        visible: userDetails.showBirthVariants
 
         Text {
             id: birthInSecond
