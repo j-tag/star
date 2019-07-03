@@ -247,6 +247,33 @@ qint64 star::date::CJalaliDate::yearsDiffTillNow(const QDateTime &dateTime)
     return this->monthsDiffTillNow(dateTime) / 12;
 }
 
+QString star::date::CJalaliDate::getJalaliYear(const QDateTime &dateTime) const
+{
+    QDate date(dateTime.date());
+
+    const QString jalaliDate = this->gregorianToJalali(date.year(), date.month(), date.day());
+
+    return jalaliDate.left(4);
+}
+
+QString star::date::CJalaliDate::getJalaliMonth(const QDateTime &dateTime) const
+{
+    QDate date(dateTime.date());
+
+    const QString jalaliDate = this->gregorianToJalali(date.year(), date.month(), date.day());
+
+    return jalaliDate.mid(5,2);
+}
+
+QString star::date::CJalaliDate::getJalaliDayInMonth(const QDateTime &dateTime) const
+{
+    QDate date(dateTime.date());
+
+    const QString jalaliDate = this->gregorianToJalali(date.year(), date.month(), date.day());
+
+    return jalaliDate.right(2);
+}
+
 QString star::date::CJalaliDate::getMiniDate(int timestamp) const
 {
     auto jalaliDate = this->unixTimestampToJalali(timestamp);
@@ -257,7 +284,7 @@ QString star::date::CJalaliDate::getCurrentJalaliDate() const
 {
     QDate date(QDate::currentDate());
 
-    const QString currentJalaliDate = gregorianToJalali(date.year(), date.month(), date.day());
+    const QString currentJalaliDate = this->gregorianToJalali(date.year(), date.month(), date.day());
 
     return currentJalaliDate;
 }

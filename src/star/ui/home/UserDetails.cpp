@@ -16,6 +16,24 @@ void star::ui::home::UserDetails::updateBirthday(const QDateTime &dateTimeBirthd
     emit this->birthdayChanged(dateTimeBirthday);
 }
 
+void star::ui::home::UserDetails::updateShowBirthVariants(bool bShowBirthVariants)
+{
+    this->_bShowBirthVariants = bShowBirthVariants;
+    emit this->showBirthVariantsChanged(this->_bShowBirthVariants);
+}
+
+void star::ui::home::UserDetails::updateCelebrateBirthday(bool bCelebrateBirthday)
+{
+    this->_bCelebrateBirthday = bCelebrateBirthday;
+    emit this->celebrateBirthdayChanged(this->_bCelebrateBirthday);
+}
+
+void star::ui::home::UserDetails::updateAutoStart(bool bAutoStart)
+{
+    this->_bAutoStart = bAutoStart;
+    emit this->autoStartChanged(this->_bAutoStart);
+}
+
 QDateTime star::ui::home::UserDetails::getBirthday() const
 {
     return this->_dateTimeBirthday;
@@ -59,6 +77,21 @@ qint64 star::ui::home::UserDetails::getBirthdayInSeasons()
 qint64 star::ui::home::UserDetails::getBirthdayInYears()
 {
     return s.getJalaliDate()->yearsDiffTillNow(this->_dateTimeBirthday);
+}
+
+bool star::ui::home::UserDetails::getShowBirthVariants()
+{
+    return this->_bShowBirthVariants;
+}
+
+bool star::ui::home::UserDetails::getCelebrateBirthday()
+{
+    return this->_bCelebrateBirthday;
+}
+
+bool star::ui::home::UserDetails::getAutoStart()
+{
+    return this->_bAutoStart;
 }
 
 QString star::ui::home::UserDetails::getName() const

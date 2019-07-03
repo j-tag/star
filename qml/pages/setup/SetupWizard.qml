@@ -155,7 +155,14 @@ Item {
                 const json = {
                     user: {
                             name: textName.text,
-                            birthday: jalaliDate.jalaliToUnixTimestamp(year, month, day)
+                            birthday: jalaliDate.jalaliToUnixTimestamp(year, month, day),
+                            showBirthVariants: true,
+                            celebrateBirthday: true
+                        },
+                    app: {
+                            windows: {
+                                autoStart: false
+                            }
                         }
                     }
 

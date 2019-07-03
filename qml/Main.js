@@ -93,6 +93,12 @@ function changePage(targetItem) {
         return
     }
 
+    if(targetItem === settingsPage) {
+        settingsPage.active = true
+    } else {
+        settingsPage.active = false
+    }
+
     stack.replace(targetItem)
 
     disablePages(targetItem)

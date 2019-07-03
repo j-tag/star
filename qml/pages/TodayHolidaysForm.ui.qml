@@ -92,6 +92,7 @@ Item {
                         color: Main.textColor
                         text: modelData
                         font.pixelSize: 22
+                        wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                     }
 
                     ScrollBar.vertical: ScrollBar {

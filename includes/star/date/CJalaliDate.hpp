@@ -40,11 +40,14 @@ public slots:
     qint64 monthsDiffTillNow(const QDateTime &dateTime);
     qint64 seasonsDiffTillNow(const QDateTime &dateTime);
     qint64 yearsDiffTillNow(const QDateTime &dateTime);
+    QString getJalaliYear(const QDateTime &dateTime) const;
+    QString getJalaliMonth(const QDateTime &dateTime) const;
+    QString getJalaliDayInMonth(const QDateTime &dateTime) const;
     QString getMiniDate(int timestamp) const;
+    QString getJalaliMonthName(int month) const;
 
 protected:
     QString gregorianToJalali(const int year, const int month, const int day) const;
-    QString getJalaliMonthName(int month) const;
 
 
 };

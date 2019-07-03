@@ -21,6 +21,18 @@ void star::settings::SettingsManager::setLocalSettings(QNetworkReply *reply)
     // Birthday
     auto birthday = QDateTime::fromSecsSinceEpoch(json["user"].toObject()["birthday"].toInt());
     s.getUiUserDetails()->updateBirthday(birthday);
+
+    // Show birth time in second, etc.
+    auto showBirthVariants = json["user"].toObject()["showBirthVariants"].toBool();
+    s.getUiUserDetails()->updateShowBirthVariants(showBirthVariants);
+
+    // Celebrate birthday
+    auto celebrateBirthday = json["user"].toObject()["celebrateBirthday"].toBool();
+    s.getUiUserDetails()->updateCelebrateBirthday(celebrateBirthday);
+
+    // Auto start
+    auto autoStart = json["app"].toObject()["windows"].toObject()["autoStart"].toBool();
+    s.getUiUserDetails()->updateAutoStart(autoStart);
 }
 
 void star::settings::SettingsManager::setOnlineValue(const QString &strJson)
