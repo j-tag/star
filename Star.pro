@@ -37,3 +37,24 @@ HEADERS += \
     includes/star/web/WebAccessManager.hpp \
     includes/star/web/url/UrlManager.hpp \
     includes/star/date/HijriDate.hpp
+
+
+VERSION = 3.0.0
+VERSION_MAJOR = 3
+VERSION_MINOR = 0
+VERSION_REVISION = 0
+VERSION_NUMBER = $$VERSION_MAJOR$$VERSION_MINOR$$VERSION_REVISION
+
+DEFINES += VERSION=\\\"$$VERSION\\\"
+DEFINES += VERSION_MAJOR=$$VERSION_MAJOR
+DEFINES += VERSION_MINOR=$$VERSION_MINOR
+DEFINES += VERSION_REVISION=$$VERSION_REVISION
+DEFINES += VERSION_NUMBER=$$VERSION_NUMBER
+
+QMAKE_TARGET_COMPANY = Pure Soft
+QMAKE_TARGET_PRODUCT = Star Persian Calendar
+QMAKE_TARGET_DESCRIPTION = Star Persian calendar and note manager
+QMAKE_TARGET_COPYRIGHT = CopyRight (C) 2012 - 2019 . AllRights Reserved by Pure Soft
+
+
+RC_ICONS = Star.ico

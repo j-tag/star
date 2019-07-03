@@ -77,6 +77,8 @@ public slots:
     void start();
     void initObjects();
     void end();
+    QString getAppVersion() const;
+    int getAppVersionNumber();
 
 protected:
     QPointer<date::CJalaliDate> pJalaliDate;

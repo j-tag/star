@@ -197,6 +197,16 @@ void star::Star::end()
 
 }
 
+QString star::Star::getAppVersion() const
+{
+    return VERSION;
+}
+
+int star::Star::getAppVersionNumber()
+{
+    return VERSION_NUMBER;
+}
+
 void star::Star::setJalaliDate(date::CJalaliDate *jalaliDate)
 {
     this->pJalaliDate = jalaliDate;

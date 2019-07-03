@@ -105,22 +105,19 @@ ApplicationWindow {
 
             ToolButton
             {
-                id:toolBtnMsgTest
-                text: qsTr("Msg TEST")
+                id: toolBtnSettings
+                text: qsTr("تنظیمات")
 
-                onClicked:
-                {
-                    Main.showMessage("تاریخ شمسی امروز: " + jalaliDate.getCurrentJalaliDate())
-                }
+                onClicked: Main.changePage(settingsPage)
 
             }
 
             ToolButton
             {
-                id: toolBtnSettings
-                text: qsTr("تنظیمات")
+                id: toolBtnAbout
+                text: qsTr("درباره")
 
-                onClicked: Main.changePage(settingsPage)
+                onClicked: Main.changePage(about)
 
             }
 
@@ -313,6 +310,11 @@ ApplicationWindow {
         SettingsPage
         {
             id: settingsPage
+            visible: false
+        }
+
+        About {
+            id: about
             visible: false
         }
 
