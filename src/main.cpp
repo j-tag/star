@@ -66,6 +66,9 @@ int main(int argc, char *argv[])
     // Today tasks handler
     engine.rootContext()->setContextProperty("todayTasks", s.getTodayTasks());
 
+    // Update manager
+    engine.rootContext()->setContextProperty("updater", s.getUpdateManager());
+
     engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
 
     return app.exec();

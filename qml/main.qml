@@ -71,6 +71,15 @@ ApplicationWindow {
         }
     }
 
+    Connections {
+        target: updater
+
+        onUpdateAvailable: {
+            Main.showToast("نسخه‌ی جدید تقویم شمسی ستاره موجود است،‌ لطفاً نسخه‌ی جدید را از وبسایت پیورسافت دانلود کنید",
+                           30000)
+        }
+    }
+
     Component.onCompleted: Main.showGlassProgressMessage()
 
 

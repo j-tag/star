@@ -48,6 +48,9 @@ star::Star::~Star()
     if(this->pTodayTasks) {
         this->pTodayTasks->deleteLater();
     }
+    if(this->pUpdateManager) {
+        this->pUpdateManager->deleteLater();
+    }
 
 }
 
@@ -167,6 +170,9 @@ void star::Star::start()
         });
     }
 
+    // Check for updates
+    this->pUpdateManager->check();
+
 }
 
 
@@ -187,6 +193,7 @@ void star::Star::initObjects()
     this->pHijriDate = new date::HijriDateCalculator;
     this->pTodayEvents = new date::events::TodayEvents;
     this->pTodayTasks = new ui::tasks::TodayTasks;
+    this->pUpdateManager = new web::update::UpdateManager;
 }
 
 /**
@@ -325,6 +332,16 @@ void star::Star::setTodayTasks(star::ui::tasks::TodayTasks *todayTasks)
 star::ui::tasks::TodayTasks *star::Star::getTodayTasks() const
 {
     return this->pTodayTasks;
+}
+
+void star::Star::setUpdateManager(star::web::update::UpdateManager *updateManager)
+{
+    this->pUpdateManager = updateManager;
+}
+
+star::web::update::UpdateManager *star::Star::getUpdateManager() const
+{
+    return this->pUpdateManager;
 }
 
 

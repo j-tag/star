@@ -35,6 +35,7 @@
 #include "includes/star/date/HijriDateCalculator.hpp" // Hijri date handler class
 #include "includes/star/date/events/TodayEvents.hpp" // Today events handler class
 #include "includes/star/ui/tasks/TodayTasks.hpp" // Today tasks handler class
+#include "includes/star/web/update/UpdateManager.hpp" // Update manager class
 
 namespace star {
 
@@ -69,6 +70,8 @@ public:
     date::events::TodayEvents *getTodayEvents() const;
     void setTodayTasks(ui::tasks::TodayTasks *todayTasks);
     ui::tasks::TodayTasks *getTodayTasks() const;
+    void setUpdateManager(web::update::UpdateManager *updateManager);
+    web::update::UpdateManager *getUpdateManager() const;
 
 
 signals:
@@ -93,6 +96,7 @@ protected:
     QPointer<date::HijriDateCalculator> pHijriDate;
     QPointer<date::events::TodayEvents> pTodayEvents;
     QPointer<ui::tasks::TodayTasks> pTodayTasks;
+    QPointer<web::update::UpdateManager> pUpdateManager;
 };
 
 }
