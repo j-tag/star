@@ -31,6 +31,7 @@
 #include "includes/star/settings/SettingsManager.hpp" // Settings manager class
 #include "includes/star/user/UserDetails.hpp" // User details manager class
 #include "includes/star/task/TaskManager.hpp" // Task manager class
+#include "includes/star/tray/TrayIconManager.hpp" // Tray icon manager class
 
 namespace star {
 
@@ -57,6 +58,8 @@ public:
     user::UserDetails *getUserDetails() const;
     void setTaskManager(task::TaskManager *taskManager);
     task::TaskManager *getTaskManager() const;
+    void setTrayIconManager(tray::TrayIconManager *trayIconManager);
+    tray::TrayIconManager *getTrayIconManager() const;
 
 public slots:
     void start();
@@ -74,6 +77,7 @@ protected:
     QPointer<web::auth::ApiToken> pApiToken;
     QPointer<user::UserDetails> pUserDetails;
     QPointer<task::TaskManager> pTaskManager;
+    QPointer<tray::TrayIconManager> pTrayIconManager;
 };
 
 }

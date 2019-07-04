@@ -30,6 +30,7 @@ SOURCES += \
         src/star/date/CjalaliDate.cpp \
         src/star/settings/SettingsManager.cpp \
         src/star/task/TaskManager.cpp \
+        src/star/tray/TrayIconManager.cpp \
         src/star/user/UserDetails.cpp \
         src/star/web/WebAccessManager.cpp \
         src/star/web/auth/OAuth2.cpp \
@@ -40,6 +41,7 @@ HEADERS += \
     includes/star/date/CJalaliDate.hpp \
     includes/star/settings/SettingsManager.hpp \
     includes/star/task/TaskManager.hpp \
+    includes/star/tray/TrayIconManager.hpp \
     includes/star/web/auth/ApiToken.hpp \
     includes/star/web/auth/OAuth2.hpp \
     includes/star/web/WebAccessManager.hpp \

@@ -28,12 +28,19 @@ star::Star::~Star() {
     if(this->pTaskManager) {
         this->pTaskManager->deleteLater();
     }
+    if(this->pTrayIconManager) {
+        this->pTrayIconManager->deleteLater();
+    }
 }
 
 /**
  * @brief Right after starting application, this method will be called.
  */
 void star::Star::start() {
+
+    // Init tray icon
+    this->getTrayIconManager()->init();
+
     // Login to Pure account
 
     auto possibleTokenType = this->pSettingsManager->getStringValue("auth/token/token_type");
@@ -151,6 +158,7 @@ void star::Star::initObjects() {
     this->pApiToken = nullptr;
     this->pUserDetails = new user::UserDetails;
     this->pTaskManager = new task::TaskManager;
+    this->pTrayIconManager = new tray::TrayIconManager;
 }
 
 /**
@@ -246,6 +254,16 @@ void star::Star::setTaskManager(star::task::TaskManager *taskManager)
 star::task::TaskManager *star::Star::getTaskManager() const
 {
     return this->pTaskManager;
+}
+
+void star::Star::setTrayIconManager(star::tray::TrayIconManager *trayIconManager)
+{
+    this->pTrayIconManager = trayIconManager;
+}
+
+star::tray::TrayIconManager *star::Star::getTrayIconManager() const
+{
+    return this->pTrayIconManager;
 }
 
 // Main app object
