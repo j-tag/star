@@ -13,7 +13,7 @@ void star::tray::TrayIconManager::init()
 {
     // Actions
 
-    auto quitAction = new QAction("&Quit");
+    auto quitAction = new QAction("خروج");
     connect(quitAction, &QAction::triggered, qApp, &QCoreApplication::quit);
 
     // Menu
@@ -34,14 +34,14 @@ void star::tray::TrayIconManager::init()
     this->pSystemTrayIcon->setIcon(QIcon(":/images/icon.png"));
 
     // Set hover tooltip
-    this->pSystemTrayIcon->setToolTip("تقویم ستاره");
+    this->pSystemTrayIcon->setToolTip("تقویم ستاره: " + s.getJalaliDate()->getCurrentJalaliDate());
 
     // Show tray icon
     this->pSystemTrayIcon->show();
 }
 
-void star::tray::TrayIconManager::showMessage(const QString &strTitle, const QString &strDescription)
+void star::tray::TrayIconManager::showMessage(const QString &strTitle, const QString &strDescription, QSystemTrayIcon::MessageIcon icon)
 {
-    this->pSystemTrayIcon->showMessage(strTitle, strDescription);
+    this->pSystemTrayIcon->showMessage(strTitle, strDescription, icon);
 }
 

@@ -17,7 +17,7 @@ public:
     virtual ~TrayIconManager();
 
     void init();
-    void showMessage(const QString &strTitle, const QString &strDescription);
+    void showMessage(const QString &strTitle, const QString &strDescription, QSystemTrayIcon::MessageIcon icon = QSystemTrayIcon::Information);
 
 private:
     QPointer<QSystemTrayIcon> pSystemTrayIcon;

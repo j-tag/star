@@ -53,7 +53,10 @@ void star::Star::start() {
 
         qInfo() << Q_FUNC_INFO << ": No local token found. Showing notif to inform user.";
 
-        // TODO: Show a notification to user to login to app
+        // Show a notification to user to login to app
+        this->getTrayIconManager()->showMessage("ورود به ستاره",
+                                                "لطفاً با کلیک بر روی این آیکن نرم افزار ستاره را اجرا کرده و وارد حساب کاربری خود در پیورسافت شوید تا بتوانید به راحتی از ستاره استفاده کنید",
+                                                QSystemTrayIcon::Warning);
 
     } else {
 
@@ -74,7 +77,10 @@ void star::Star::start() {
 
                 // This user has not any settings yet, so show them a notif to inform them
 
-                // TODO: Show a notification to user to open app and finish the wizard
+                // Show a notification to user to open app and finish the wizard
+                this->getTrayIconManager()->showMessage("تکمیل پروفایل کاربری",
+                                                        "لطفاً با کلیک بر روی این آیکن نرم افزار ستاره را اجرا کرده و پروفایل خود را تکمیل کنید تا بتوانید به راحتی از ستاره استفاده کنید",
+                                                        QSystemTrayIcon::Warning);
 
             } else if(httpStatus == 401) {
 
@@ -105,7 +111,10 @@ void star::Star::start() {
                             qInfo() << Q_FUNC_INFO << ": Failed to use refresh token. Possibly expired refresh token:"
                                     << strMessage;
 
-                            // TODO: Show a notification to user to say that we have problems to login to their account
+                            // Show a notification to user to say that we have problems to login to their account
+                            this->getTrayIconManager()->showMessage("ورود به ستاره",
+                                                                    "متأسفانه نتوانستیم وارد حساب کاربری شما در پیورسافت شویم، برای اینکه رویدادهای تقویم در ستاره همگام سازی شوند، شما باید با کلیک برروی اینجا وارد حساب کاربری خود در پیورسافت شوید",
+                                                                    QSystemTrayIcon::Warning);
                         }
 
                     });
@@ -116,20 +125,27 @@ void star::Star::start() {
 
                         // This user has not any settings yet, so tell them to complete the wizard
 
-                        // TODO: Tell the user to complete the result
+                        this->getTrayIconManager()->showMessage("تکمیل پروفایل کاربری",
+                                                                "لطفاً با کلیک بر روی این آیکن نرم افزار ستاره را اجرا کرده و پروفایل خود را تکمیل کنید تا بتوانید به راحتی از ستاره استفاده کنید",
+                                                                QSystemTrayIcon::Warning);
 
                     } else if(httpStatus == 401) {
 
                         qInfo() << Q_FUNC_INFO << ": Tried refresh token and also that was invalid. Now we should inform user.";
 
-                        // TODO: Tell the user to login to their account
+                        // Tell the user to login to their account
+                        this->getTrayIconManager()->showMessage("ورود به ستاره",
+                                                                "متأسفانه نتوانستیم وارد حساب کاربری شما در پیورسافت شویم، برای اینکه رویدادهای تقویم در ستاره همگام سازی شوند، شما باید با کلیک برروی اینجا وارد حساب کاربری خود در پیورسافت شوید",
+                                                                QSystemTrayIcon::Warning);
                     } else {
                         // Something else is wrong
                         qWarning() << Q_FUNC_INFO << ": Can't get user settings. HTTP Status:" << httpStatus <<
                                       "Result:" << reply->readAll();
 
-                        // TODO: Say:
-                        // "نمیتوان تنظیمات شما را از پیورسافت دریافت کرد، لطفاً اتصال اینترنت خود را بررسی کنید و در صورت بر قرار بودن اینترنت لطفاً به پشتیبانی وبسایت پیورسافت اطلاع دهید"
+                        this->getTrayIconManager()->showMessage("ورود به ستاره",
+                                                               "نمیتوان تنظیمات شما را از پیورسافت دریافت کرد، لطفاً اتصال اینترنت خود را بررسی کنید و در صورت بر قرار بودن اینترنت لطفاً به پشتیبانی وبسایت پیورسافت اطلاع دهید",
+                                                                QSystemTrayIcon::Warning);
+
                     }
 
                 });
@@ -139,8 +155,9 @@ void star::Star::start() {
                 qWarning() << Q_FUNC_INFO << ": Can't get user settings. HTTP Status:" << httpStatus <<
                               "Result:" << reply->readAll();
 
-                // TODO: Say:
-                // "نمیتوان تنظیمات شما را از پیورسافت دریافت کرد، لطفاً اتصال اینترنت خود را بررسی کنید و در صورت بر قرار بودن اینترنت لطفاً به پشتیبانی وبسایت پیورسافت اطلاع دهید"
+                this->getTrayIconManager()->showMessage("ورود به ستاره",
+                                                       "نمیتوان تنظیمات شما را از پیورسافت دریافت کرد، لطفاً اتصال اینترنت خود را بررسی کنید و در صورت بر قرار بودن اینترنت لطفاً به پشتیبانی وبسایت پیورسافت اطلاع دهید",
+                                                        QSystemTrayIcon::Warning);
             }
         });
     }
