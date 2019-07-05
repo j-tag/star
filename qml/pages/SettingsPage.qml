@@ -46,7 +46,7 @@ Item {
 
             comboYear.currentIndex = comboYear.find(Main.englishNumberToPersian(jalaliDate.getJalaliYear(userDetails.birthday)))
 
-            comboMonth.currentIndex = comboMonth.find(jalaliDate.getJalaliMonthName(parseInt(Main.persianNumberToEnglish(jalaliDate.getJalaliMonth(userDetails.birthday)))))
+            comboMonth.currentIndex = parseInt(Main.persianNumberToEnglish(jalaliDate.getJalaliMonth(userDetails.birthday))) - 1
 
             comboDay.currentIndex = comboDay.find(Main.englishNumberToPersian(jalaliDate.getJalaliDayInMonth(userDetails.birthday)))
         }

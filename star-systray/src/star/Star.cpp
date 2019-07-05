@@ -217,7 +217,7 @@ void star::Star::enableAutoStartIfChosen(bool result, QString )
 
         if(s.getUserDetails()->getAutoStart() == true) {
             settings.setValue("StarSysTray",
-                               QCoreApplication::applicationFilePath().replace('/', '\\'));
+                               QCoreApplication::applicationFilePath().replace('/', '\\').prepend('"').append('"'));
         } else {
             settings.remove("StarSysTray");
         }
