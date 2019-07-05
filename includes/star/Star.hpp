@@ -82,6 +82,7 @@ public slots:
     void end();
     QString getAppVersion() const;
     int getAppVersionNumber();
+    void startTrayApp();
 
 protected:
     QPointer<date::CJalaliDate> pJalaliDate;

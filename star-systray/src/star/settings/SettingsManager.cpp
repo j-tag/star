@@ -76,6 +76,11 @@ int star::settings::SettingsManager::getIntValue(const QString &strKey, int nDef
     return this->_settings.value(strKey, nDefaultValue).toInt();
 }
 
+qint64 star::settings::SettingsManager::getQint64Value(const QString &strKey, qint64 nDefaultValue)
+{
+    return this->_settings.value(strKey, nDefaultValue).toLongLong();
+}
+
 void star::settings::SettingsManager::removeValue(const QString &strKey)
 {
     return this->_settings.remove(strKey);

@@ -41,6 +41,7 @@ ApplicationWindow {
         Component.onCompleted: star.start()
 
         target: oauth2
+
         onShowLoginBox: {
 
             // result -> bool
@@ -55,6 +56,16 @@ ApplicationWindow {
 
                 loginGlassMessage.close()
                 glassProgressMessage.close()
+            }
+        }
+
+        onLoginResult: {
+            // result -> bool
+            // strMessage -> QString
+
+            if(result === true) {
+                // Login was successful, now start tray app
+                star.startTrayApp()
             }
         }
     }

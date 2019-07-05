@@ -11,6 +11,14 @@ int main(int argc, char *argv[])
 
     QApplication a(argc, argv);
 
+    QObject::connect(&a, &QCoreApplication::aboutToQuit, [] {
+
+        qInfo() << Q_FUNC_INFO << ": Cleaning up systray runtime settings.";
+
+        QSettings settings("PureSoft", "Star");
+        settings.remove("app/tray/runtime");
+    });
+
 #ifdef IGNORE_SSL_ERRORS
     // Ignore SSL Errors
     QSslConfiguration sslConf = QSslConfiguration::defaultConfiguration();

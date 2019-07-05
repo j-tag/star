@@ -4,6 +4,7 @@
 #include <QApplication>
 #include <QAction>
 #include <QMenu>
+#include <QProcess>
 
 star::tray::TrayIconManager::TrayIconManager() {}
 
@@ -13,14 +14,20 @@ void star::tray::TrayIconManager::init()
 {
     // Actions
 
+    auto dateAction = new QAction("تاریخ: " + s.getJalaliDate()->getCurrentJalaliDate());
+
+    auto starAction = new QAction("اجرای ستاره");
+
+    connect(starAction, &QAction::triggered, this, &TrayIconManager::runStar);
+
     auto quitAction = new QAction("خروج");
     connect(quitAction, &QAction::triggered, qApp, &QCoreApplication::quit);
 
     // Menu
     auto trayIconMenu = new QMenu();
-//    trayIconMenu->addAction(minimizeAction);
-//    trayIconMenu->addAction(maximizeAction);
-//    trayIconMenu->addAction(restoreAction);
+    trayIconMenu->addAction(dateAction);
+    trayIconMenu->addSeparator();
+    trayIconMenu->addAction(starAction);
     trayIconMenu->addSeparator();
     trayIconMenu->addAction(quitAction);
 
@@ -48,5 +55,10 @@ void star::tray::TrayIconManager::showMessage(const QString &strTitle, const QSt
 void star::tray::TrayIconManager::notifyTask(const QJsonObject &json)
 {
     this->showMessage(json["title"].toString(), json["description"].toString());
+}
+
+void star::tray::TrayIconManager::runStar()
+{
+    QProcess::execute(s.getSettingsManager()->getStringValue("app/star_path"));
 }
 

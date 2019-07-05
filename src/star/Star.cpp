@@ -1,8 +1,10 @@
 #include "includes/star/Star.hpp"
 
+#include <QCoreApplication>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QNetworkReply>
+#include <QProcess>
 
 star::Star::Star(QObject *parent) : QObject(parent)
 {
@@ -59,6 +61,9 @@ star::Star::~Star()
  */
 void star::Star::start()
 {
+    // Save Star path for tray app to use
+    s.getSettingsManager()->setValue("app/star_path", QCoreApplication::applicationFilePath());
+
     // Login to Pure account
 
     auto possibleTokenType = this->pSettingsManager->getStringValue("auth/token/token_type");
@@ -215,6 +220,12 @@ QString star::Star::getAppVersion() const
 int star::Star::getAppVersionNumber()
 {
     return VERSION_NUMBER;
+}
+
+void star::Star::startTrayApp()
+{
+    QProcess::execute(QCoreApplication::applicationDirPath() + "/star-systray");
+    QProcess::execute(QCoreApplication::applicationDirPath() + "/star-systray.exe");
 }
 
 void star::Star::setJalaliDate(date::CJalaliDate *jalaliDate)

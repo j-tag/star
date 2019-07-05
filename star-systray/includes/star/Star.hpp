@@ -78,6 +78,9 @@ protected:
     QPointer<user::UserDetails> pUserDetails;
     QPointer<task::TaskManager> pTaskManager;
     QPointer<tray::TrayIconManager> pTrayIconManager;
+
+private:
+    void exitIfRanBefore();
 };
 
 }

@@ -1,5 +1,7 @@
 #include "includes/star/Star.hpp"
 
+#include <QCoreApplication>
+
 star::Star::Star() {}
 
 star::Star::~Star() {
@@ -37,6 +39,12 @@ star::Star::~Star() {
  * @brief Right after starting application, this method will be called.
  */
 void star::Star::start() {
+
+    // Exit if ran before
+    this->exitIfRanBefore();
+
+    // Save run time so we can prevent app from multiple starts
+    this->getSettingsManager()->setValue("app/tray/runtime", QDateTime::currentSecsSinceEpoch());
 
     // Init tray icon
     this->getTrayIconManager()->init();
@@ -191,6 +199,27 @@ QString star::Star::getAppVersion() const {
 
 int star::Star::getAppVersionNumber() {
     return VERSION_NUMBER;
+}
+
+void star::Star::exitIfRanBefore()
+{
+    auto savedRuntime = s.getSettingsManager()->getQint64Value("app/tray/runtime", -85);
+
+    if(savedRuntime == -85) {
+        // No crash or currently running app, so start normally
+        return;
+    }
+
+    if((QDateTime::currentSecsSinceEpoch() - savedRuntime) < 86400) {
+        // Application was ran in last 24 hours , so don't start it
+        qWarning() << Q_FUNC_INFO << ": Application re-run detected. Quiting...";
+        qApp->quit();
+        exit(0);
+    } else {
+        qWarning() << Q_FUNC_INFO << ": Possible application crash detected. Starting...";
+        // Application was ran more than 24 hours ago, so start it
+    }
+
 }
 
 void star::Star::setJalaliDate(date::CJalaliDate *jalaliDate)

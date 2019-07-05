@@ -21,6 +21,9 @@ public:
     void showMessage(const QString &strTitle, const QString &strDescription, QSystemTrayIcon::MessageIcon icon = QSystemTrayIcon::Information);
     void notifyTask(const QJsonObject &json);
 
+public slots:
+    void runStar();
+
 private:
     QPointer<QSystemTrayIcon> pSystemTrayIcon;
 };
