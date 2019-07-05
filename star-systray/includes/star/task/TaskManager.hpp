@@ -1,6 +1,7 @@
 #ifndef TASKMANAGER_HPP
 #define TASKMANAGER_HPP
 
+#include <QMutex>
 #include <QObject>
 #include <QVariantList>
 
@@ -17,21 +18,23 @@ public:
     TaskManager();
     virtual ~TaskManager();
 
+    QVariantList getTasks() const;
+
 signals:
     void tasksChanged(QVariantList tasks);
-    void paginationChanged(int pageCount, int currentPage);
 
 public slots:
-    void reload(int page = 1);
-    void append(int page = 1);
-    QVariantList getTasks() const;
-    int getPageCount();
-    int getCurrentPage();
+    void initWorker(bool bStart);
+    void reload();
 
 private:
+    void reloadDate();
+    void reloadTime();
+    void reloadDateTime();
+    void findTasks(const QString &strUrl);
+
     QVariantList _varLstTasks;
-    int _nPageCount;
-    int _nCurrentPage;
+    QMutex mutex;
 };
 
 }

@@ -1,6 +1,7 @@
 #ifndef TRAYICONMANAGER_HPP
 #define TRAYICONMANAGER_HPP
 
+#include <QJsonObject>
 #include <QObject>
 #include <QPointer>
 #include <QSystemTrayIcon>
@@ -18,6 +19,7 @@ public:
 
     void init();
     void showMessage(const QString &strTitle, const QString &strDescription, QSystemTrayIcon::MessageIcon icon = QSystemTrayIcon::Information);
+    void notifyTask(const QJsonObject &json);
 
 private:
     QPointer<QSystemTrayIcon> pSystemTrayIcon;

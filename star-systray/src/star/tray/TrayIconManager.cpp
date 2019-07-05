@@ -45,3 +45,8 @@ void star::tray::TrayIconManager::showMessage(const QString &strTitle, const QSt
     this->pSystemTrayIcon->showMessage(strTitle, strDescription, icon);
 }
 
+void star::tray::TrayIconManager::notifyTask(const QJsonObject &json)
+{
+    this->showMessage(json["title"].toString(), json["description"].toString());
+}
+
