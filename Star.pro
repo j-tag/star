@@ -59,4 +59,4 @@ QMAKE_TARGET_DESCRIPTION = Star Persian calendar and note manager
 QMAKE_TARGET_COPYRIGHT = CopyRight (C) 2012 - 2019 . AllRights Reserved by Pure Soft
 
 
-RC_ICONS = Star.ico
+RC_ICONS = star.ico

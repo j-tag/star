@@ -34,7 +34,7 @@ void star::tray::TrayIconManager::init()
     // Make tray icon
     this->pSystemTrayIcon = new QSystemTrayIcon(this);
 
-    connect(this->pSystemTrayIcon, &QSystemTrayIcon::activated, this, &TrayIconManager::runStar);
+    connect(this->pSystemTrayIcon, &QSystemTrayIcon::messageClicked, this, &TrayIconManager::runStar);
 
     // Assign menu items
     this->pSystemTrayIcon->setContextMenu(trayIconMenu);

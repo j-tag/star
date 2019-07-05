@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
     // Initialize application objects
     s.initObjects();
 
-    // Initialize star app
+    // Initialize star systray app
     s.start();
 
     qInfo() << Q_FUNC_INFO << ": Started Star system tray service.";

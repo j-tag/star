@@ -62,7 +62,7 @@ star::Star::~Star()
 void star::Star::start()
 {
     // Save Star path for tray app to use
-    s.getSettingsManager()->setValue("app/star_path", QCoreApplication::applicationFilePath());
+    s.getSettingsManager()->setValue("app/star_path", QCoreApplication::applicationFilePath().prepend('"').append('"'));
 
     // Login to Pure account
 
