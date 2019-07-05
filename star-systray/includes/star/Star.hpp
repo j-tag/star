@@ -16,7 +16,7 @@
 //#define QT_NO_WARNING_OUTPUT
 
 // Ignore SSL errors [Only for developemnt porpuses]
-#define IGNORE_SSL_ERRORS
+//#define IGNORE_SSL_ERRORS
 
 #include <QObject>
 #include <QDebug>
