@@ -6,17 +6,14 @@
         <file>qml/pages/HomeForm.ui.qml</file>
         <file>images/background.png</file>
         <file>qml/pages/Today.qml</file>
-        <file>images/tile.png</file>
         <file>qml/Main.js</file>
         <file>images/background2.png</file>
         <file>images/background3.png</file>
         <file>qml/pages/TodayHolidays.qml</file>
         <file>qml/pages/TodayHolidaysForm.ui.qml</file>
         <file>qml/components/GlassMessage.qml</file>
-        <file>images/toolbar-home.png</file>
-        <file>images/toolbar-todayholidays.png</file>
+        <file>images/notes-icon.png</file>
         <file>qml/pages/TodayTasks.qml</file>
-        <file>images/toolbar-todayevents.png</file>
         <file>fonts/IRANSans.ttf</file>
         <file>qtquickcontrols2.conf</file>
         <file>qml/components/SimpleTextGlassMessage.qml</file>

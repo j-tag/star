@@ -120,6 +120,30 @@ Item {
             width: todayTasksPage.width / 1.2
             height: todayTasksPage.height / 1.3
 
+            Item {
+                anchors.fill: itemTodayEvents
+                visible: todayTasks.tasks.length === 0
+
+                Image {
+                    id: imageEmptyIcon
+                    anchors.centerIn: parent
+                    width: 80
+                    source: "qrc:/images/notes-icon.png"
+                    fillMode: Image.PreserveAspectFit
+                }
+
+                Label {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.top: imageEmptyIcon.bottom
+                    width: parent.width
+                    horizontalAlignment: Qt.AlignHCenter
+                    padding: 14
+                    color: "grey"
+                    text: qsTr("به راحتی یادآوری‌های خود را در ستاره ذخیره کنید. برای ایجاد یادآوری بر روی دکمه‌ی جدید در بالای کادر سفید رنگ کلیک کنید")
+                    wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+                }
+            }
+
             GridView {
                 id: gridviewTodayEvents
                 width: itemTodayEvents.width / 1.2
