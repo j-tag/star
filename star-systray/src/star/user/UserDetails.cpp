@@ -39,46 +39,6 @@ QDateTime star::user::UserDetails::getBirthday() const
     return this->_dateTimeBirthday;
 }
 
-qint64 star::user::UserDetails::getBirthdayInSeconds()
-{
-    return s.getJalaliDate()->secondsDiffTillNow(this->_dateTimeBirthday);
-}
-
-qint64 star::user::UserDetails::getBirthdayInMinutes()
-{
-    return s.getJalaliDate()->minutesDiffTillNow(this->_dateTimeBirthday);
-}
-
-qint64 star::user::UserDetails::getBirthdayInHours()
-{
-    return s.getJalaliDate()->hoursDiffTillNow(this->_dateTimeBirthday);
-}
-
-qint64 star::user::UserDetails::getBirthdayInDays()
-{
-    return s.getJalaliDate()->daysDiffTillNow(this->_dateTimeBirthday);
-}
-
-qint64 star::user::UserDetails::getBirthdayInWeeks()
-{
-    return s.getJalaliDate()->weeksDiffTillNow(this->_dateTimeBirthday);
-}
-
-qint64 star::user::UserDetails::getBirthdayInMonths()
-{
-    return s.getJalaliDate()->monthsDiffTillNow(this->_dateTimeBirthday);
-}
-
-qint64 star::user::UserDetails::getBirthdayInSeasons()
-{
-    return s.getJalaliDate()->seasonsDiffTillNow(this->_dateTimeBirthday);
-}
-
-qint64 star::user::UserDetails::getBirthdayInYears()
-{
-    return s.getJalaliDate()->yearsDiffTillNow(this->_dateTimeBirthday);
-}
-
 bool star::user::UserDetails::getShowBirthVariants()
 {
     return this->_bShowBirthVariants;

@@ -14,7 +14,7 @@ void star::tray::TrayIconManager::init()
 {
     // Actions
 
-    auto dateAction = new QAction("تاریخ: " + s.getJalaliDate()->getCurrentJalaliDate());
+    auto dateAction = new QAction("تاریخ: " + s.getJalaliDate()->getCurrentJalaliDayName() + " " + s.getJalaliDate()->getCurrentJalaliDate());
 
     auto starAction = new QAction("اجرای ستاره");
 

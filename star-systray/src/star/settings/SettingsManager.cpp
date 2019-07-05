@@ -35,19 +35,6 @@ void star::settings::SettingsManager::setLocalSettings(QNetworkReply *reply)
     s.getUserDetails()->updateAutoStart(autoStart);
 }
 
-void star::settings::SettingsManager::setOnlineValue(const QString &strJson)
-{
-    auto successFunctor = std::bind( &SettingsManager::successOnlineSettingsFunctor,
-                                     this, std::placeholders::_1, std::placeholders::_2);
-
-    auto failFunctor = std::bind( &SettingsManager::failedOnlineSettingsFunctor,
-                                     this, std::placeholders::_1, std::placeholders::_2);
-
-    s.getWebAccessManager()->withAuthenticationHeader()->post(
-                s.getUrlManager()->getPureUrl("apps/fa/star-v3/settings/set.html"),
-                strJson, successFunctor, failFunctor);
-}
-
 void star::settings::SettingsManager::getOnlineSettings()
 {
     auto successFunctor = std::bind( &star::settings::SettingsManager::successOnlineSettingsFunctor,

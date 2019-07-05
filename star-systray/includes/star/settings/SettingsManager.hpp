@@ -24,8 +24,6 @@ signals:
     void onlineSettingsUpdated(bool result, QString newSettings);
 
 public slots:
-
-    void setOnlineValue(const QString &strJson);
     void getOnlineSettings();
 
     void setValue(const QString &strKey, const QVariant &value);

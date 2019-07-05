@@ -21,75 +21,106 @@ QString star::date::CJalaliDate::getCurrentGregorianDate() const
 // Get Gregorian Date and Convert it to Jalali Date
 QString star::date::CJalaliDate::gregorianToJalali(int year, int month, int day) const
 {
-    // TODO: Refine this code
-
     QString result;
-    int s=year-1;
-    int m=month-1;
-    int r;
+    int tmpYear = year - 1;
+    int tmpMonth = month - 1;
+    int tmpDay = 0;
 
-    if (year%4==0)
+    if (year % 4 == 0)
     {
-        if(m==0) r=(s*365.25)+day;
-        if(m==1) r=(s*365.25)+31+day;
-        if(m==2) r=(s*365.25)+31+29+day;
-        if(m==3) r=(s*365.25)+31+29+31+day;
-        if(m==4) r=(s*365.25)+31+29+31+30+day;
-        if(m==5) r=(s*365.25)+31+29+31+30+31+day;
-        if(m==6) r=(s*365.25)+31+29+31+30+31+30+day;
-        if(m==7) r=(s*365.25)+31+29+31+30+31+30+31+day;
-        if(m==8) r=(s*365.25)+31+29+31+30+31+30+31+31+day;
-        if(m==9) r=(s*365.25)+31+29+31+30+31+30+31+31+30+day;
-        if(m==10) r=(s*365.25)+31+29+31+30+31+30+31+31+30+31+day;
-        if(m==11) r=(s*365.25)+31+29+31+30+31+30+31+31+30+31+30+day;
+        if(tmpMonth == 0) tmpDay = (int(tmpYear * 365.25)) + day;
+        if(tmpMonth == 1) tmpDay = (int(tmpYear * 365.25)) + 31 + day;
+        if(tmpMonth == 2) tmpDay = (int(tmpYear * 365.25)) + 31 + 29 + day;
+        if(tmpMonth == 3) tmpDay = (int(tmpYear * 365.25)) + 31 + 29 + 31 + day;
+        if(tmpMonth == 4) tmpDay = (int(tmpYear * 365.25)) + 31 + 29 + 31 + 30 + day;
+        if(tmpMonth == 5) tmpDay = (int(tmpYear * 365.25)) + 31 + 29 + 31 + 30 + 31 + day;
+        if(tmpMonth == 6) tmpDay = (int(tmpYear * 365.25)) + 31 + 29 + 31 + 30 + 31 + 30 + day;
+        if(tmpMonth == 7) tmpDay = (int(tmpYear * 365.25)) + 31 + 29 + 31 + 30 + 31 + 30 + 31 + day;
+        if(tmpMonth == 8) tmpDay = (int(tmpYear * 365.25)) + 31 + 29 + 31 + 30 + 31 + 30 + 31 + 31 + day;
+        if(tmpMonth == 9) tmpDay = (int(tmpYear * 365.25)) + 31 + 29 + 31 + 30 + 31 + 30 + 31 + 31 + 30 + day;
+        if(tmpMonth == 10) tmpDay = (int(tmpYear * 365.25)) + 31 + 29 + 31 + 30 + 31 + 30 + 31 + 31 + 30 + 31 + day;
+        if(tmpMonth == 11) tmpDay = (int(tmpYear * 365.25)) + 31 + 29 + 31 + 30 + 31 + 30 + 31 + 31 + 30 + 31 + 30 + day;
     }
     else
     {
-        if(m==0) r=(s*365.25)+day;
-        if(m==1) r=(s*365.25)+31+day;
-        if(m==2) r=(s*365.25)+31+28+day;
-        if(m==3) r=(s*365.25)+31+28+31+day;
-        if(m==4) r=(s*365.25)+31+28+31+30+day;
-        if(m==5) r=(s*365.25)+31+28+31+30+31+day;
-        if(m==6) r=(s*365.25)+31+28+31+30+31+30+day;
-        if(m==7) r=(s*365.25)+31+28+31+30+31+30+31+day;
-        if(m==8) r=(s*365.25)+31+28+31+30+31+30+31+31+day;
-        if(m==9) r=(s*365.25)+31+28+31+30+31+30+31+31+30+day;
-        if(m==10) r=(s*365.25)+31+28+31+30+31+30+31+31+30+31+day;
-        if(m==11) r=(s*365.25)+31+28+31+30+31+30+31+31+30+31+30+day;
-    }
-    r=r-226899;
-    int sa=(r/365.25)+1 ;
-    int ss=r/365.25;
-    r=r-(ss*365.25)+.25;
-    int ma,ro;
-    if (sa%4==3) r=r+1;
-    if(r>336) ma=12,ro=r-336;
-    else if(r>306) ma=11 ,ro=r-306;
-    else  if(r>276) ma=10 ,ro=r-276;
-    else  if(r>246) ma=9 ,ro=r-246;
-    else  if(r>216) ma=8 ,ro=r-216;
-    else  if(r>186) ma=7 ,ro=r-186;
-    else  if(r>155) ma=6 ,ro=r-155;
-    else  if(r>124) ma=5 ,ro=r-124;
-    else  if(r>93) ma=4 ,ro=r-93;
-    else  if(r>62) ma=3 ,ro=r-62;
-    else  if(r>31) ma=2 ,ro=r-31;
-    else  if(r>0) ma=1,ro=r;
-    else if(r==0)
-    {
-        if(sa%4!=0)sa=sa-1,ma=12,ro=29;
-        else sa=sa-1,ma=12,ro=30;
+        if(tmpMonth == 0) tmpDay = (int(tmpYear * 365.25)) + day;
+        if(tmpMonth == 1) tmpDay = (int(tmpYear * 365.25)) + 31 + day;
+        if(tmpMonth == 2) tmpDay = (int(tmpYear * 365.25)) + 31 + 28 + day;
+        if(tmpMonth == 3) tmpDay = (int(tmpYear * 365.25)) + 31 + 28 + 31 + day;
+        if(tmpMonth == 4) tmpDay = (int(tmpYear * 365.25)) + 31 + 28 + 31 + 30 + day;
+        if(tmpMonth == 5) tmpDay = (int(tmpYear * 365.25)) + 31 + 28 + 31 + 30 + 31 + day;
+        if(tmpMonth == 6) tmpDay = (int(tmpYear * 365.25)) + 31 + 28 + 31 + 30 + 31 + 30 + day;
+        if(tmpMonth == 7) tmpDay = (int(tmpYear * 365.25)) + 31 + 28 + 31 + 30 + 31 + 30 + 31 + day;
+        if(tmpMonth == 8) tmpDay = (int(tmpYear * 365.25)) + 31 + 28 + 31 + 30 + 31 + 30 + 31 + 31 + day;
+        if(tmpMonth == 9) tmpDay = (int(tmpYear * 365.25)) + 31 + 28 + 31 + 30 + 31 + 30 + 31 + 31 + 30 + day;
+        if(tmpMonth == 10) tmpDay = (int(tmpYear * 365.25)) + 31 + 28 + 31 + 30 + 31 + 30 + 31 + 31 + 30 + 31 + day;
+        if(tmpMonth == 11) tmpDay = (int(tmpYear * 365.25)) + 31 + 28 + 31 + 30 + 31 + 30 + 31 + 31 + 30 + 31 + 30 + day;
     }
 
-    if (ma<=9 && ro<=9)
-        result = QString("%1/0%2/0%3").arg(sa).arg(ma).arg(ro);
-    else if(ma<=9)
-        result = QString("%1/0%2/%3").arg(sa).arg(ma).arg(ro);
-    else if(ro<=9)
-        result = QString("%1/%2/0%3").arg(sa).arg(ma).arg(ro);
+    tmpDay = tmpDay - 226899;
+
+    int resultYear = int(tmpDay / 365.25) + 1 ;
+    int auxYear = int(tmpDay / 365.25);
+
+    tmpDay = tmpDay - int( int(auxYear * 365.25) + .25 );
+
+    int resultMonth, resultDay;
+
+    if (resultYear % 4 == 3) tmpDay = tmpDay + 1;
+
+    if(tmpDay > 336) {
+        resultMonth = 12; resultDay = tmpDay - 336;
+    }
+    else if(tmpDay > 306) {
+        resultMonth = 11; resultDay = tmpDay - 306;
+    }
+    else if(tmpDay > 276) {
+        resultMonth = 10; resultDay = tmpDay - 276;
+    }
+    else if(tmpDay > 246) {
+        resultMonth = 9; resultDay = tmpDay - 246;
+    }
+    else if(tmpDay > 216) {
+        resultMonth = 8; resultDay = tmpDay - 216;
+    }
+    else if(tmpDay > 186) {
+        resultMonth = 7; resultDay = tmpDay - 186;
+    }
+    else if(tmpDay > 155) {
+        resultMonth = 6; resultDay = tmpDay - 155;
+    }
+    else if(tmpDay > 124) {
+        resultMonth = 5; resultDay = tmpDay - 124;
+    }
+    else if(tmpDay > 93) {
+        resultMonth = 4; resultDay = tmpDay - 93;
+    }
+    else if(tmpDay > 62) {
+        resultMonth = 3; resultDay = tmpDay - 62;
+    }
+    else if(tmpDay > 31) {
+        resultMonth = 2; resultDay = tmpDay - 31;
+    }
+    else if(tmpDay > 0) {
+        resultMonth = 1; resultDay = tmpDay;
+    }
+    else {
+        if(resultYear % 4 != 0) {
+            resultYear = resultYear - 1; resultMonth = 12; resultDay = 29;
+        }
+        else {
+            resultYear = resultYear - 1; resultMonth = 12; resultDay = 30;
+        }
+    }
+
+    if (resultMonth <= 9 && resultDay <= 9)
+        result = QString("%1/0%2/0%3").arg(resultYear).arg(resultMonth).arg(resultDay);
+    else if(resultMonth <= 9)
+        result = QString("%1/0%2/%3").arg(resultYear).arg(resultMonth).arg(resultDay);
+    else if(resultDay <= 9)
+        result = QString("%1/%2/0%3").arg(resultYear).arg(resultMonth).arg(resultDay);
     else
-        result = QString("%1/%2/%3").arg(sa).arg(ma).arg(ro);
+        result = QString("%1/%2/%3").arg(resultYear).arg(resultMonth).arg(resultDay);
 
     return result;
 }
@@ -130,59 +161,119 @@ QString star::date::CJalaliDate::getJalaliMonthName(int month) const
 QString star::date::CJalaliDate::jalaliToGregorian(int year, int month, int day) const
 {
     QString result;
-    int s=year -1;
-    int m=month -1;
-    int r=day;
-    if(m<=6 ) r=(s*365.25)+(m*31)+r+.25;
-    else r=(s*365.25)+(m-6)*30+186 + r+.25;
-    r=r+226899;
-    int sa=(r/365.25)+1;
-    int ss=r/365.25;
-    ss=ss*365.25;
-    r=r-ss;
-    int ma,ro;
-    if(sa%4==0)
+    int tmpYear = year -1;
+    int tmpMonth = month -1;
+    int tmpDay = day;
+
+    if(tmpMonth <= 6 ) tmpDay = int( int(tmpYear * 365.25) + (tmpMonth * 31) + tmpDay + .25 );
+    else tmpDay = int( int(tmpYear * 365.25) + (tmpMonth - 6) * 30 + 186 + tmpDay + .25 );
+
+    tmpDay = tmpDay + 226899;
+    int resultYear = int(tmpDay / 365.25) + 1;
+    int auxYear = int(tmpDay / 365.25);
+    auxYear = int(auxYear * 365.25);
+    tmpDay = tmpDay - auxYear;
+    int resultMonth = 0, resultDay = 0;
+
+    if(resultYear % 4 == 0)
     {
-        if(r==0) sa=sa-1,ma=12,ro=31;
-        if(r<=31) ma=1, ro=r;
-        else if(r<=60) ma=2, ro=r-31;
-        else if(r<=91) ma=3, ro=r-60;
-        else if(r<=121) ma=4, ro=r-91;
-        else if(r<=152) ma=5, ro=r-121;
-        else if(r<=182) ma=6, ro=r-152;
-        else if(r<=213) ma=7, ro=r-182;
-        else if(r<=244) ma=8, ro=r-213;
-        else if(r<=274) ma=9, ro=r-244;
-        else if(r<=305) ma=10, ro=r-274;
-        else if(r<=335) ma=11, ro=r-305;
-        else if(r<=366) ma=12, ro=r-335;
+        if(tmpDay == 0) {
+            resultYear = resultYear - 1;
+            resultMonth = 12;
+            resultDay = 31;
+        }
+
+        if(tmpDay <= 31) {
+            resultMonth = 1; resultDay = tmpDay;
+        }
+        else if(tmpDay <= 60) {
+            resultMonth = 2; resultDay = tmpDay - 31;
+        }
+        else if(tmpDay <= 91) {
+            resultMonth = 3; resultDay = tmpDay - 60;
+        }
+        else if(tmpDay <= 121) {
+            resultMonth = 4; resultDay = tmpDay - 91;
+        }
+        else if(tmpDay <= 152) {
+            resultMonth = 5; resultDay = tmpDay - 121;
+        }
+        else if(tmpDay <= 182) {
+            resultMonth = 6; resultDay = tmpDay - 152;
+        }
+        else if(tmpDay <= 213) {
+            resultMonth = 7; resultDay = tmpDay - 182;
+        }
+        else if(tmpDay <= 244) {
+            resultMonth = 8; resultDay = tmpDay - 213;
+        }
+        else if(tmpDay <= 274) {
+            resultMonth = 9; resultDay = tmpDay - 244;
+        }
+        else if(tmpDay <= 305) {
+            resultMonth = 10; resultDay = tmpDay - 274;
+        }
+        else if(tmpDay <= 335) {
+            resultMonth = 11; resultDay = tmpDay - 305;
+        }
+        else if(tmpDay <= 366) {
+            resultMonth = 12; resultDay = tmpDay - 335;
+        }
     }
     else
     {
-        if(r==0) sa=sa-1,ma=12,ro=31;
-        else if(r<=31) ma=1, ro=r;
-        else if(r<=59) ma=2, ro=r-31;
-        else if(r<=90) ma=3, ro=r-59;
-        else if(r<=120) ma=4, ro=r-90;
-        else if(r<=151) ma=5, ro=r-120;
-        else if(r<=181) ma=6, ro=r-151;
-        else if(r<=212) ma=7, ro=r-181;
-        else if(r<=243) ma=8, ro=r-212;
-        else if(r<=273) ma=9, ro=r-243;
-        else if(r<=304) ma=10, ro=r-273;
-        else if(r<=334) ma=11, ro=r-304;
-        else if(r<366) ma=12, ro=r-334;
-        else if (r==366) sa=sa+1,ma=1 , ro=1;
+        if(tmpDay==0) {
+            resultYear = resultYear - 1; resultMonth = 12; resultDay = 31;
+        }
+        else if(tmpDay <= 31) {
+            resultMonth = 1; resultDay = tmpDay;
+        }
+        else if(tmpDay <= 59) {
+            resultMonth = 2; resultDay = tmpDay - 31;
+        }
+        else if(tmpDay <= 90) {
+            resultMonth = 3; resultDay = tmpDay - 59;
+        }
+        else if(tmpDay <= 120) {
+            resultMonth = 4; resultDay = tmpDay - 90;
+        }
+        else if(tmpDay <= 151) {
+            resultMonth = 5; resultDay = tmpDay - 120;
+        }
+        else if(tmpDay <= 181) {
+            resultMonth = 6; resultDay = tmpDay - 151;
+        }
+        else if(tmpDay <= 212) {
+            resultMonth = 7; resultDay = tmpDay - 181;
+        }
+        else if(tmpDay <= 243) {
+            resultMonth = 8; resultDay = tmpDay - 212;
+        }
+        else if(tmpDay <= 273) {
+            resultMonth = 9; resultDay = tmpDay - 243;
+        }
+        else if(tmpDay <= 304) {
+            resultMonth = 10; resultDay = tmpDay - 273;
+        }
+        else if(tmpDay <= 334) {
+            resultMonth = 11; resultDay = tmpDay - 304;
+        }
+        else if(tmpDay < 366) {
+            resultMonth = 12; resultDay = tmpDay - 334;
+        }
+        else {
+            resultYear = resultYear + 1; resultMonth = 1; resultDay = 1;
+        }
     }
 
-    if (ma<=9 && ro<=9)
-        result = QString("%1/0%2/0%3").arg(sa).arg(ma).arg(ro);
-    else if(ma<=9)
-        result = QString("%1/0%2/%3").arg(sa).arg(ma).arg(ro);
-    else if(ro<=9)
-        result = QString("%1/%2/0%3").arg(sa).arg(ma).arg(ro);
+    if (resultMonth <= 9 && resultDay <= 9)
+        result = QString("%1/0%2/0%3").arg(resultYear).arg(resultMonth).arg(resultDay);
+    else if(resultMonth <= 9)
+        result = QString("%1/0%2/%3").arg(resultYear).arg(resultMonth).arg(resultDay);
+    else if(resultDay <= 9)
+        result = QString("%1/%2/0%3").arg(resultYear).arg(resultMonth).arg(resultDay);
     else
-        result = QString("%1/%2/%3").arg(sa).arg(ma).arg(ro);
+        result = QString("%1/%2/%3").arg(resultYear).arg(resultMonth).arg(resultDay);
 
     return result;
 }

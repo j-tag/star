@@ -20,9 +20,6 @@ public:
 
     QVariantList getTasks() const;
 
-signals:
-    void tasksChanged(QVariantList tasks);
-
 public slots:
     void initWorker(bool bStart);
     void reload();

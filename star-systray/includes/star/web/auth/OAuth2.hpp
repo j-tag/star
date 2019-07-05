@@ -28,7 +28,6 @@ public:
 
 signals:
     void loginResult(bool result, QString strMessage);
-    void showLoginBox(bool result);
 
 public slots:
     void login(const QString &strUsername, const QString &strPassword);

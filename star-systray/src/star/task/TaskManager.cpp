@@ -132,9 +132,6 @@ void star::task::TaskManager::findTasks(const QString &strUrl)
         }
 
         this->mutex.unlock();
-
-        // Populate changes
-        emit this->tasksChanged(this->_varLstTasks);
     });
 }
 
