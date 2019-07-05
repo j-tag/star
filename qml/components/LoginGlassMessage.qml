@@ -59,6 +59,15 @@ GlassMessage {
                     wrapMode: Text.WordWrap
                 }
 
+                Button {
+                    Layout.fillWidth: true
+                    Layout.rightMargin: 14
+                    Layout.leftMargin: 14
+                    flat: true
+                    text: qsTr("اگر حساب کاربری ندارید اینجا کلیک کنید تا یک حساب کاملاً رایگان را به راحتی ایجاد کنید")
+                    onClicked: Qt.openUrlExternally("https://puresoftware.org/go/register")
+                }
+
                 TextField
                 {
                     id: textUsername
@@ -127,28 +136,6 @@ GlassMessage {
                 }
             }
         }
-
-        Button {
-            anchors {
-                top: parent.top
-                right: parent.right
-                topMargin: 5
-                rightMargin: 20
-            }
-            width: 40
-            height: 40
-            flat: true
-
-            Text {
-                id: textClose
-                anchors.centerIn: parent
-                text: "×"
-                color: Main.textColor
-            }
-
-            onClicked: msg.close()
-        }
-
     }
 
 

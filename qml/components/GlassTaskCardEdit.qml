@@ -201,6 +201,13 @@ GlassMessage {
                             return
                         }
 
+                        if(textTitle.text.trim().length === 0) {
+                            // Show message about empty title
+                            showError("عنوان نمی‌تواند خالی باشد")
+                            console.warn("Task title is empty.")
+                            return
+                        }
+
                         showOverlay()
 
                         Main.editTask(modelId, textTitle.text.trim(), textDescription.text.trim(),
