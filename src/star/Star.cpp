@@ -224,8 +224,8 @@ int star::Star::getAppVersionNumber()
 
 void star::Star::startTrayApp()
 {
-    QProcess::execute(QCoreApplication::applicationDirPath() + "/star-systray");
-    QProcess::execute(QCoreApplication::applicationDirPath() + "/star-systray.exe");
+    QProcess::startDetached(QCoreApplication::applicationDirPath() + "/star-systray");
+    QProcess::startDetached(QCoreApplication::applicationDirPath() + "/star-systray.exe");
 }
 
 void star::Star::setJalaliDate(date::CJalaliDate *jalaliDate)

@@ -67,6 +67,7 @@ public slots:
     void end();
     QString getAppVersion() const;
     int getAppVersionNumber();
+    void enableAutoStartIfChosen(bool result, QString strMessage);
 
 protected:
     QPointer<date::CJalaliDate> pJalaliDate;

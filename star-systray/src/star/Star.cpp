@@ -49,6 +49,9 @@ void star::Star::start() {
     // Init tray icon
     this->getTrayIconManager()->init();
 
+    // Check auto start
+    connect(s.getOAuth2(), &star::web::auth::OAuth2::loginResult, this, &Star::enableAutoStartIfChosen);
+
     // Login to Pure account
 
     auto possibleTokenType = this->pSettingsManager->getStringValue("auth/token/token_type");
@@ -199,6 +202,23 @@ QString star::Star::getAppVersion() const {
 
 int star::Star::getAppVersionNumber() {
     return VERSION_NUMBER;
+}
+
+void star::Star::enableAutoStartIfChosen(bool result, QString )
+{
+    if(result == true) {
+
+        QSettings settings("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+                             QSettings::NativeFormat);
+
+        if(s.getUserDetails()->getAutoStart() == true) {
+            settings.setValue("StarSysTray",
+                               QCoreApplication::applicationFilePath().replace('/', '\\'));
+        } else {
+            settings.remove("StarSysTray");
+        }
+    }
+
 }
 
 void star::Star::exitIfRanBefore()

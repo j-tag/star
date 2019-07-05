@@ -34,6 +34,8 @@ void star::tray::TrayIconManager::init()
     // Make tray icon
     this->pSystemTrayIcon = new QSystemTrayIcon(this);
 
+    connect(this->pSystemTrayIcon, &QSystemTrayIcon::activated, this, &TrayIconManager::runStar);
+
     // Assign menu items
     this->pSystemTrayIcon->setContextMenu(trayIconMenu);
 
@@ -59,6 +61,6 @@ void star::tray::TrayIconManager::notifyTask(const QJsonObject &json)
 
 void star::tray::TrayIconManager::runStar()
 {
-    QProcess::execute(s.getSettingsManager()->getStringValue("app/star_path"));
+    QProcess::startDetached(s.getSettingsManager()->getStringValue("app/star_path"));
 }
 
