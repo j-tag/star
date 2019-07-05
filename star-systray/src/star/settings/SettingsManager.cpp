@@ -16,23 +16,23 @@ void star::settings::SettingsManager::setLocalSettings(QNetworkReply *reply)
 
     // Name
     auto name = json["user"].toObject()["name"].toString();
-//    s.getUiUserDetails()->updateName(name.isNull() ? "[نام شما]" : name);
+    s.getUserDetails()->updateName(name.isNull() ? "[نام شما]" : name);
 
     // Birthday
     auto birthday = QDateTime::fromSecsSinceEpoch(json["user"].toObject()["birthday"].toInt());
-//    s.getUiUserDetails()->updateBirthday(birthday);
+    s.getUserDetails()->updateBirthday(birthday);
 
     // Show birth time in second, etc.
     auto showBirthVariants = json["user"].toObject()["showBirthVariants"].toBool();
-//    s.getUiUserDetails()->updateShowBirthVariants(showBirthVariants);
+    s.getUserDetails()->updateShowBirthVariants(showBirthVariants);
 
     // Celebrate birthday
     auto celebrateBirthday = json["user"].toObject()["celebrateBirthday"].toBool();
-//    s.getUiUserDetails()->updateCelebrateBirthday(celebrateBirthday);
+    s.getUserDetails()->updateCelebrateBirthday(celebrateBirthday);
 
     // Auto start
     auto autoStart = json["app"].toObject()["windows"].toObject()["autoStart"].toBool();
-//    s.getUiUserDetails()->updateAutoStart(autoStart);
+    s.getUserDetails()->updateAutoStart(autoStart);
 }
 
 void star::settings::SettingsManager::setOnlineValue(const QString &strJson)

@@ -32,6 +32,7 @@
 #include "includes/star/user/UserDetails.hpp" // User details manager class
 #include "includes/star/task/TaskManager.hpp" // Task manager class
 #include "includes/star/tray/TrayIconManager.hpp" // Tray icon manager class
+#include "includes/star/user/BirthdayChecker.hpp" // User birthday checker class
 
 namespace star {
 
@@ -60,6 +61,8 @@ public:
     task::TaskManager *getTaskManager() const;
     void setTrayIconManager(tray::TrayIconManager *trayIconManager);
     tray::TrayIconManager *getTrayIconManager() const;
+    void setBirthdayChecker(user::BirthdayChecker *birthdayChecker);
+    user::BirthdayChecker *getBirthdayChecker() const;
 
 public slots:
     void start();
@@ -79,6 +82,7 @@ protected:
     QPointer<user::UserDetails> pUserDetails;
     QPointer<task::TaskManager> pTaskManager;
     QPointer<tray::TrayIconManager> pTrayIconManager;
+    QPointer<user::BirthdayChecker> pBirthdayChecker;
 
 private:
     void exitIfRanBefore();

@@ -33,6 +33,9 @@ star::Star::~Star() {
     if(this->pTrayIconManager) {
         this->pTrayIconManager->deleteLater();
     }
+    if(this->pBirthdayChecker) {
+        this->pBirthdayChecker->deleteLater();
+    }
 }
 
 /**
@@ -187,6 +190,7 @@ void star::Star::initObjects() {
     this->pUserDetails = new user::UserDetails;
     this->pTaskManager = new task::TaskManager;
     this->pTrayIconManager = new tray::TrayIconManager;
+    this->pBirthdayChecker = new user::BirthdayChecker;
 }
 
 /**
@@ -330,6 +334,16 @@ void star::Star::setTrayIconManager(star::tray::TrayIconManager *trayIconManager
 star::tray::TrayIconManager *star::Star::getTrayIconManager() const
 {
     return this->pTrayIconManager;
+}
+
+void star::Star::setBirthdayChecker(star::user::BirthdayChecker *birthdayChecker)
+{
+    this->pBirthdayChecker = birthdayChecker;
+}
+
+star::user::BirthdayChecker *star::Star::getBirthdayChecker() const
+{
+    return this->pBirthdayChecker;
 }
 
 // Main app object
