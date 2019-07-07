@@ -17,6 +17,8 @@ public:
     virtual ~TcpServer();
 
     void initServer();
+    void closeAllClients();
+    void close();
 
 public slots:
     void onNewConnection();

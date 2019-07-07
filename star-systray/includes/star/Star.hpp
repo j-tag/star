@@ -34,6 +34,7 @@
 #include "includes/star/tray/TrayIconManager.hpp" // Tray icon manager class
 #include "includes/star/user/BirthdayChecker.hpp" // User birthday checker class
 #include "includes/star/server/TcpServer.hpp" // TCP server handler class
+#include "includes/star/client/TcpClient.hpp" // TCP client handler class
 
 namespace star {
 
@@ -66,6 +67,8 @@ public:
     user::BirthdayChecker *getBirthdayChecker() const;
     void setTcpServer(server::TcpServer *tcpServer);
     server::TcpServer *getTcpServer() const;
+    void setTcpClient(client::TcpClient *tcpClient);
+    client::TcpClient *getTcpClient() const;
 
 public slots:
     void start();
@@ -74,6 +77,7 @@ public slots:
     QString getAppVersion() const;
     int getAppVersionNumber();
     void enableAutoStartIfChosen(bool result, QString strMessage);
+    void mainStart();
 
 private:
     void exitIfRanBefore();
@@ -90,6 +94,7 @@ private:
     QPointer<tray::TrayIconManager> pTrayIconManager;
     QPointer<user::BirthdayChecker> pBirthdayChecker;
     QPointer<server::TcpServer> pTcpServer;
+    QPointer<client::TcpClient> pTcpClient;
 };
 
 }

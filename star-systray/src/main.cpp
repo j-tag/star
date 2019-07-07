@@ -11,12 +11,15 @@ int main(int argc, char *argv[])
 
     QApplication a(argc, argv);
 
-    QObject::connect(&a, &QCoreApplication::aboutToQuit, [] {
+    QObject::connect(&a, &QCoreApplication::aboutToQuit, [=] {
 
-        qInfo() << Q_FUNC_INFO << ": Cleaning up systray runtime settings.";
+        qInfo() << Q_FUNC_INFO << ": Quiting Star systray application...";
 
-        QSettings settings("PureSoft", "Star");
-        settings.remove("app/tray/runtime");
+        qInfo() << Q_FUNC_INFO << ": Closing up all TCP clients.";
+
+        s.getTcpServer()->closeAllClients();
+        s.getTcpServer()->close();
+
     });
 
 #ifdef IGNORE_SSL_ERRORS

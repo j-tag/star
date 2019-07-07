@@ -20,6 +20,25 @@ void star::server::TcpServer::initServer()
     }
 }
 
+void star::server::TcpServer::closeAllClients()
+{
+    QList<QTcpSocket *>::iterator i;
+
+    for (i = this->_lstSocketClients.begin(); i != this->_lstSocketClients.end(); ++i) {
+        auto socketClient = *i;
+        socketClient->close();
+        socketClient->deleteLater();
+    }
+
+}
+
+void star::server::TcpServer::close()
+{
+    if(this->_pServer) {
+        this->_pServer->close();
+    }
+}
+
 void star::server::TcpServer::onNewConnection()
 {
     // When new connection arrived, we will keep it in our collection

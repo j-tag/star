@@ -39,6 +39,9 @@ star::Star::~Star() {
     if(this->pTcpServer) {
         this->pTcpServer->deleteLater();
     }
+    if(this->pTcpClient) {
+        this->pTcpClient->deleteLater();
+    }
 }
 
 /**
@@ -48,15 +51,65 @@ void star::Star::start() {
 
     // Exit if ran before
     this->exitIfRanBefore();
+}
 
-    // Save run time so we can prevent app from multiple starts
-    this->getSettingsManager()->setValue("app/tray/runtime", QDateTime::currentSecsSinceEpoch());
+/**
+ * @brief This method will be initialize member variable of this class.
+ */
+void star::Star::initObjects() {
+    this->pJalaliDate = new date::CJalaliDate;
+    this->pOAuth2 = new web::auth::OAuth2;
+    this->pWebAccessManager = new web::WebAccessManager;
+    this->pUrlManager = new web::url::UrlManager;
+    this->pSettingsManager = new settings::SettingsManager;
+    this->pApiToken = nullptr;
+    this->pUserDetails = new user::UserDetails;
+    this->pTaskManager = new task::TaskManager;
+    this->pTrayIconManager = new tray::TrayIconManager;
+    this->pBirthdayChecker = new user::BirthdayChecker;
+    this->pTcpServer = new server::TcpServer;
+    this->pTcpClient = new client::TcpClient;
+}
+
+/**
+ * @brief Before exiting application, this method will be called.
+ */
+void star::Star::end() {
+
+}
+
+QString star::Star::getAppVersion() const {
+    return VERSION;
+}
+
+int star::Star::getAppVersionNumber() {
+    return VERSION_NUMBER;
+}
+
+void star::Star::enableAutoStartIfChosen(bool result, QString )
+{
+    if(result == true) {
+
+        QSettings settings("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+                             QSettings::NativeFormat);
+
+        if(s.getUserDetails()->getAutoStart() == true) {
+            settings.setValue("StarSysTray",
+                               QCoreApplication::applicationFilePath().replace('/', '\\').prepend('"').append('"'));
+        } else {
+            settings.remove("StarSysTray");
+        }
+    }
+
+}
+
+void star::Star::mainStart()
+{
+    // Init local TCP server
+    this->pTcpServer->initServer();
 
     // Init tray icon
     this->getTrayIconManager()->init();
-
-    // Init local TCP server
-    this->pTcpServer->initServer();
 
     // Check auto start
     connect(s.getOAuth2(), &star::web::auth::OAuth2::loginResult, this, &Star::enableAutoStartIfChosen);
@@ -175,74 +228,20 @@ void star::Star::start() {
     }
 }
 
-/**
- * @brief This method will be initialize member variable of this class.
- */
-void star::Star::initObjects() {
-    this->pJalaliDate = new date::CJalaliDate;
-    this->pOAuth2 = new web::auth::OAuth2;
-    this->pWebAccessManager = new web::WebAccessManager;
-    this->pUrlManager = new web::url::UrlManager;
-    this->pSettingsManager = new settings::SettingsManager;
-    this->pApiToken = nullptr;
-    this->pUserDetails = new user::UserDetails;
-    this->pTaskManager = new task::TaskManager;
-    this->pTrayIconManager = new tray::TrayIconManager;
-    this->pBirthdayChecker = new user::BirthdayChecker;
-    this->pTcpServer = new server::TcpServer;
-}
-
-/**
- * @brief Before exiting application, this method will be called.
- */
-void star::Star::end() {
-
-}
-
-QString star::Star::getAppVersion() const {
-    return VERSION;
-}
-
-int star::Star::getAppVersionNumber() {
-    return VERSION_NUMBER;
-}
-
-void star::Star::enableAutoStartIfChosen(bool result, QString )
-{
-    if(result == true) {
-
-        QSettings settings("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
-                             QSettings::NativeFormat);
-
-        if(s.getUserDetails()->getAutoStart() == true) {
-            settings.setValue("StarSysTray",
-                               QCoreApplication::applicationFilePath().replace('/', '\\').prepend('"').append('"'));
-        } else {
-            settings.remove("StarSysTray");
-        }
-    }
-
-}
-
 void star::Star::exitIfRanBefore()
 {
-    auto savedRuntime = s.getSettingsManager()->getQint64Value("app/tray/runtime", -85);
-
-    if(savedRuntime == -85) {
-        // No crash or currently running app, so start normally
-        return;
-    }
-
-    if((QDateTime::currentSecsSinceEpoch() - savedRuntime) < 86400) {
-        // Application was ran in last 24 hours , so don't start it
+    this->pTcpClient->connectToServer([this]() {
+        // Connected to TCP socker server, so there is another instance listening before us, so don't start app
         qWarning() << Q_FUNC_INFO << ": Application re-run detected. Quiting...";
+
+        this->pTcpClient->close();
         qApp->quit();
         exit(0);
-    } else {
-        qWarning() << Q_FUNC_INFO << ": Possible application crash detected. Starting...";
-        // Application was ran more than 24 hours ago, so start it
-    }
-
+    },
+    [this]() {
+        // Failed to connect to TCP server, therefore there was no inctance before us, so we can keep going
+        this->mainStart();
+    });
 }
 
 void star::Star::setJalaliDate(date::CJalaliDate *jalaliDate)
@@ -353,6 +352,16 @@ void star::Star::setTcpServer(star::server::TcpServer *tcpServer)
 star::server::TcpServer *star::Star::getTcpServer() const
 {
     return this->pTcpServer;
+}
+
+void star::Star::setTcpClient(star::client::TcpClient *tcpClient)
+{
+    this->pTcpClient = tcpClient;
+}
+
+star::client::TcpClient *star::Star::getTcpClient() const
+{
+    return this->pTcpClient;
 }
 
 // Main app object

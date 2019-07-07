@@ -27,6 +27,7 @@ CONFIG += c++11
 SOURCES += \
         src/main.cpp \
         src/star/Star.cpp \
+        src/star/client/TcpClient.cpp \
         src/star/date/CjalaliDate.cpp \
         src/star/server/TcpServer.cpp \
         src/star/settings/SettingsManager.cpp \
@@ -40,6 +41,7 @@ SOURCES += \
 
 HEADERS += \
     includes/star/Star.hpp \
+    includes/star/client/TcpClient.hpp \
     includes/star/date/CJalaliDate.hpp \
     includes/star/server/TcpServer.hpp \
     includes/star/settings/SettingsManager.hpp \
