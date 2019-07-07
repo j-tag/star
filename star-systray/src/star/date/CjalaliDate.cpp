@@ -129,31 +129,31 @@ QString star::date::CJalaliDate::getJalaliMonthName(int month) const
 {
     switch (month) {
     case 1:
-        return QStringLiteral("فروردین");
+        return "فروردین";
     case 2:
-        return QStringLiteral("اردیبهشت");
+        return "اردیبهشت";
     case 3:
-        return QStringLiteral("خرداد");
+        return "خرداد";
     case 4:
-        return QStringLiteral("تیر");
+        return "تیر";
     case 5:
-        return QStringLiteral("مرداد");
+        return "مرداد";
     case 6:
-        return QStringLiteral("شهریور");
+        return "شهریور";
     case 7:
-        return QStringLiteral("مهر");
+        return "مهر";
     case 8:
-        return QStringLiteral("آبان");
+        return "آبان";
     case 9:
-        return QStringLiteral("آذر");
+        return "آذر";
     case 10:
-        return QStringLiteral("دی");
+        return "دی";
     case 11:
-        return QStringLiteral("بهمن");
+        return "بهمن";
     case 12:
-        return QStringLiteral("اسفند");
+        return "اسفند";
     default:
-        return QStringLiteral("");
+        return "";
     }
 }
 
