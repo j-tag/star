@@ -216,7 +216,6 @@ int star::Star::getAppVersionNumber()
 
 void star::Star::startTrayApp()
 {
-    QProcess::startDetached(QCoreApplication::applicationDirPath().prepend('"') + "/star-systray\"");
     QProcess::startDetached(QCoreApplication::applicationDirPath().prepend('"') + "/star-systray.exe\"");
 }
 
