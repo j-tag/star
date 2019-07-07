@@ -36,6 +36,9 @@ star::Star::~Star() {
     if(this->pBirthdayChecker) {
         this->pBirthdayChecker->deleteLater();
     }
+    if(this->pTcpServer) {
+        this->pTcpServer->deleteLater();
+    }
 }
 
 /**
@@ -51,6 +54,9 @@ void star::Star::start() {
 
     // Init tray icon
     this->getTrayIconManager()->init();
+
+    // Init local TCP server
+    this->pTcpServer->initServer();
 
     // Check auto start
     connect(s.getOAuth2(), &star::web::auth::OAuth2::loginResult, this, &Star::enableAutoStartIfChosen);
@@ -183,6 +189,7 @@ void star::Star::initObjects() {
     this->pTaskManager = new task::TaskManager;
     this->pTrayIconManager = new tray::TrayIconManager;
     this->pBirthdayChecker = new user::BirthdayChecker;
+    this->pTcpServer = new server::TcpServer;
 }
 
 /**
@@ -336,6 +343,16 @@ void star::Star::setBirthdayChecker(star::user::BirthdayChecker *birthdayChecker
 star::user::BirthdayChecker *star::Star::getBirthdayChecker() const
 {
     return this->pBirthdayChecker;
+}
+
+void star::Star::setTcpServer(star::server::TcpServer *tcpServer)
+{
+    this->pTcpServer = tcpServer;
+}
+
+star::server::TcpServer *star::Star::getTcpServer() const
+{
+    return this->pTcpServer;
 }
 
 // Main app object

@@ -33,6 +33,7 @@
 #include "includes/star/task/TaskManager.hpp" // Task manager class
 #include "includes/star/tray/TrayIconManager.hpp" // Tray icon manager class
 #include "includes/star/user/BirthdayChecker.hpp" // User birthday checker class
+#include "includes/star/server/TcpServer.hpp" // TCP server handler class
 
 namespace star {
 
@@ -63,6 +64,8 @@ public:
     tray::TrayIconManager *getTrayIconManager() const;
     void setBirthdayChecker(user::BirthdayChecker *birthdayChecker);
     user::BirthdayChecker *getBirthdayChecker() const;
+    void setTcpServer(server::TcpServer *tcpServer);
+    server::TcpServer *getTcpServer() const;
 
 public slots:
     void start();
@@ -72,7 +75,10 @@ public slots:
     int getAppVersionNumber();
     void enableAutoStartIfChosen(bool result, QString strMessage);
 
-protected:
+private:
+    void exitIfRanBefore();
+
+private:
     QPointer<date::CJalaliDate> pJalaliDate;
     QPointer<web::auth::OAuth2> pOAuth2;
     QPointer<web::WebAccessManager> pWebAccessManager;
@@ -83,9 +89,7 @@ protected:
     QPointer<task::TaskManager> pTaskManager;
     QPointer<tray::TrayIconManager> pTrayIconManager;
     QPointer<user::BirthdayChecker> pBirthdayChecker;
-
-private:
-    void exitIfRanBefore();
+    QPointer<server::TcpServer> pTcpServer;
 };
 
 }

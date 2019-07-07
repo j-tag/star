@@ -28,6 +28,7 @@ SOURCES += \
         src/main.cpp \
         src/star/Star.cpp \
         src/star/date/CjalaliDate.cpp \
+        src/star/server/TcpServer.cpp \
         src/star/settings/SettingsManager.cpp \
         src/star/task/TaskManager.cpp \
         src/star/tray/TrayIconManager.cpp \
@@ -40,6 +41,7 @@ SOURCES += \
 HEADERS += \
     includes/star/Star.hpp \
     includes/star/date/CJalaliDate.hpp \
+    includes/star/server/TcpServer.hpp \
     includes/star/settings/SettingsManager.hpp \
     includes/star/task/TaskManager.hpp \
     includes/star/tray/TrayIconManager.hpp \
