@@ -79,7 +79,7 @@ void star::Star::start() {
         // Initialize API token
         this->setApiToken(new web::auth::ApiToken(possibleTokenType, possibleAccessToken, possibleRefreshToken, possibleExpiresIn));
 
-        pWebAccessManager->withAuthenticationHeader()->get(this->getUrlManager()->getPureUrl("apps/fa/star-v3/settings/get.html"),
+        pWebAccessManager->withAuthenticationHeader()->get(this->getUrlManager()->getPureUrl("apps/fa/star-v4/settings/get.html"),
                                                            [=](QNetworkReply *reply, int ) {
             // Update settings in app
             this->pSettingsManager->setLocalSettings(reply);
@@ -135,15 +135,7 @@ void star::Star::start() {
 
                 }, [=](QNetworkReply *reply, int httpStatus){
 
-                    if(httpStatus == 404) {
-
-                        // This user has not any settings yet, so tell them to complete the wizard
-
-                        this->getTrayIconManager()->showMessage("تکمیل پروفایل کاربری",
-                                                                "لطفاً با کلیک بر روی این آیکن نرم افزار ستاره را اجرا کرده و پروفایل خود را تکمیل کنید تا بتوانید به راحتی از ستاره استفاده کنید",
-                                                                QSystemTrayIcon::Warning);
-
-                    } else if(httpStatus == 401) {
+                    if(httpStatus == 401) {
 
                         qInfo() << Q_FUNC_INFO << ": Tried refresh token and also that was invalid. Now we should inform user.";
 

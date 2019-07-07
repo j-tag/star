@@ -44,7 +44,7 @@ void star::settings::SettingsManager::getOnlineSettings()
                                      this, std::placeholders::_1, std::placeholders::_2);
 
     s.getWebAccessManager()->withAuthenticationHeader()->get(
-                s.getUrlManager()->getPureUrl("apps/fa/star-v3/settings/get.html"),
+                s.getUrlManager()->getPureUrl("apps/fa/star-v4/settings/get.html"),
                 successFunctor, failFunctor);
 }
 
@@ -75,12 +75,25 @@ void star::settings::SettingsManager::removeValue(const QString &strKey)
 
 void star::settings::SettingsManager::failedOnlineSettingsFunctor(QNetworkReply *reply, int httpStatus)
 {
-    // Online settings failed to retrive, so we can update with false result
 
-    emit this->onlineSettingsUpdated(false, QString());
+    if(httpStatus == 404) {
 
-    qWarning() << Q_FUNC_INFO << ": Getting online settings failed. HTTP status and result:" <<
-                  httpStatus << reply->readAll();
+        // This user has not any settings yet
+        s.getTrayIconManager()->showMessage("تکمیل پروفایل کاربری",
+                                                "لطفاً با کلیک بر روی این آیکن نرم افزار ستاره را اجرا کرده و پروفایل خود را تکمیل کنید تا بتوانید به راحتی از ستاره استفاده کنید",
+                                                QSystemTrayIcon::Warning);
+
+        qWarning() << Q_FUNC_INFO << ": There is no online settings. Showing setup wizard:" <<
+                      httpStatus << reply->readAll();
+
+    } else {
+        // Online settings failed to retrive, so we can update with false result
+
+        emit this->onlineSettingsUpdated(false, QString());
+
+        qWarning() << Q_FUNC_INFO << ": Getting online settings failed. HTTP status and result:" <<
+                      httpStatus << reply->readAll();
+    }
 }
 
 void star::settings::SettingsManager::successOnlineSettingsFunctor(QNetworkReply *reply, int)

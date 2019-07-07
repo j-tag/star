@@ -62,7 +62,7 @@ star::Star::~Star()
 void star::Star::start()
 {
     // Save Star path for tray app to use
-    s.getSettingsManager()->setValue("app/star_path", QCoreApplication::applicationFilePath().prepend('"').append('"'));
+    s.getSettingsManager()->setValue("app/star_path", QCoreApplication::applicationFilePath());
 
     // Login to Pure account
 
@@ -86,7 +86,7 @@ void star::Star::start()
         // Initialize API token
         this->setApiToken(new web::auth::ApiToken(possibleTokenType, possibleAccessToken, possibleRefreshToken, possibleExpiresIn));
 
-        pWebAccessManager->withAuthenticationHeader()->get(this->getUrlManager()->getPureUrl("apps/fa/star-v3/settings/get.html"),
+        pWebAccessManager->withAuthenticationHeader()->get(this->getUrlManager()->getPureUrl("apps/fa/star-v4/settings/get.html"),
                                                            [=](QNetworkReply *reply, int ) {
             // Update settings in app
             this->pSettingsManager->setLocalSettings(reply);
@@ -144,15 +144,7 @@ void star::Star::start()
 
                 }, [=](QNetworkReply *reply, int httpStatus){
 
-                    if(httpStatus == 404) {
-
-                        // This user has not any settings yet, so show them setup wizard to begin
-                        emit this->pUiSetupWizard->initSetupWizard();
-
-                        // Close all login related boxes
-                        emit s.getOAuth2()->showLoginBox(false);
-
-                    } else if(httpStatus == 401) {
+                    if(httpStatus == 401) {
 
                         qInfo() << Q_FUNC_INFO << ": Tried refresh token and also that was invalid. Now we should show login box.";
 

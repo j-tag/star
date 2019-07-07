@@ -36,7 +36,7 @@ void star::task::TaskManager::reload()
 
 void star::task::TaskManager::reloadDate()
 {
-    QString patternUrl("apps/fa/star-v3/task-reminder/date/$YEAR/$MONTH/$DAY.json?page=1");
+    QString patternUrl("apps/fa/star-v4/task-reminder/date/$YEAR/$MONTH/$DAY.json?page=1");
 
     auto strUrl = patternUrl.replace("$YEAR", s.getJalaliDate()->getCurrentJalaliYear())
             .replace("$MONTH", s.getJalaliDate()->getCurrentJalaliMonth())
@@ -47,7 +47,7 @@ void star::task::TaskManager::reloadDate()
 
 void star::task::TaskManager::reloadTime()
 {
-    QString patternUrl("apps/fa/star-v3/task-reminder/time/$HOUR/$MINUTE/$SECONDS.json?page=1");
+    QString patternUrl("apps/fa/star-v4/task-reminder/time/$HOUR/$MINUTE/$SECONDS.json?page=1");
 
     auto current = QTime::currentTime();
 
@@ -60,7 +60,7 @@ void star::task::TaskManager::reloadTime()
 
 void star::task::TaskManager::reloadDateTime()
 {
-    QString patternUrl("apps/fa/star-v3/task-reminder/date-time/$YEAR/$MONTH/$DAY/$HOUR/$MINUTE/$SECONDS.json?page=1");
+    QString patternUrl("apps/fa/star-v4/task-reminder/date-time/$YEAR/$MONTH/$DAY/$HOUR/$MINUTE/$SECONDS.json?page=1");
 
     auto current = QTime::currentTime();
 

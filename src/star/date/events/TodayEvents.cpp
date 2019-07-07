@@ -11,7 +11,7 @@ star::date::events::TodayEvents::~TodayEvents() {}
 
 void star::date::events::TodayEvents::reload()
 {
-    QString patternUrl("apps/fa/star-v3/calendar-event/$YEAR/$MONTH/$DAY.json");
+    QString patternUrl("apps/fa/star-v4/calendar-event/$YEAR/$MONTH/$DAY.json");
 
     auto strUrl = patternUrl.replace("$YEAR", s.getJalaliDate()->getCurrentJalaliYear())
             .replace("$MONTH", s.getJalaliDate()->getCurrentJalaliMonth())

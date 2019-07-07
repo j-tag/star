@@ -44,7 +44,7 @@ void star::settings::SettingsManager::setOnlineValue(const QString &strJson)
                                      this, std::placeholders::_1, std::placeholders::_2);
 
     s.getWebAccessManager()->withAuthenticationHeader()->post(
-                s.getUrlManager()->getPureUrl("apps/fa/star-v3/settings/set.html"),
+                s.getUrlManager()->getPureUrl("apps/fa/star-v4/settings/set.html"),
                 strJson, successFunctor, failFunctor);
 }
 
@@ -57,7 +57,7 @@ void star::settings::SettingsManager::getOnlineSettings()
                                      this, std::placeholders::_1, std::placeholders::_2);
 
     s.getWebAccessManager()->withAuthenticationHeader()->get(
-                s.getUrlManager()->getPureUrl("apps/fa/star-v3/settings/get.html"),
+                s.getUrlManager()->getPureUrl("apps/fa/star-v4/settings/get.html"),
                 successFunctor, failFunctor);
 }
 
@@ -83,12 +83,27 @@ void star::settings::SettingsManager::removeValue(const QString &strKey)
 
 void star::settings::SettingsManager::failedOnlineSettingsFunctor(QNetworkReply *reply, int httpStatus)
 {
-    // Online settings failed to retrive, so we can update with false result
 
-    emit this->onlineSettingsUpdated(false, QString());
+    if(httpStatus == 404) {
 
-    qWarning() << Q_FUNC_INFO << ": Getting online settings failed. HTTP status and result:" <<
-                  httpStatus << reply->readAll();
+        // This user has not any settings yet, so show them setup wizard to begin
+        emit s.getUiSetupWizard()->initSetupWizard();
+
+        // Close all login related boxes
+        emit s.getOAuth2()->showLoginBox(false);
+
+        qWarning() << Q_FUNC_INFO << ": There is no online settings. Showing setup wizard:" <<
+                      httpStatus << reply->readAll();
+
+    } else {
+        // Online settings failed to retrive, so we can update with false result
+
+        emit this->onlineSettingsUpdated(false, QString());
+
+        qWarning() << Q_FUNC_INFO << ": Getting online settings failed. HTTP status and result:" <<
+                      httpStatus << reply->readAll();
+    }
+
 }
 
 void star::settings::SettingsManager::successOnlineSettingsFunctor(QNetworkReply *reply, int)

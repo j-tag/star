@@ -10,7 +10,7 @@ star::ui::tasks::TodayTasks::~TodayTasks() {}
 
 void star::ui::tasks::TodayTasks::reload(int page)
 {
-    QString patternUrl("apps/fa/star-v3/tasks.json?page=%PAGE");
+    QString patternUrl("apps/fa/star-v4/tasks.json?page=%PAGE");
 
     auto strUrl = patternUrl.replace("%PAGE", QString::number(page));
 
@@ -34,7 +34,7 @@ void star::ui::tasks::TodayTasks::reload(int page)
 
 void star::ui::tasks::TodayTasks::append(int page)
 {
-    QString patternUrl("apps/fa/star-v3/tasks.json?page=%PAGE");
+    QString patternUrl("apps/fa/star-v4/tasks.json?page=%PAGE");
 
     auto strUrl = patternUrl.replace("%PAGE", QString::number(page));
 
@@ -63,7 +63,7 @@ QVariantList star::ui::tasks::TodayTasks::getTasks() const
 
 void star::ui::tasks::TodayTasks::deleteTask(int id)
 {
-    QString patternUrl("apps/fa/star-v3/tasks/%ID.json");
+    QString patternUrl("apps/fa/star-v4/tasks/%ID.json");
 
     auto strUrl = patternUrl.replace("%ID", QString::number(id));
 
@@ -94,7 +94,7 @@ void star::ui::tasks::TodayTasks::deleteTask(int id)
 
 void star::ui::tasks::TodayTasks::editTask(int id, const QString &strTitle, const QString &strDescription, int triggerDate, const QString &strTriggerTime)
 {
-    QString patternUrl("apps/fa/star-v3/tasks/%ID.json");
+    QString patternUrl("apps/fa/star-v4/tasks/%ID.json");
 
     auto strUrl = patternUrl.replace("%ID", QString::number(id));
 
@@ -159,7 +159,7 @@ void star::ui::tasks::TodayTasks::editTask(int id, const QString &strTitle, cons
 
 void star::ui::tasks::TodayTasks::createTask(const QString &strTitle, const QString &strDescription, int triggerDate, const QString &strTriggerTime)
 {
-    QString strUrl("apps/fa/star-v3/tasks.json");
+    QString strUrl("apps/fa/star-v4/tasks.json");
 
     // Generate JSON request body
     QJsonObject json = QJsonObject();

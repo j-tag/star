@@ -164,13 +164,13 @@ function showGlassProgressMessage() {
 // Flip main content to setup wizard
 function toggleFlipToSetupWizard() {
     setupWizard.active = true
-    flipableMainWindow.flipped = !flipableMainWindow.flipped
+    flipableMainWindow.flipped = true
 }
 
 // Flip setup wizard to main content
 function toggleFlipToMainContent() {
     setupWizard.active = false
-    flipableMainWindow.flipped = !flipableMainWindow.flipped
+    flipableMainWindow.flipped = false
 }
 
 // Show a nice and neat blur message box about deleting task
