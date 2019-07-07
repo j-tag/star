@@ -70,7 +70,6 @@ public:
     void setTcpClient(client::TcpClient *tcpClient);
     client::TcpClient *getTcpClient() const;
 
-public slots:
     void start();
     void initObjects();
     void end();
@@ -78,9 +77,14 @@ public slots:
     int getAppVersionNumber();
     void enableAutoStartIfChosen(bool result, QString strMessage);
     void mainStart();
+    void login();
+
+public slots:
+    void checkLoginStatus();
 
 private:
     void exitIfRanBefore();
+    void initLoginChecker();
 
 private:
     QPointer<date::CJalaliDate> pJalaliDate;
@@ -95,6 +99,8 @@ private:
     QPointer<user::BirthdayChecker> pBirthdayChecker;
     QPointer<server::TcpServer> pTcpServer;
     QPointer<client::TcpClient> pTcpClient;
+
+    bool bIsLoggedIn;
 };
 
 }

@@ -1,8 +1,9 @@
 #include "includes/star/Star.hpp"
 
 #include <QCoreApplication>
+#include <QTimer>
 
-star::Star::Star() {}
+star::Star::Star():bIsLoggedIn(false) {}
 
 star::Star::~Star() {
     // Free up member objects
@@ -88,6 +89,8 @@ int star::Star::getAppVersionNumber() {
 
 void star::Star::enableAutoStartIfChosen(bool result, QString )
 {
+    this->bIsLoggedIn = result;
+
     if(result == true) {
 
         QSettings settings("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
@@ -114,6 +117,15 @@ void star::Star::mainStart()
     // Check auto start
     connect(s.getOAuth2(), &star::web::auth::OAuth2::loginResult, this, &Star::enableAutoStartIfChosen);
 
+    // Login to Pure account
+    this->login();
+
+    // Initialize login checker
+    this->initLoginChecker();
+}
+
+void star::Star::login()
+{
     // Login to Pure account
 
     auto possibleTokenType = this->pSettingsManager->getStringValue("auth/token/token_type");
@@ -242,6 +254,27 @@ void star::Star::exitIfRanBefore()
         // Failed to connect to TCP server, therefore there was no inctance before us, so we can keep going
         this->mainStart();
     });
+}
+
+void star::Star::initLoginChecker()
+{
+    QTimer *timer = new QTimer(this);
+    connect(timer, &QTimer::timeout, this, QOverload<>::of(&Star::checkLoginStatus));
+    timer->start(5 * 60 * 1000); // 5 Min
+}
+
+void star::Star::checkLoginStatus()
+{
+    qInfo() << Q_FUNC_INFO << ": Checking up login status...";
+
+    if(this->bIsLoggedIn) {
+        // User is logged in
+        qInfo() << Q_FUNC_INFO << ": User is logged in. No action needed.";
+    } else {
+        // User is not logged in, try to login again
+        qWarning() << Q_FUNC_INFO << ": User is not logged in. Trying to login...";
+        this->login();
+    }
 }
 
 void star::Star::setJalaliDate(date::CJalaliDate *jalaliDate)
